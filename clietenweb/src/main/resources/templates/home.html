@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/gestapart.css}">
+    <!-- Font Awesome JS -->
+    <script th:src="@{/fonts/fontawesome.js}"></script>
+    <script th:src="@{/fonts/solid.js}"></script>
+    <!--GestApartSript-->
+    <script th:src="@{/js/gestapart.js}"></script>
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery-3.3.1.js}"></script>
+    <!-- Popper.JS -->
+    <script th:src="@{/js/popper.min.js}"></script>
+    <!-- Bootstrap JS -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+
+
+    <!--<sec:authorize access="hasRole('ROLE_ADMIN')">-->
+        <!--Este contenido se muestra si el usuario tiene el privilegio: <b>ROLE_ADMIN</b>.-->
+    <!--</sec:authorize>-->
+
+
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="wrapper">
+        <!-- Menu lateral  -->
+        <div class="menu-fijo">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <div id="logo_empresa">
+
+                    </div>
+                    <div id="foto_usuario">
+                        <img class="rounded-circle img-fluid w-75 h-auto" th:src="${usuarioFoto}"/>
+                    </div>
+                    <div id="nombre_usuario">
+                        <h5 th:text ="${#authentication.getName()}"></h5>
+                    </div>
+
+                </div>
+
+                <ul class="list-unstyled components">
+                    <!--<p>Dummy Heading</p>-->
+                    <li class="active">
+                        <a href="#">Inicio</a>
+                    </li>
+                    <li>
+                        <a id="menuUsuarios" href="#usuariosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
+                        <ul class="collapse list-unstyled" id="usuariosSubmenu">
+                            <li>
+                                <a href="/usuarios/buscar" >Buscar</a>
+                                <!--<a th:href="'javascript:cargarCodigo(\'/usuariosBuscar\');'">Buscar</a>-->
+                            </li>
+                            <li>
+                                <a href="/usuarios/nuevo">Nuevo</a>
+                            </li>
+                            <li>
+                                <a href="/usuarios/lista">Lista</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#apartamentosSubmenu" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle">Apartamentos</a>
+                        <ul class="collapse list-unstyled" id="apartamentosSubmenu">
+                            <li>
+                                <a href="/apartamentos/buscar">Buscar</a>
+                            </li>
+                            <li>
+                                <a href="/apartamentos/nuevo">Nuevo</a>
+                            </li>
+                            <li>
+                                <a href="/apartamentos/disponibles">Disponibles</a>
+                            </li>
+                            <li>
+                                <a href="/apartamentos/nodisponibles">No disponibles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#parkingsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parkings</a>
+                        <ul class="collapse list-unstyled" id="parkingsSubmenu">
+                            <li>
+                                <a href="#">Disponibles</a>
+                            </li>
+                            <li>
+                                <a href="#">No disponibles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#serviciosSubmenu" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle">Servicios</a>
+                        <ul class="collapse list-unstyled" id="serviciosSubmenu">
+                            <li>
+                                <a href="#">Taxis</a>
+                            </li>
+                            <li>
+                                <a href="#">Restaurantes</a>
+                            </li>
+                            <li>
+                                <a href="#">Ocio</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#limpiezaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Limpieza</a>
+                        <ul class="collapse list-unstyled" id="limpiezaSubmenu">
+                            <li>
+                                <a href="#">Estado</a>
+                            </li>
+                            <li>
+                                <a href="#">Reporte</a>
+                            </li>
+                            <li>
+                                <a href="#">Disponibles</a>
+                            </li>
+                            <li>
+                                <a href="#">No disponibles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#reservasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reservas</a>
+                        <ul class="collapse list-unstyled" id="reservasSubmenu">
+                            <li>
+                                <a href="#">Pendientes</a>
+                            </li>
+                            <li>
+                                <a href="#">Activas</a>
+                            </li>
+                            <li>
+                                <a href="#">Finalizadas</a>
+                            </li>
+                            <li>
+                                <a href="#">Buscar</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!--Cuerpo-->
+        <div id="cuerpo" class="container-fluid">
+            <!--Menu superior-->
+            <div id="menu_superior">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid w-100">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li>
+                                <a class="nav-link"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a class="nav-link"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <img class="rounded-circle img-fluid w-50 h-auto float-left"
+                                     th:src="${usuarioFoto}"/>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false" th:text ="${#authentication.getName()}"></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" th:href="'javascript:cargarCodigo(\'/usuariosPasswd\');'">Contraseña</a>
+                                    <div class="dropdown-divider"></div>
+                                    <logout logout-success-url="/anonymous.html" logout-url="/perform_logout"
+                                            delete-cookies="JSESSIONID"><a class="dropdown-item" href="/logout">LOGOUT</a></logout>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!--<div id="contenido" class="container">-->
+
+            <!--</div>-->
+            <div th:include="${pagina}" class="container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

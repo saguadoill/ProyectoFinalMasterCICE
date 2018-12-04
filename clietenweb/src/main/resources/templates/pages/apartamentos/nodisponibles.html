@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de apartamentos no disponibles</title>
+</head>
+<body onload="gestionNuevoApartamento()">
+<!--Cuerpo-->
+<div id="titulo" class="text-center">
+    <h4>Lista completa de Apartamentos no disponibles</h4>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="resultados" class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Foto</th>
+                <th>Tipo</th>
+                <th>Direccion</th>
+                <th>Capacidad</th>
+                <th>Piso</th>
+                <th>Puerta</th>
+                <th>Propietario</th>
+                <th>DISPONIBLE</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tb">
+            <tr th:if="${#lists.isEmpty(lista)}">
+                <td colspan="8" class="text-center">Ningun apartamento encontrado</td>
+            </tr>
+            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'nodisponibles')">
+                <td><span th:text="${apartamento.idApartamento}"> </span></td>
+                <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                          th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
+                <td th:title="${apartamento.tipo.idTipoModelo}"><span th:text="${apartamento.tipo.tipo}">  </span></td>
+                <td><span th:text="${apartamento.direccion}">  </span></td>
+                <td><span th:text="${apartamento.capacidad}">  </span></td>
+                <td><span th:text="${apartamento.piso}">  </span></td>
+                <td><span th:text="${apartamento.puerta}">  </span></td>
+                <td th:title="${apartamento.propietario.idPropietario}"><span th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
+                <td th:title="${apartamento.disponible}">
+                    <span th:if="${apartamento.disponible}"><i class="fas fa-home" style="color: green"></i></span>
+                    <span th:unless= "${apartamento.disponible}"><i class="fas fa-home" style="color: red"></i></span>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!--Modal para modificacion usuario-->
+<div th:include="/pages/apartamentos/modificar.html :: panel_modificar"></div>
+</body>
+</html>

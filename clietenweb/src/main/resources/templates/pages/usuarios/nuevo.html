@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Contenido-->
+<form role="form" name="formulario_nuevo_usuario" class="text-center border border-light p-5" method="POST"
+      action="/usuarios/nuevo"
+      enctype="multipart/form-data">
+    <p class="h4 mb-4">Registro de usuario</p>
+    <hr/>
+    <!--Datos personales-->
+    <p class="h6 mb-4">Datos personales</p>
+    <div class="form-row mb-4">
+        <div class="col-1"></div>
+        <!--Nombre-->
+        <div class="col-4">
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+        </div>
+        <!--Apellidos-->
+        <div class="col-6">
+            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" required>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="form-row mb-4">
+        <!--Foto-->
+        <div class="col-2"></div>
+        <div class="col-3">
+            <img id="foto_preview" th:src="@{/img/logo_user_off.png}" class="img-fluid w-75 h-auto border border-primary">
+        </div>
+        <!--Seleccionar foto-->
+        <div class="col-5 my-auto text-left">
+            <small class="form-text text-muted mb-4">
+                Selecionar foto del usuario
+            </small>
+            <div class="card card-block w-100">
+                <input name="file" type="file"  accept="image/jpeg,image/png" onchange="preview_image(event)">
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <hr/>
+    <!--Datos profesionales-->
+    <p class="h6 mb-4">Datos profesionales</p>
+    <div class="form-row mb-4">
+        <div class="col-3"></div>
+        <div class="col-4">
+            <!-- Username-->
+            <input type="text" id="username" name="username" class="form-control mb-4" placeholder="username" readonly>
+
+            <!-- Contraseña -->
+            <input type="text" id="passwd" name="passwd" class="form-control" placeholder="contraseña" readonly>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-info my-4 btn-block" formaction="javascript:generarCampos()">Generar</button>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col-3"></div>
+        <div class="col-4">
+            <select id="perfil" name="perfil" class="mdb-select md-form" required>
+                <option value="default" disabled selected>Seleccionar perfil</option>
+                <option value="ROLE_USER">Usuario</option>
+                <option value="ROLE_CLEAN">Limpieza</option>
+                <option value="ROLE_ADMIN">Admistrador</option>
+            </select>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <hr/>
+    <!-- Sign up button -->
+    <div class="form-row mb-4">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <button class="btn btn-info my-4 btn-block" type="reset">Limpiar</button>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-2">
+            <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Crear</button>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</form>
+<!-- Default form register -->
+
+</body>
+</html>

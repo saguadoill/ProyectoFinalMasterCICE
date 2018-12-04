@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de usuarios</title>
+</head>
+<body>
+<!--Cuerpo-->
+    <div id="titulo" class="text-center">
+        <h4>Lista completa de usuarios</h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="resultados" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Foto</th>
+                    <th>Usuario</th>
+                    <th>Permisos</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="tb">
+                <!--Resultado generado por thymeleaf-->
+                <tr th:if="${#lists.isEmpty(lista)}">
+                    <td colspan="8"> Lista de usuarios vacia o no disponible</td>
+                </tr>
+                <tr th:each="usuario : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaUsuarios(this,'lista')">
+                    <td><span th:text="${usuario.idUsuario}"> </span></td>
+                    <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                              th:src="'data:image/png;base64,'+${usuario.foto}"/></td>
+                    <td ><span th:text="${usuario.username}">  </span></td>
+                    <td><span th:text="${usuario.perfil}">  </span></td>
+                    <td><span th:text="${usuario.nombre}">  </span></td>
+                    <td><span th:text="${usuario.apellidos}">  </span></td>
+                    <td><span th:if="!${usuario.cambioPasswd}"><i class="fas fa-question-circle" style="color: red" title="El usuaro debe cambiar la contraseña"></i></span></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+<!--Modal para modificacion usuario-->
+<div th:include="/pages/usuarios/modificar.html :: panel_modificar"></div>
+</body>
+</html>

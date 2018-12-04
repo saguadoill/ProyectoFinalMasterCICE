@@ -1,0 +1,41 @@
+#cuerpo{
+    margin-left: 10%;
+}
+
+.table thead tr{
+    background-color: rgb(115, 134, 213);
+    color: white;
+}
+
+.modal-content {
+    min-width: 800px;
+    width: 100%;
+}
+
+.error_class{
+    text-align: left;
+}
+
+input[data-readonly] {
+    pointer-events: none;
+}
+/*Scrollbar, solo para Chrome, Safari, Opera.*/
+/* ancho */
+ ::-webkit-scrollbar {
+     width: 5px;
+ }
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2c3acc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

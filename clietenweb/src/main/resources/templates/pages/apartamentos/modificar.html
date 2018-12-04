@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Apartamento</title>
+    <!--<script src="../../../static/js/gestapart.js"></script>-->
+    <!--<script src="../../../static/js/jquery-3.3.1.js"></script>-->
+    <!--<script src="../../../static/js/popper.min.js"></script>-->
+    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="../../../static/css/gestapart.css">-->
+    <!--<link rel="stylesheet" href="../../../static/css/style.css">-->
+    <!--<script src="../../../static/js/bootstrap.min.js"></script>-->
+    <!--<script src="../../../static/fonts/fontawesome.js"></script>-->
+    <!--<script src="../../../static/fonts/solid.js"></script>-->
+
+
+</head>
+<body>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+</button>
+<div id="panel_modificar" th:fragment="panel_modificar">
+    <form role="form" class="text-center border border-light p-5" method="POST"
+          action="/apartamentos/modificar"
+          enctype="multipart/form-data">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Panel Modificacion del apartamento</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="text-center border border-light p-2">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="datos-tab" data-toggle="tab" href="#home"
+                                       role="tab"
+                                       aria-controls="home"
+                                       aria-selected="true">Datos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="propietario-tab" data-toggle="tab" href="#tab_propietario"
+                                       role="tab"
+                                       aria-controls="contact" aria-selected="false">Propietario</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <!--Panel Datos-->
+                                <p>
+                                    <!--Campos ocultos-->
+                                    <input type="hidden" id="idApartamento" name="idApartamento">
+                                    <input type="hidden" id="idPropietario" name="idPropietario">
+                                    <input type="hidden" id="origen" name="origen" class="form-control">
+                                </p>
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                     aria-labelledby="datos-tab">
+                                    <div class="form-row mb-4">
+                                        <div class="col-2"></div>
+                                        <!--Direccion-->
+                                        <div class="col-8">
+                                            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" required>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <div class="form-row mb-4">
+                                        <div class="col-2"></div>
+                                        <!--Piso-->
+                                        <div class="col-4">
+                                            <input type="text" id="piso" name="piso" class="form-control" placeholder="Piso">
+                                        </div>
+                                        <!--Puerta-->
+                                        <div class="col-4">
+                                            <input type="text" id="puerta" name="puerta" class="form-control" placeholder="Puerta">
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <!--Capacidad-->
+                                    <div class="form-row mb-4">
+                                        <div class="col-2"></div>
+                                        <div class="col-2">
+                                            <input type="text" id="capacidad" name="capacidad" class="form-control" placeholder="Capacidad" required>
+                                        </div>
+                                        <div class="col-4">
+                                            <select id="selector_tipo" name="tipo" class="mdb-select md-form" required>
+                                                <option value="default">Seleccionar tipo</option>
+                                                <option th:each="tipo : ${listaTipoModelos}" th:value="${tipo.idTipoModelo}" th:text="${tipo.tipo}">
+                                            </select>
+                                        </div>
+                                        <!--Disponibilidad-->
+                                        <div class="col-2">
+                                            <h6>Disponible?</h6>
+                                            <input type="radio" id="btn_disponible"  name="disponible" value="true"><i class="fas fa-home" style="color: green" title="NO DISPONIBLE"></i>
+                                            <input type="radio" id="btn_nodisponible" name="disponible" value="false"><i class="fas fa-home" style="color: red" title="DISPONIBLE"></i>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                    <!--Foto-->
+                                    <div class="form-row mb-4">
+                                        <div class="col-2"></div>
+                                        <div class="col-3">
+                                            <img id="foto_preview" th:src="@{/img/logo_user_off.png}"
+                                                 class="img-fluid w-75 h-auto border border-primary">
+                                        </div>
+                                        <!--Seleccionar foto-->
+                                        <div class="col-5 my-auto text-left">
+                                            <small class="form-text text-muted mb-4">
+                                                Selecionar foto para el apartamento
+                                            </small>
+                                            <div class="card card-block w-100">
+                                                <input name="file" type="file" accept="image/jpeg,image/png" onchange="preview_image(event)">
+                                            </div>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                </div>
+                                <!--Panel Propietario-->
+                                <div class="tab-pane fade" id="tab_propietario" role="tabpanel"
+                                     aria-labelledby="propietario-tab">
+                                    <p></p>
+                                    <p class="h6 mb-4">Datos del propietario actual</p>
+                                    <div class="form-row mb-4">
+                                        <div class="col-4"></div>
+                                        <!--Nombre-->
+                                        <div class="col-4">
+                                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <div class="form-row mb-4">
+                                        <div class="col-4"></div>
+                                        <!--Apellidos-->
+                                        <div class="col-4">
+                                            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" required>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <div class="form-row mb-4">
+                                        <div class="col-4"></div>
+                                        <!--Telefono-->
+                                        <div class="col-4">
+                                            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" required>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <div class="form-row mb-4">
+                                        <div class="col-4"></div>
+                                        <!--Email-->
+                                        <div class="col-4">
+                                            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <p class="h6 mb-4">Cambiar a otro propietario ya existente </p>
+                                    <div class="form-row mb-4">
+                                        <div class="col-2"></div>
+                                        <div class="col-8">
+                                            <select id="select_propietario" name="propietario" class="mdb-select md-form" required>
+                                                <option value="default">Añadir nuevo</option>
+                                                <option th:each="propietario : ${listaPropietarios}" th:value="${propietario.idPropietario}" th:text="${propietario.nombre}+' '+${propietario.apellidos}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-4">
+                            <!--<button type="button" class="btn btn-danger btn-rounded" onclick="eliminarUsuario()">-->
+                            <!--Eliminar-->
+                            <!--</button>-->
+                            <button class="btn btn-danger btn-rounded" type="submit" formaction="/apartamentos/eliminar">
+                                Eliminar
+                            </button>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-4 text-right">
+                            <!--<button type="button" class="btn btn-secondary btn-rounded" type onclick="/modificarUsuario">Modificar</button>-->
+                            <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Modificar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

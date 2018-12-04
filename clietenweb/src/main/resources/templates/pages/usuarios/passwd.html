@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cambio de contraseña</title>
+</head>
+<body>
+<!--Contenido-->
+<form id="form_passwd" class="text-center border border-light p-5 align-content-center">
+    <p class="h4 mb-4">Cambio de contraseña</p>
+    <hr/>
+    <!--Datos personales-->
+    <p class="h6 mb-4">Todos los datos son obligatorios</p>
+    <div id="intput_actual" class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Contraseña actual-->
+        <div class="col-4">
+            <input type="password" id="passwd_actual" class="form-control" placeholder="Contraseña actual">
+        </div>
+        <div id="error_actual" class="col-4 error_class"></div>
+    </div>
+    <div id="input_nueva" class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Contraseña nueva-->
+        <div class="col-4">
+            <input type="password" id="passwd_nueva" class="form-control" placeholder="Nueva contraseña">
+        </div>
+        <div id="error_nueva" class="col-4 error_class"></div>
+    </div>
+    <div id="input_repetir" class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Contraseña nueva repetida-->
+        <div class="col-4">
+            <input type="password" id="passwd_repetir" class="form-control" placeholder="Repetir nueva contraseña">
+        </div>
+        <div id="error_repetir" class="col-4 error_class"></div>
+    </div>
+    <hr/>
+    <!-- Sign up button -->
+    <div class="form-row mb-4">
+        <div class="col-5"></div>
+        <div class="col-2">
+            <button class="btn btn-info my-4 btn-block" type="submit" formaction="javascript:cambiarPasswd()">Cambiar</button>
+        </div>
+        <div class="col-5"></div>
+    </div>
+</form>
+<!-- Default form register -->
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo apartamento</title>
+    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="../../../static/css/gestapart.css">-->
+    <!--<link rel="stylesheet" href="../../../static/css/style.css">-->
+    <!--<script src="../../../static/js/jquery-3.3.1.js"></script>-->
+    <!--<script src="../../../static/js/popper.min.js"></script>-->
+    <!--<script src="../../../static/js/gestapart.js"></script>-->
+    <!--<script src="../../../static/js/bootstrap.min.js"></script>-->
+
+
+</head>
+<body onload="gestionNuevoApartamento()">
+<!--Contenido-->
+<form role="form" name="formulario_nuevo_apartamento" class="text-center border border-light p-5" method="POST"
+      action="/apartamentos/nuevo"
+      enctype="multipart/form-data">
+    <p class="h4 mb-4">Registro de apartamentos</p>
+    <hr/>
+    <!--Datos-->
+    <div class="form-row mb-4">
+        <div class="col-2"></div>
+        <!--Direccion-->
+        <div class="col-8">
+            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" required>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col-2"></div>
+        <!--Piso-->
+        <div class="col-1">
+            <input type="text" id="piso" name="piso" class="form-control" placeholder="Piso" required>
+        </div>
+        <!--Puerta-->
+        <div class="col-2">
+            <input type="text" id="puerta" name="puerta" class="form-control" placeholder="Puerta" required>
+        </div>
+        <!--Tipo o Modelo-->
+        <div class="col-6">
+            <select name="tipo" class="mdb-select md-form" required>
+                <option value="default">Seleccionar tipo</option>
+                <option th:each="tipo : ${tipos}" th:value="${tipo.idTipoModelo}" th:text="${tipo.tipo}">
+            </select>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <!--Capacidad-->
+    <div class="form-row mb-4">
+        <div class="col-4"></div>
+        <div class="col-2">
+            <input type="text" id="capacidad" name="capacidad" class="form-control" placeholder="Capacidad" required>
+        </div>
+        <div class="2">
+            <label><small> Personas</small></label>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="form-row mb-4">
+        <!--Foto-->
+        <div class="col-2"></div>
+        <div class="col-3">
+            <img id="foto_preview" th:src="@{/img/logo_user_off.png}"
+                 class="img-fluid w-75 h-auto border border-primary">
+        </div>
+        <!--Seleccionar foto-->
+        <div class="col-5 my-auto text-left">
+            <small class="form-text text-muted mb-4">
+                Selecionar foto para el apartamento
+            </small>
+            <div class="card card-block w-100">
+                <input name="file" type="file" accept="image/jpeg,image/png" onchange="preview_image(event)">
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <hr/>
+    <!--Datos propietario-->
+    <p class="h6 mb-4">Datos del propietario nuevo</p>
+    <div class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Nombre-->
+        <div class="col-4">
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Apellidos-->
+        <div class="col-4">
+            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" required>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Telefono-->
+        <div class="col-4">
+            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" required>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="form-row mb-4">
+        <div class="col-4"></div>
+        <!--Email-->
+        <div class="col-4">
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <p class="h6 mb-4">Propietario existente</p>
+    <small class="form-text text-muted mb-4">
+        <!--Mensjae si se ve que no queda claro el funcionameinto, en caso de estar elegido otra cosa que no sea Añadir nuevo, se incluira ese propietario-->
+    </small>
+    <div class="form-row mb-4">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <select id="select_propietario" name="propietario" class="mdb-select md-form" required>
+                <option value="default">Añadir nuevo</option>
+                <option th:each="propietario : ${propietarios}" th:value="${propietario.idPropietario}" th:text="${propietario.nombre+' '+propietario.apellidos}">
+            </select>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <hr/>
+    <!-- Sign up button -->
+    <div class="form-row mb-4">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <button class="btn btn-info my-4 btn-block" type="reset">Limpiar</button>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-2">
+            <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Crear</button>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</form>
+</body>
+</html>

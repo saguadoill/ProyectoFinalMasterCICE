@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_style.css}"/>
+    <!-- JavaScript -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+
+</head>
+<body id="LoginForm">
+
+<div class="container centrado">
+
+    <div class="login-form h-100">
+        <div class="main-div">
+            <div class="panel">
+                <h2>GestApart 1.0</h2>
+                <p>Introducir nombre de usuario y contraseña</p>
+            </div>
+            <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+
+                <div class="form-group">
+
+
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+
+                </div>
+
+                <div class="form-group">
+
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+
+                </div>
+                <!--<div class="form-group">-->
+
+                    <!--<label>Recordar sesion?</label>-->
+                    <!--<input type="checkbox" name="remember-me" />-->
+
+                <!--</div>-->
+                <button type="submit" class="btn btn-primary">Login</button>
+                <!-- /login?error=true -->
+                <div th:if="${#request.getParameter('error') == 'true'}"
+                     style="color:red;margin:10px 0px;">
+                    Login Incorrecto !!!<br />
+                    Usuario y/o Contraseña no validos
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
