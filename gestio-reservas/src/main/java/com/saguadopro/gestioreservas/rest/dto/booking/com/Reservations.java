@@ -15,10 +15,14 @@ import java.util.List;
 @XmlRootElement(name = "reservations")
 public class Reservations {
 
-    private List<Reservation> reservations;
+    private List<Reservation> listaReservas;
 
     @XmlElement(name = "reservation")
-    public List<Reservation> getReservations() {
-        return reservations;
+    public List<Reservation> getListaReservas() {
+        return listaReservas;
+    }
+
+    public void setListaReservas(List<Reservation> listaReservas) {
+        this.listaReservas = listaReservas;
     }
 }
