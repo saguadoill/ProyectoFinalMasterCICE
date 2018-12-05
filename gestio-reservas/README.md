@@ -1,3 +1,6 @@
+
+##EJEMPLO RESERVA BOOKING
+
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;  
 &lt;reservations&gt;  
     &lt;reservation&gt;  
