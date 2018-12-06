@@ -55,7 +55,6 @@ public class ReservasService  implements ReservasImpl {
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             reservations = (Reservations) unmarshaller.unmarshal(inputStream);
             System.out.println(reservations);
-            //TODO: convertir a Reserva
             for (Reservation reservation : reservations.getListaReservas()) {
                 Reserva reserva = new Reserva();
                 reserva.setIdReserva(reservation.getId());

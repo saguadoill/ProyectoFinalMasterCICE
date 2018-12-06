@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservas finalizadas</title>
+</head>
+<body onload="gestionNuevoApartamento()">
+<!--Cuerpo-->
+<div id="titulo" class="text-center">
+    <h4>Lista de Reservas finalizadas</h4>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="resultados" class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cliente</th>
+                <th>Fecha de entrada</th>
+                <th>Fecha de salida</th>
+                <th>Nº Personas</th>
+                <th>Apartamento</th>
+                <th>Precio Total</th>
+                <th>Parking</th>
+                <th></th>
+                <th></th>
+                <!--TODO: ver como hacemo sla asignacion del apartmaneto y la plaza de parking(si la desea el cliente)-->
+            </tr>
+            </thead>
+            <tbody id="tb">
+            <tr th:if="${#lists.isEmpty(lista)}">
+                <td colspan="8" class="text-center">Ninguna reserva encontrado</td>
+            </tr>
+            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'pendientes')">
+                <td><span th:text="${reserva.idReserva}"> </span></td>
+                <td><span th:text="${reserva.cliente}"></span></td>
+                <td><span th:text="${reserva.fechaEntrada}">  </span></td>
+                <td><span th:text="${reserva.fechaSalida}">  </span></td>
+                <td><span th:text="${reserva.numeroPersonas}">  </span></td>
+                <td><span th:text="${reserva.idApartamento}">  </span></td>
+                <td><span th:text="${reserva.precioTotal}"> </span></td>
+                <td th:title="${reserva.parking}">
+                    <span th:if="${reserva.parking}"><i class="fas fa-taxi" style="color: green"></i></span>
+                    <span th:unless= "${reserva.parking}"><i class="fas fa-taxi" style="color: red"></i></span>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!--Modal para modificacion usuario-->
+<div th:include="/pages/apartamentos/modificar.html :: panel_modificar"></div>
+</body>
+</html>
