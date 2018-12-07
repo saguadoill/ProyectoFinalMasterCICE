@@ -72,9 +72,9 @@ public class ApartamentosService implements ApartamentosImp {
                 if (apartamentoOriginal.get().getPuerta() != apartamentoDTOModificado.getPuerta()) {
                     apartamentoOriginal.get().setPuerta(apartamentoDTOModificado.getPuerta());
                 }
-                if (apartamentoOriginal.get().getTipo() != apartamentoDTOModificado.getTipo()) {
-                    apartamentoOriginal.get().setTipo(apartamentoDTOModificado.getTipo());
-                }
+//                if (apartamentoOriginal.get().getTipo() != apartamentoDTOModificado.getTipo()) {
+//                    apartamentoOriginal.get().setTipo(apartamentoDTOModificado.getTipo());
+//                }
                 if (apartamentoOriginal.get().getDisponible() != apartamentoDTOModificado.getDisponible()) {
                     apartamentoOriginal.get().setDisponible(apartamentoDTOModificado.getDisponible());
                 }

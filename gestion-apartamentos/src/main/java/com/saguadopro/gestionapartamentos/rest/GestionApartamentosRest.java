@@ -2,10 +2,10 @@ package com.saguadopro.gestionapartamentos.rest;
 
 import com.saguadopro.gestionapartamentos.rest.dto.ApartamentoDTO;
 import com.saguadopro.gestionapartamentos.rest.dto.PropietarioDTO;
-import com.saguadopro.gestionapartamentos.rest.dto.TipoModeloDTO;
+import com.saguadopro.gestionapartamentos.rest.dto.CapacidadDTO;
 import com.saguadopro.gestionapartamentos.services.ApartamentosService;
 import com.saguadopro.gestionapartamentos.services.PropietariosService;
-import com.saguadopro.gestionapartamentos.services.TipoModelosService;
+import com.saguadopro.gestionapartamentos.services.CapacidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class GestionApartamentosRest {
     PropietariosService propietariosService;
 
     @Autowired
-    TipoModelosService tipoModelosService;
+    CapacidadService tipoModelosService;
 
 
     @RequestMapping(value = "/apartamentos",method = RequestMethod.POST)
@@ -74,14 +74,14 @@ public class GestionApartamentosRest {
     }
 
     @RequestMapping(value = "/apartamentos/tipos", method = RequestMethod.GET)
-    public List<TipoModeloDTO> listaTipoModelos(){
-        return tipoModelosService.listaTiposModelos();
+    public List<CapacidadDTO> listaCapacidad(){
+        return tipoModelosService.listaCapacidades();
     }
 
 
-    @RequestMapping(value = "/apartamentos/tipos/{idTipoModelo}", method = RequestMethod.GET)
-    public TipoModeloDTO buscarTipoModelo(@PathVariable(value = "idTipoModelo") String idTipoModelo){
-        return tipoModelosService.buscarTipoModelo(Integer.parseInt(idTipoModelo));
+    @RequestMapping(value = "/apartamentos/tipos/{capacidad}", method = RequestMethod.GET)
+    public CapacidadDTO buscarPorCapacidad(@PathVariable(value = "capacidad") String capacidad){
+        return tipoModelosService.buscarPorCapacidad(Integer.parseInt(capacidad));
     }
 
 

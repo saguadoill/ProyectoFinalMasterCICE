@@ -20,7 +20,7 @@ public class ConvertidorApartamentosService {
         apartamentoDTO.setPropietario(apartamento.getPropietario());
         apartamentoDTO.setPiso(apartamento.getPiso());
         apartamentoDTO.setPuerta(apartamento.getPuerta());
-        apartamentoDTO.setTipo(apartamento.getTipo());
+//        apartamentoDTO.setTipo(apartamento.getTipo());
         apartamentoDTO.setDisponible(apartamento.getDisponible());
         apartamentoDTO.setFoto(fotosService.codificarFoto(apartamento.getFoto_url()));
         return apartamentoDTO;
@@ -28,7 +28,7 @@ public class ConvertidorApartamentosService {
 
     public Apartamento dtoToApartamento(ApartamentoDTO apartamentoDTO) {
         Apartamento apartamento = new Apartamento();
-        apartamento.setTipo(apartamentoDTO.getTipo());
+//        apartamento.setTipo(apartamentoDTO.getTipo());
         apartamento.setPuerta(apartamentoDTO.getPuerta());
         apartamento.setPiso(apartamentoDTO.getPiso());
         apartamento.setPropietario(apartamentoDTO.getPropietario());

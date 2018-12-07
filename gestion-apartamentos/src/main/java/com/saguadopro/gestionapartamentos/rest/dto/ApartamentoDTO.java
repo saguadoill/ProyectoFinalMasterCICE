@@ -1,7 +1,7 @@
 package com.saguadopro.gestionapartamentos.rest.dto;
 
 import com.saguadopro.gestionapartamentos.entities.Propietario;
-import com.saguadopro.gestionapartamentos.entities.TiposModelo;
+import com.saguadopro.gestionapartamentos.entities.Capacidad;
 import lombok.Data;
 
 @Data
@@ -9,9 +9,9 @@ public class ApartamentoDTO {
 
     private Long idApartamento;
 
-    private TiposModelo tipo;
+    private Capacidad capacidad;
 
-    private Integer capacidad;
+//    private Integer capacidad;
 
     private String direccion;
 

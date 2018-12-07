@@ -20,11 +20,11 @@ public class Apartamento {
     private Long idApartamento;
 
     @OneToOne
-    @JoinColumn(name = "id_tipomodelo")
-    private TiposModelo tipo;
-
-    @Column(name = "capacidad")
-    private Integer capacidad;
+    @JoinColumn(name = "capacidad")
+    private Capacidad capacidad;
+//
+//    @Column(name = "capacidad")
+//    private Integer capacidad;
 
     @Column(name = "direccion")
     private String direccion;

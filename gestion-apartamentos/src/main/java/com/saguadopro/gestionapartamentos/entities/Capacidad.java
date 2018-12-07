@@ -11,14 +11,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "tipos_modelos")
-public class TiposModelo {
+public class Capacidad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipomodelo", nullable = false, unique = true)
-    private Integer idTipoModelo;
+    @Column(name = "id_capacidad", nullable = false, unique = true)
+    private Integer idCapacidad;
 
-    @Column(name = "tipo", unique = true)
-    private String tipo;
+    @Column(name = "capacidad", unique = true)
+    private String maxPersonas;
 
 }
