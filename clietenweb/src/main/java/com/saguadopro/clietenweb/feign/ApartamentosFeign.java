@@ -3,7 +3,7 @@ package com.saguadopro.clietenweb.feign;
 
 import com.saguadopro.clietenweb.dto.ApartamentoDTO;
 import com.saguadopro.clietenweb.dto.PropietarioDTO;
-import com.saguadopro.clietenweb.dto.TipoModeloDTO;
+import com.saguadopro.clietenweb.dto.CapacidadDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -39,10 +39,10 @@ public interface ApartamentosFeign {
     @RequestMapping(value = "/apartamentos/propietarios/{idPropietario}",method = RequestMethod.GET)
     PropietarioDTO buscarPropietario(@PathVariable(value = "idPropietario") String idPropietario);
 
-    @RequestMapping(value = "/apartamentos/tipos",method = RequestMethod.GET)
-    List<TipoModeloDTO> listaTipoModelos();
+    @RequestMapping(value = "/apartamentos/capacidades",method = RequestMethod.GET)
+    List<CapacidadDTO> listaCapacidades();
 
-    @RequestMapping(value = "/apartamentos/tipos/{idTipoModelo}",method = RequestMethod.GET)
-    TipoModeloDTO buscarTipoModelo(@PathVariable(value = "idTipoModelo") String idTipoModelo);
+    @RequestMapping(value = "/apartamentos/capacidades/{capacidad}",method = RequestMethod.GET)
+    CapacidadDTO buscarCapacidad(@PathVariable(value = "capacidad") String idCapacidad);
 
 }

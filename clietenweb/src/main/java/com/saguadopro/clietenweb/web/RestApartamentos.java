@@ -3,7 +3,7 @@ package com.saguadopro.clietenweb.web;
 
 import com.saguadopro.clietenweb.dto.ApartamentoDTO;
 import com.saguadopro.clietenweb.dto.PropietarioDTO;
-import com.saguadopro.clietenweb.dto.TipoModeloDTO;
+import com.saguadopro.clietenweb.dto.CapacidadDTO;
 import com.saguadopro.clietenweb.services.ApartamentosWebService;
 import com.saguadopro.clietenweb.services.InicioWebService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class RestApartamentos {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("pagina","pages/apartamentos/nuevo");
         vista.addObject("propietarios",apartamentosWebService.listaPropietarios());
-        vista.addObject("tipos",apartamentosWebService.listaTipoModelos());
+        vista.addObject("listaCapacidades",apartamentosWebService.listaTipoModelos());
         return vista;
     }
 
@@ -98,7 +98,7 @@ public class RestApartamentos {
     }
 
     @RequestMapping(value = "/tipos/{idTipoModelo}", method = RequestMethod.GET)
-    public TipoModeloDTO cargarTipoModelo(@PathVariable(value = "idTipoModelo") String idTipoModelo){
+    public CapacidadDTO cargarTipoModelo(@PathVariable(value = "idTipoModelo") String idTipoModelo){
         return apartamentosWebService.buscarTipoModelo(idTipoModelo);
     }
 }

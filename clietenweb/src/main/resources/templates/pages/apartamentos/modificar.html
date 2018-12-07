@@ -81,13 +81,10 @@
                                     <!--Capacidad-->
                                     <div class="form-row mb-4">
                                         <div class="col-2"></div>
-                                        <div class="col-2">
-                                            <input type="text" id="capacidad" name="capacidad" class="form-control" placeholder="Capacidad" required>
-                                        </div>
-                                        <div class="col-4">
-                                            <select id="selector_tipo" name="tipo" class="mdb-select md-form" required>
+                                        <div class="col-6">
+                                            <select id="selector_capacidad" name="capacidad" class="mdb-select md-form" required>
                                                 <option value="default">Seleccionar tipo</option>
-                                                <option th:each="tipo : ${listaTipoModelos}" th:value="${tipo.idTipoModelo}" th:text="${tipo.tipo}">
+                                                <option th:each="tipo : ${listaCapacidades}" th:value="${capacidad.idCapacidad}" th:text="${capacidad.maxPersonas}">
                                             </select>
                                         </div>
                                         <!--Disponibilidad-->

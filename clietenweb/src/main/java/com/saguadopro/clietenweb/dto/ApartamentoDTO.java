@@ -11,7 +11,7 @@ public class ApartamentoDTO {
 
     private Long idApartamento;
 
-    private TipoModeloDTO tipo;
+    private CapacidadDTO tipo;
 
     private Integer capacidad;
 

@@ -73,13 +73,13 @@ public class GestionApartamentosRest {
         return propietariosService.buscarPropietario(Integer.parseInt(idPropietario));
     }
 
-    @RequestMapping(value = "/apartamentos/tipos", method = RequestMethod.GET)
+    @RequestMapping(value = "/apartamentos/capacidades", method = RequestMethod.GET)
     public List<CapacidadDTO> listaCapacidad(){
         return tipoModelosService.listaCapacidades();
     }
 
 
-    @RequestMapping(value = "/apartamentos/tipos/{capacidad}", method = RequestMethod.GET)
+    @RequestMapping(value = "/apartamentos/capacidades/{capacidad}", method = RequestMethod.GET)
     public CapacidadDTO buscarPorCapacidad(@PathVariable(value = "capacidad") String capacidad){
         return tipoModelosService.buscarPorCapacidad(Integer.parseInt(capacidad));
     }

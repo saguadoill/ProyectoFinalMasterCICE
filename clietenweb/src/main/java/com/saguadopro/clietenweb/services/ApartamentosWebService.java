@@ -2,7 +2,7 @@ package com.saguadopro.clietenweb.services;
 
 import com.saguadopro.clietenweb.dto.ApartamentoDTO;
 import com.saguadopro.clietenweb.dto.PropietarioDTO;
-import com.saguadopro.clietenweb.dto.TipoModeloDTO;
+import com.saguadopro.clietenweb.dto.CapacidadDTO;
 import com.saguadopro.clietenweb.feign.ApartamentosFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,7 @@ public class ApartamentosWebService {
 
         vista.addObject("pagina", "pages/apartamentos/"+origen);
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
-        vista.addObject("listaTipoModelos", apartamentosFeign.listaTipoModelos());
+        vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
         return vista;
     }
 //TODO: comprobar si el buscar apartamento tambien actiualiza despues de modificar y ver la opcion de ELIMINAR
@@ -62,7 +62,7 @@ public class ApartamentosWebService {
         vista.addObject("pagina","pages/apartamentos/buscar");
         vista.addObject("lista", apartamentosFeign.buscarApartamento(idApartamento));
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
-        vista.addObject("listaTipoModelos", apartamentosFeign.listaTipoModelos());
+        vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
         return vista;
     }
 
@@ -73,7 +73,7 @@ public class ApartamentosWebService {
             apartamentoDtoModificado.setFoto(Base64.getEncoder().encodeToString(fotoForm));
             apartamentosFeign.modificarApartamento(apartamentoDtoModificado);
             vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
-            vista.addObject("listaTipoModelos", apartamentosFeign.listaTipoModelos());
+            vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
             vista.addObject("apartamentoFoto", "data:image/png;base64," + apartamentosFeign.buscarApartamento(String.valueOf(apartamentoDtoModificado.getIdApartamento())).get(0).getFoto());
             gestionarListaSegunOrigen(origen, vista, String.valueOf(apartamentoDtoModificado.getIdApartamento()));
 
@@ -96,7 +96,7 @@ public class ApartamentosWebService {
         }
         vista.addObject("lista", listaDisponibles);
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
-        vista.addObject("listaTipoModelos", apartamentosFeign.listaTipoModelos());
+        vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
         vista.addObject("pagina", "pages/apartamentos/disponibles");
         return vista;
     }
@@ -112,7 +112,7 @@ public class ApartamentosWebService {
         }
         vista.addObject("lista", listaNoDisponibles);
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
-        vista.addObject("listaTipoModelos", apartamentosFeign.listaTipoModelos());
+        vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
         vista.addObject("pagina", "pages/apartamentos/nodisponibles");
         return vista;
     }
@@ -127,35 +127,33 @@ public class ApartamentosWebService {
         return propietarioDTO;
     }
 
-    public List<TipoModeloDTO> listaTipoModelos() {
-        return apartamentosFeign.listaTipoModelos();
+    public List<CapacidadDTO> listaCapacidades() {
+        return apartamentosFeign.listaCapacidades();
     }
 
-    public TipoModeloDTO buscarTipoModelo(String idTipoModelo) {
-        TipoModeloDTO tipoModeloDTO = apartamentosFeign.buscarTipoModelo(idTipoModelo);
-        return tipoModeloDTO;
+    public CapacidadDTO buscarTipoModelo(String idCapacidad) {
+        CapacidadDTO capacidadDTO = apartamentosFeign.buscarCapacidad(idCapacidad);
+        return capacidadDTO;
     }
 
     private void gestionarListaSegunOrigen(String origen, ModelAndView vista, String idApartamento){
-
+        List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
+        List<ApartamentoDTO> listaFiltrada = new ArrayList<>();
         if (origen.equals("disponibles")){
-            List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
-            List<ApartamentoDTO> listaDisponibles = new ArrayList<>();
+
             for (ApartamentoDTO apartamentoDTO : listaCompleta) {
                 if (apartamentoDTO.getDisponible()) {
-                    listaDisponibles.add(apartamentoDTO);
+                    listaFiltrada.add(apartamentoDTO);
                 }
             }
-            vista.addObject("lista", listaDisponibles);
+            vista.addObject("lista", listaFiltrada);
         }else if (origen.equals("nodisponibles")){
-            List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
-            List<ApartamentoDTO> listaNoDisponibles = new ArrayList<>();
             for (ApartamentoDTO apartamentoDTO : listaCompleta) {
                 if (!apartamentoDTO.getDisponible()) {
-                    listaNoDisponibles.add(apartamentoDTO);
+                    listaFiltrada.add(apartamentoDTO);
                 }
             }
-            vista.addObject("lista", listaNoDisponibles);
+            vista.addObject("lista", listaFiltrada);
         }else {
             vista.addObject("lista", apartamentosFeign.buscarApartamento(idApartamento));
         }
