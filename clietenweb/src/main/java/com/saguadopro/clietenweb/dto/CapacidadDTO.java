@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CapacidadDTO {
 
-    private Integer idTipoModelo;
+    private Integer idCapacidad;
 
-    private String tipo;
+    private String maxPersonas;
 }

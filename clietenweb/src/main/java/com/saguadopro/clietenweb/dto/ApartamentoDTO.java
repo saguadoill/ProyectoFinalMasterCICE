@@ -1,19 +1,15 @@
 package com.saguadopro.clietenweb.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ApartamentoDTO {
 
     private Long idApartamento;
 
-    private CapacidadDTO tipo;
+    private CapacidadDTO capacidad;
 
-    private Integer capacidad;
+//    private Integer capacidad;
 
     private String direccion;
 
@@ -23,7 +19,7 @@ public class ApartamentoDTO {
 
     private String foto;
 
-    private Boolean disponible;
+    private HuespedDTO huesped;
 
     private PropietarioDTO propietario;
 }

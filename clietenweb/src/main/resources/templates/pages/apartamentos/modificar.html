@@ -84,7 +84,7 @@
                                         <div class="col-6">
                                             <select id="selector_capacidad" name="capacidad" class="mdb-select md-form" required>
                                                 <option value="default">Seleccionar tipo</option>
-                                                <option th:each="tipo : ${listaCapacidades}" th:value="${capacidad.idCapacidad}" th:text="${capacidad.maxPersonas}">
+                                                <option th:each="capacidad : ${listaCapacidades}" th:value="${capacidad.idCapacidad}" th:text="${capacidad.maxPersonas}">
                                             </select>
                                         </div>
                                         <!--Disponibilidad-->

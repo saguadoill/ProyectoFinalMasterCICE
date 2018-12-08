@@ -1,13 +1,13 @@
-package com.saguadopro.gestionapartamentos.services;
+package com.saguadopro.gestionapartamentos.services.conversores;
 
 import com.saguadopro.gestionapartamentos.entities.Propietario;
 import com.saguadopro.gestionapartamentos.rest.dto.PropietarioDTO;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConvertidoPropietariosService {
+public class PropietarioConverter {
 
-    public PropietarioDTO propietarioToDto(Propietario propietario) {
+    public static PropietarioDTO propietarioToDto(Propietario propietario) {
         PropietarioDTO propietarioDTO = new PropietarioDTO();
         propietarioDTO.setIdPropietario(propietario.getIdPropietario());
         propietarioDTO.setNombre(propietario.getNombre());
@@ -17,7 +17,7 @@ public class ConvertidoPropietariosService {
         return propietarioDTO;
     }
 
-    public Propietario dtoToPropietario(PropietarioDTO propietarioDTO) {
+    public static Propietario dtoToPropietario(PropietarioDTO propietarioDTO) {
         Propietario propietario = new Propietario();
         propietario.setIdPropietario(propietarioDTO.getIdPropietario());
         propietario.setNombre(propietarioDTO.getNombre());

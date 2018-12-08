@@ -24,7 +24,7 @@ public class RestApartamentos {
     ApartamentosWebService apartamentosWebService;
 
 
-    @RequestMapping(value = "/eliminar",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/eliminar",method = RequestMethod.POST)
     public ModelAndView eliminarApartamento(@RequestParam String idApartamento ,@RequestParam String origen, Principal principal) {
         return apartamentosWebService.eliminarApartamento(idApartamento,principal,origen);
     }
@@ -34,20 +34,19 @@ public class RestApartamentos {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("pagina","pages/apartamentos/nuevo");
         vista.addObject("propietarios",apartamentosWebService.listaPropietarios());
-        vista.addObject("listaCapacidades",apartamentosWebService.listaTipoModelos());
+        vista.addObject("listaCapacidades",apartamentosWebService.listaCapacidades());
         return vista;
     }
 
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-    public ModelAndView crearApartamento(@RequestParam String direccion,@RequestParam String tipo,@RequestParam String capacidad
+    public ModelAndView crearApartamento(@RequestParam String direccion,@RequestParam String capacidad
             ,@RequestParam String piso,@RequestParam String puerta,@RequestParam String propietario, @RequestParam MultipartFile file, Principal principal) {
         ApartamentoDTO apartamentoDTO = new ApartamentoDTO();
         apartamentoDTO.setDireccion(direccion);
-        apartamentoDTO.setCapacidad(Integer.parseInt(capacidad));
         apartamentoDTO.setPiso(piso);
         apartamentoDTO.setPuerta(puerta);
         apartamentoDTO.setDisponible(true);
-        apartamentoDTO.setTipo(apartamentosWebService.buscarTipoModelo(tipo));
+        apartamentoDTO.setCapacidad(apartamentosWebService.buscarCapacidad(capacidad));
         apartamentoDTO.setPropietario(apartamentosWebService.buscarPropietario(propietario));
         System.out.println(apartamentoDTO);
         return apartamentosWebService.crearNuevoApartamento(apartamentoDTO,file,principal) ;
@@ -76,18 +75,17 @@ public class RestApartamentos {
     }
 
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
-    public ModelAndView modificarApartamento(@RequestParam String idApartamento,@RequestParam String direccion,@RequestParam String tipo,@RequestParam String capacidad
+    public ModelAndView modificarApartamento(@RequestParam String idApartamento,@RequestParam String direccion,@RequestParam String capacidad
             ,@RequestParam String piso,@RequestParam String puerta,@RequestParam String propietario,@RequestParam String disponible, @RequestParam MultipartFile file,@RequestParam String origen ,Principal principal) {
         ApartamentoDTO apartamentoDtoModificado = new ApartamentoDTO();
         apartamentoDtoModificado.setIdApartamento(Long.parseLong(idApartamento));
         apartamentoDtoModificado.setDireccion(direccion);
-        apartamentoDtoModificado.setCapacidad(Integer.parseInt(capacidad));
         apartamentoDtoModificado.setPiso(piso);
         apartamentoDtoModificado.setPuerta(puerta);
         System.out.println("modificar: disponible: "+disponible);
         apartamentoDtoModificado.setDisponible(Boolean.parseBoolean(disponible.toUpperCase()));
         System.out.println("modificar: disponible: "+apartamentoDtoModificado.getDisponible());
-        apartamentoDtoModificado.setTipo(apartamentosWebService.buscarTipoModelo(tipo));
+        apartamentoDtoModificado.setCapacidad(apartamentosWebService.buscarCapacidad(capacidad));
         apartamentoDtoModificado.setPropietario(apartamentosWebService.buscarPropietario(propietario));
         return apartamentosWebService.modificarApartamento(apartamentoDtoModificado,file,principal,origen);
     }
@@ -97,8 +95,8 @@ public class RestApartamentos {
         return apartamentosWebService.buscarPropietario(idPropietario);
     }
 
-    @RequestMapping(value = "/tipos/{idTipoModelo}", method = RequestMethod.GET)
-    public CapacidadDTO cargarTipoModelo(@PathVariable(value = "idTipoModelo") String idTipoModelo){
-        return apartamentosWebService.buscarTipoModelo(idTipoModelo);
+    @RequestMapping(value = "/tipos/{capacidad}", method = RequestMethod.GET)
+    public CapacidadDTO cargarTipoModelo(@PathVariable(value = "capacidad") String capacidad){
+        return apartamentosWebService.buscarCapacidad(capacidad);
     }
 }

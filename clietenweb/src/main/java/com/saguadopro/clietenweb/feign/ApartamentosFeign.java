@@ -22,7 +22,7 @@ public interface ApartamentosFeign {
     HttpStatus crearUsuarioFeign(ApartamentoDTO usuarioDTO);
 
     @RequestMapping(value = "/apartamentos/{idApartamento}",method = RequestMethod.DELETE)
-    Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") Long idApartamento);
+    Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") String idApartamento);
 
     @RequestMapping(value = "/apartamentos",method = RequestMethod.PUT)
     HttpStatus modificarApartamento(@RequestBody ApartamentoDTO apartamentoDTOModificado);

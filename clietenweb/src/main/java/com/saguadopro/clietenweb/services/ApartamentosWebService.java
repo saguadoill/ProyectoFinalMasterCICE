@@ -48,9 +48,9 @@ public class ApartamentosWebService {
 
 
     public ModelAndView eliminarApartamento(String idApartamento, Principal principal, String origen) {
+        apartamentosFeign.eliminarApartamentos(idApartamento);
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         gestionarListaSegunOrigen(origen, vista, idApartamento);
-
         vista.addObject("pagina", "pages/apartamentos/"+origen);
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
         vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
@@ -131,7 +131,7 @@ public class ApartamentosWebService {
         return apartamentosFeign.listaCapacidades();
     }
 
-    public CapacidadDTO buscarTipoModelo(String idCapacidad) {
+    public CapacidadDTO buscarCapacidad(String idCapacidad) {
         CapacidadDTO capacidadDTO = apartamentosFeign.buscarCapacidad(idCapacidad);
         return capacidadDTO;
     }

@@ -37,9 +37,13 @@ public class Apartamento {
 
     @Column(name = "foto_url")
     private String foto_url;
+//
+//    @Column(name = "disponible")
+//    private Boolean disponible;
 
-    @Column(name = "disponible")
-    private Boolean disponible;
+    @ManyToOne
+    @Column(name = "id_huesped")
+    private Huesped huesped;
 
     @ManyToOne
     @JoinColumn(name = "id_propietario")

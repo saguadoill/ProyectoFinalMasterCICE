@@ -31,7 +31,7 @@ public class Reserva {
     private LocalDate fechaSalida;
 
     @Column(name = "numero_personas")
-    private Integer numeroPersonas;
+    private Integer numero_personas;
 
     @Column(name = "id_apartamento")
     private Long idApartamento;

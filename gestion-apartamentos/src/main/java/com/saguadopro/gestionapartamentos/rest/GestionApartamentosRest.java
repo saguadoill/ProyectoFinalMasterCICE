@@ -35,8 +35,8 @@ public class GestionApartamentosRest {
     }
 
     @RequestMapping(value = "/apartamentos/{idApartamento}",method = RequestMethod.DELETE)
-    public Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") Long idApartamento){
-        if (apartamentosService.eliminarApartamento(idApartamento)){
+    public Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") String idApartamento){
+        if (apartamentosService.eliminarApartamento(Long.parseLong(idApartamento))){
             return true;
         }else{
             return false;

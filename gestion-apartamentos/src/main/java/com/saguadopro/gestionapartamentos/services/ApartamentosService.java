@@ -3,6 +3,10 @@ package com.saguadopro.gestionapartamentos.services;
 import com.saguadopro.gestionapartamentos.entities.Apartamento;
 import com.saguadopro.gestionapartamentos.repositories.ApartamentosRepo;
 import com.saguadopro.gestionapartamentos.rest.dto.ApartamentoDTO;
+import com.saguadopro.gestionapartamentos.services.conversores.CapacidadConverter;
+import com.saguadopro.gestionapartamentos.services.conversores.PropietarioConverter;
+import com.saguadopro.gestionapartamentos.services.conversores.ApartamentoConverter;
+import com.saguadopro.gestionapartamentos.services.conversores.HuespedConverter;
 import com.saguadopro.gestionapartamentos.services.impl.ApartamentosImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,7 @@ public class ApartamentosService implements ApartamentosImp {
     private FotosService fotosService;
 
     @Autowired
-    private ConvertidorApartamentosService convertidorApartamentosService;
+    private ApartamentoConverter apartamentoConverter;
 
     @Autowired
     private ApartamentosRepo apartamentosRepo;
@@ -28,7 +32,7 @@ public class ApartamentosService implements ApartamentosImp {
     public Boolean crearApartamento(ApartamentoDTO apartamentoDTO) {
         if (apartamentoDTO != null) {
             System.out.println("entrando en donde la foto no esta vacia");
-            Apartamento apartamentoBBDD = convertidorApartamentosService.dtoToApartamento(apartamentoDTO);
+            Apartamento apartamentoBBDD = apartamentoConverter.dtoToApartamento(apartamentoDTO);
             apartamentosRepo.save(apartamentoBBDD);
             return true;
         } else {
@@ -57,14 +61,14 @@ public class ApartamentosService implements ApartamentosImp {
             if (apartamentoOriginal.isPresent()) {
                 BufferedImage fotoUsuarioModificada = fotosService.decodificarFoto(apartamentoDTOModificado.getFoto());
 
-                if (apartamentoOriginal.get().getCapacidad() != apartamentoDTOModificado.getCapacidad()) {
-                    apartamentoOriginal.get().setCapacidad(apartamentoDTOModificado.getCapacidad());
+                if (apartamentoOriginal.get().getCapacidad().getIdCapacidad() != apartamentoDTOModificado.getCapacidad().getIdCapacidad()) {
+                    apartamentoOriginal.get().setCapacidad(CapacidadConverter.dtoToCapacidad(apartamentoDTOModificado.getCapacidad()));
                 }
                 if (!apartamentoOriginal.get().getDireccion().equals(apartamentoDTOModificado.getDireccion())) {
                     apartamentoOriginal.get().setDireccion(apartamentoDTOModificado.getDireccion());
                 }
                 if (apartamentoOriginal.get().getPropietario().getIdPropietario() != apartamentoDTOModificado.getPropietario().getIdPropietario()) {
-                    apartamentoOriginal.get().setPropietario(apartamentoDTOModificado.getPropietario());
+                    apartamentoOriginal.get().setPropietario(PropietarioConverter.dtoToPropietario(apartamentoDTOModificado.getPropietario()));
                 }
                 if (!apartamentoOriginal.get().getPiso().equals(apartamentoDTOModificado.getPiso())) {
                     apartamentoOriginal.get().setPiso(apartamentoDTOModificado.getPiso());
@@ -75,8 +79,8 @@ public class ApartamentosService implements ApartamentosImp {
 //                if (apartamentoOriginal.get().getTipo() != apartamentoDTOModificado.getTipo()) {
 //                    apartamentoOriginal.get().setTipo(apartamentoDTOModificado.getTipo());
 //                }
-                if (apartamentoOriginal.get().getDisponible() != apartamentoDTOModificado.getDisponible()) {
-                    apartamentoOriginal.get().setDisponible(apartamentoDTOModificado.getDisponible());
+                if (apartamentoOriginal.get().getHuesped().getIdHuesped() != apartamentoDTOModificado.getHuesped().getIdHuesped()) {
+                    apartamentoOriginal.get().setHuesped(HuespedConverter.dtoToHuesped(apartamentoDTOModificado.getHuesped()));
                 }
                 if (!apartamentoDTOModificado.getFoto().equals("")) {
                     apartamentoOriginal.get().setFoto_url(fotosService.guardarFoto(apartamentoOriginal.get().getIdApartamento(), fotoUsuarioModificada));
@@ -99,13 +103,13 @@ public class ApartamentosService implements ApartamentosImp {
         try {
             apartamentoEncontrado.addAll(apartamentosRepo.encontrarApartamentosPorId(idApartamento));
             for (Apartamento apartamento : apartamentoEncontrado) {
-                apartamentosDtoEncontrado.add(convertidorApartamentosService.apartamentoToDto(apartamento));
+                apartamentosDtoEncontrado.add(apartamentoConverter.apartamentoToDto(apartamento));
             }
             return apartamentosDtoEncontrado;
         } catch (NumberFormatException e) {
             apartamentoEncontrado.addAll(apartamentosRepo.encontrarApartamentosPorId(idApartamento));
             for (Apartamento apartamento : apartamentoEncontrado) {
-                apartamentosDtoEncontrado.add(convertidorApartamentosService.apartamentoToDto(apartamento));
+                apartamentosDtoEncontrado.add(apartamentoConverter.apartamentoToDto(apartamento));
             }
             return apartamentosDtoEncontrado;
         } catch (NullPointerException e) {
@@ -117,7 +121,7 @@ public class ApartamentosService implements ApartamentosImp {
     public List<ApartamentoDTO> listaApartamentos() {
         List<ApartamentoDTO> listaApartamentosDto = new ArrayList<>();
         for (Apartamento apartamento : apartamentosRepo.findAll()) {
-            listaApartamentosDto.add(convertidorApartamentosService.apartamentoToDto(apartamento));
+            listaApartamentosDto.add(apartamentoConverter.apartamentoToDto(apartamento));
         }
         return listaApartamentosDto;
     }

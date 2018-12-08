@@ -60,7 +60,7 @@ public class ReservasService  implements ReservasImpl {
                 reserva.setIdReserva(reservation.getId());
                 reserva.setIdApartamento(reservation.getRoom().getId());
                 reserva.setCliente(reservation.getCustomer().getFirst_name()+" "+reservation.getCustomer().getLast_name());
-                reserva.setNumeroPersonas(reservation.getRoom().getNumberofguests());
+                reserva.setNumero_personas(reservation.getRoom().getNumberofguests());
                 reserva.setFechaEntrada(LocalDate.parse(reservation.getRoom().getArrival_date()));
                 reserva.setFechaSalida(LocalDate.parse(reservation.getRoom().getDeparture_date()));
                 reserva.setPrecioTotal(reservation.getRoom().getTotalprice());
@@ -70,7 +70,5 @@ public class ReservasService  implements ReservasImpl {
             e.printStackTrace();
         }
     }
-
-    // TODO: integrar reservas en el clienteweb. Y ver como asignar los apartamentos.
 }
 

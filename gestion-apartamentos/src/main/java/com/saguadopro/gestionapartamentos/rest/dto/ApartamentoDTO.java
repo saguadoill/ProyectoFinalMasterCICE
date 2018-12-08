@@ -1,5 +1,6 @@
 package com.saguadopro.gestionapartamentos.rest.dto;
 
+import com.saguadopro.gestionapartamentos.entities.Huesped;
 import com.saguadopro.gestionapartamentos.entities.Propietario;
 import com.saguadopro.gestionapartamentos.entities.Capacidad;
 import lombok.Data;
@@ -9,7 +10,7 @@ public class ApartamentoDTO {
 
     private Long idApartamento;
 
-    private Capacidad capacidad;
+    private CapacidadDTO capacidad;
 
 //    private Integer capacidad;
 
@@ -21,7 +22,7 @@ public class ApartamentoDTO {
 
     private String foto;
 
-    private Boolean disponible;
+    private HuespedDTO huesped;
 
-    private Propietario propietario;
+    private PropietarioDTO propietario;
 }

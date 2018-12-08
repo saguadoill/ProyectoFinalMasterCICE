@@ -20,7 +20,7 @@ public class ReservaDTO {
 
     private LocalDate fechaSalida;
 
-    private Integer numeroPersonas;
+    private Integer capacidad;
 
     private Long idApartamento;
 

@@ -13,7 +13,7 @@
     <script src="../../../static/fonts/fontawesome.js"></script>
     <script src="../../../static/fonts/solid.js"></script>
 
-
+<!--TODO: hacer un modal para asignar apartamento y parking por id o por capacidad en caso de los apartamentos. Los parkings ya veremos-->
 </head>
 <body>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -37,134 +37,125 @@
                         <form class="text-center border border-light p-2">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="datos-tab" data-toggle="tab" href="#home"
+                                    <a class="nav-link active" id="por_id-tab" data-toggle="tab" href="#home"
                                        role="tab"
                                        aria-controls="home"
-                                       aria-selected="true">Datos</a>
+                                       aria-selected="true">Por Id Reserva</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="propietario-tab" data-toggle="tab" href="#tab_propietario"
+                                    <a class="nav-link" id="por_capacidad-tab" data-toggle="tab" href="#tab_capacidad"
                                        role="tab"
-                                       aria-controls="contact" aria-selected="false">Propietario</a>
+                                       aria-controls="contact" aria-selected="false">Por Capacidad</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="propietario-tab" data-toggle="tab" href="#tab_parking"
+                                       role="tab"
+                                       aria-controls="contact" aria-selected="false">Parking</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <!--Panel Datos-->
+                                <!--Panel Por ID Reserva-->
                                 <p>
                                     <!--Campos ocultos-->
-                                    <input type="hidden" id="idApartamento" name="idApartamento">
                                     <input type="hidden" id="idPropietario" name="idPropietario">
                                     <input type="hidden" id="origen" name="origen" class="form-control">
                                 </p>
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                     aria-labelledby="datos-tab">
+                                     aria-labelledby="por_id-tab">
                                     <div class="form-row mb-4">
-                                        <div class="col-2"></div>
-                                        <!--Direccion-->
-                                        <div class="col-8">
-                                            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" required>
-                                        </div>
-                                        <div class="col-2"></div>
-                                    </div>
-                                    <div class="form-row mb-4">
-                                        <div class="col-2"></div>
-                                        <!--Piso-->
-                                        <div class="col-4">
-                                            <input type="text" id="piso" name="piso" class="form-control" placeholder="Piso">
-                                        </div>
-                                        <!--Puerta-->
-                                        <div class="col-4">
-                                            <input type="text" id="puerta" name="puerta" class="form-control" placeholder="Puerta">
-                                        </div>
-                                        <div class="col-2"></div>
-                                    </div>
-                                    <!--Capacidad-->
-                                    <div class="form-row mb-4">
-                                        <div class="col-2"></div>
-                                        <div class="col-2">
-                                            <input type="text" id="capacidad" name="capacidad" class="form-control" placeholder="Capacidad" required>
-                                        </div>
-                                        <div class="col-4">
-                                            <select id="selector_tipo" name="tipo" class="mdb-select md-form" required>
-                                                <option value="default">Seleccionar tipo</option>
-                                                <!--<option th:each="tipo : ${listaTipoModelos}" th:value="${tipo.idTipoModelo}" th:text="${tipo.tipo}">-->
-                                            </select>
-                                        </div>
-                                        <!--Disponibilidad-->
-                                        <div class="col-2">
-                                            <h6>Disponible?</h6>
-                                            <input type="radio" id="btn_disponible"  name="disponible" value="true"><i class="fas fa-home" style="color: green" title="NO DISPONIBLE"></i>
-                                            <input type="radio" id="btn_nodisponible" name="disponible" value="false"><i class="fas fa-home" style="color: red" title="DISPONIBLE"></i>
-                                        </div>
-                                        <div class="col-2"></div>
-                                    </div>
-                                    <!--Foto-->
-                                    <div class="form-row mb-4">
-                                        <div class="col-2"></div>
-                                        <div class="col-3">
-                                            <img id="foto_preview" th:src="@{/img/logo_user_off.png}"
-                                                 class="img-fluid w-75 h-auto border border-primary">
-                                        </div>
-                                        <!--Seleccionar foto-->
-                                        <div class="col-5 my-auto text-left">
-                                            <small class="form-text text-muted mb-4">
-                                                Selecionar foto para el apartamento
-                                            </small>
-                                            <div class="card card-block w-100">
-                                                <input name="file" type="file" accept="image/jpeg,image/png" onchange="preview_image(event)">
-                                            </div>
-                                        </div>
-                                        <div class="col-2"></div>
+                                        <table id="tabla_id_reserva" class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Foto</th>
+                                                <th>Direccion</th>
+                                                <th>Capacidad</th>
+                                                <th>Piso</th>
+                                                <th>Puerta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tb_id_reserva">
+                                            <tr>
+                                                <td id="idApartamento" th:name="idApartamento"></td>
+                                                <td id="foto"></td>
+                                                <td id="direccion"></td>
+                                                <td id="capacidad"></td>
+                                                <td id="piso"></td>
+                                                <td id="puerta"></td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
                                     </div>
                                 </div>
-                                <!--Panel Propietario-->
-                                <div class="tab-pane fade" id="tab_propietario" role="tabpanel"
-                                     aria-labelledby="propietario-tab">
+                                <!--Panel Por Capacidad-->
+                                <div class="tab-pane fade" id="tab_capacidad" role="tabpanel"
+                                     aria-labelledby="por_capacidad-tab">
                                     <p></p>
-                                    <p class="h6 mb-4">Datos del propietario actual</p>
                                     <div class="form-row mb-4">
-                                        <div class="col-4"></div>
-                                        <!--Nombre-->
-                                        <div class="col-4">
-                                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
-                                        </div>
-                                        <div class="col-4"></div>
+                                        <table id="tabla_capacidad" class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Foto</th>
+                                                <th>Direccion</th>
+                                                <th>Capacidad</th>
+                                                <th>Piso</th>
+                                                <th>Puerta</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tb_capacidad">
+                                            <tr th:if="${#lists.isEmpty(lista)}">
+                                                <td colspan="8" class="text-center">Ningun apartamento disponible</td>
+                                            </tr>
+                                            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'disponibles')">
+                                                <td><span th:text="${apartamento.idApartamento}"> </span></td>
+                                                <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                                                          th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
+                                                <td><span th:text="${apartamento.direccion}">  </span></td>
+                                                <td th:title="${apartamento.capacidad.idCapacidad}"><span th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
+                                                <td><span th:text="${apartamento.piso}">  </span></td>
+                                                <td><span th:text="${apartamento.puerta}">  </span></td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
                                     </div>
+                                </div>
+                                <!--Panel Parking-->
+                                <div class="tab-pane fade" id="tab_parking" role="tabpanel"
+                                     aria-labelledby="por_capacidad-tab">
+                                    <p></p>
                                     <div class="form-row mb-4">
-                                        <div class="col-4"></div>
-                                        <!--Apellidos-->
-                                        <div class="col-4">
-                                            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" required>
-                                        </div>
-                                        <div class="col-4"></div>
-                                    </div>
-                                    <div class="form-row mb-4">
-                                        <div class="col-4"></div>
-                                        <!--Telefono-->
-                                        <div class="col-4">
-                                            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" required>
-                                        </div>
-                                        <div class="col-4"></div>
-                                    </div>
-                                    <div class="form-row mb-4">
-                                        <div class="col-4"></div>
-                                        <!--Email-->
-                                        <div class="col-4">
-                                            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
-                                        </div>
-                                        <div class="col-4"></div>
-                                    </div>
-                                    <p class="h6 mb-4">Cambiar a otro propietario ya existente </p>
-                                    <div class="form-row mb-4">
-                                        <div class="col-2"></div>
-                                        <div class="col-8">
-                                            <select id="select_propietario" name="propietario" class="mdb-select md-form" required>
-                                                <option value="default">Añadir nuevo</option>
-                                                <option th:each="propietario : ${listaPropietarios}" th:value="${propietario.idPropietario}" th:text="${propietario.nombre}+' '+${propietario.apellidos}">
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-2"></div>
+                                        <table id="tabla_parking" class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Foto</th>
+                                                <th>Direccion</th>
+                                                <th>Capacidad</th>
+                                                <th>Piso</th>
+                                                <th>Puerta</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tb_parking">
+                                            <tr th:if="${#lists.isEmpty(lista)}">
+                                                <td colspan="8" class="text-center">Ningun apartamento disponible</td>
+                                            </tr>
+                                            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'disponibles')">
+                                                <td><span th:text="${apartamento.idApartamento}"> </span></td>
+                                                <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                                                          th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
+                                                <td><span th:text="${apartamento.direccion}">  </span></td>
+                                                <td th:title="${apartamento.capacidad.idCapacidad}"><span th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
+                                                <td><span th:text="${apartamento.piso}">  </span></td>
+                                                <td><span th:text="${apartamento.puerta}">  </span></td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -172,18 +163,12 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-4">
-                            <!--<button type="button" class="btn btn-danger btn-rounded" onclick="eliminarUsuario()">-->
-                            <!--Eliminar-->
-                            <!--</button>-->
-                            <button class="btn btn-danger btn-rounded" type="submit" formaction="/apartamentos/eliminar">
-                                Eliminar
-                            </button>
                         </div>
                         <div class="col-4">
                         </div>
                         <div class="col-4 text-right">
                             <!--<button type="button" class="btn btn-secondary btn-rounded" type onclick="/modificarUsuario">Modificar</button>-->
-                            <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Modificar</button>
+                            <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Asingar</button>
                         </div>
                     </div>
                 </div>

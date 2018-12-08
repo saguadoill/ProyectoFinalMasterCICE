@@ -3,6 +3,7 @@ package com.saguadopro.gestionapartamentos.services;
 import com.saguadopro.gestionapartamentos.entities.Propietario;
 import com.saguadopro.gestionapartamentos.repositories.PropietariosRepo;
 import com.saguadopro.gestionapartamentos.rest.dto.PropietarioDTO;
+import com.saguadopro.gestionapartamentos.services.conversores.PropietarioConverter;
 import com.saguadopro.gestionapartamentos.services.impl.PropietariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class PropietariosService implements PropietariosImp {
     PropietariosRepo propietariosRepo;
 
     @Autowired
-    ConvertidoPropietariosService convertidoPropietariosService;
+    PropietarioConverter propietarioConverter;
 
 
     @Override
@@ -37,7 +38,7 @@ public class PropietariosService implements PropietariosImp {
 
     @Override
     public PropietarioDTO buscarPropietario(Integer idPropietario) {
-        PropietarioDTO propietarioDTO = convertidoPropietariosService.propietarioToDto(propietariosRepo.findById(idPropietario).get());
+        PropietarioDTO propietarioDTO = propietarioConverter.propietarioToDto(propietariosRepo.findById(idPropietario).get());
         return propietarioDTO;
     }
 
@@ -45,7 +46,7 @@ public class PropietariosService implements PropietariosImp {
     public List<PropietarioDTO> listaPropietarios() {
         List<PropietarioDTO> listaApartamentosDto = new ArrayList<>();
         for (Propietario propietario : propietariosRepo.findAll()) {
-            listaApartamentosDto.add(convertidoPropietariosService.propietarioToDto(propietario));
+            listaApartamentosDto.add(propietarioConverter.propietarioToDto(propietario));
         }
         return listaApartamentosDto;
     }

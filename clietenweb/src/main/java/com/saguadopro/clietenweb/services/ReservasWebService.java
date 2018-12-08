@@ -20,6 +20,9 @@ public class ReservasWebService {
     @Autowired
     ReservasFeign reservasFeign;
 
+    @Autowired
+    ApartamentosWebService apartamentosWebService;
+
     public ModelAndView reservasPendientesService(Principal principal){
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         List<ReservaDTO> reservasPendientes = new ArrayList<>();
