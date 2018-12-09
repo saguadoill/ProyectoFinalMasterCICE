@@ -2,6 +2,7 @@ package com.saguadopro.clietenweb.feign;
 
 
 import com.saguadopro.clietenweb.dto.ApartamentoDTO;
+import com.saguadopro.clietenweb.dto.HuespedDTO;
 import com.saguadopro.clietenweb.dto.PropietarioDTO;
 import com.saguadopro.clietenweb.dto.CapacidadDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,7 +25,7 @@ public interface ApartamentosFeign {
     @RequestMapping(value = "/apartamentos/{idApartamento}",method = RequestMethod.DELETE)
     Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") String idApartamento);
 
-    @RequestMapping(value = "/apartamentos",method = RequestMethod.PUT)
+    @RequestMapping(value = "/apartamentos/modificar",method = RequestMethod.PUT)
     HttpStatus modificarApartamento(@RequestBody ApartamentoDTO apartamentoDTOModificado);
 
     @RequestMapping(value = "/apartamentos/{idApartamento}", method = RequestMethod.GET)
@@ -44,5 +45,8 @@ public interface ApartamentosFeign {
 
     @RequestMapping(value = "/apartamentos/capacidades/{capacidad}",method = RequestMethod.GET)
     CapacidadDTO buscarCapacidad(@PathVariable(value = "capacidad") String idCapacidad);
+
+    @RequestMapping(value = "/apartamentos/huesped/{idHuesped}", method = RequestMethod.GET)
+    HuespedDTO buscarHuesped(@PathVariable(value = "idHuesped") String idHuesped);
 
 }

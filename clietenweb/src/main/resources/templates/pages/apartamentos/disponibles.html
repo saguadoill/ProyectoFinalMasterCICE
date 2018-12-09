@@ -38,13 +38,13 @@
                 <td><span th:text="${apartamento.piso}">  </span></td>
                 <td><span th:text="${apartamento.puerta}">  </span></td>
                 <td th:title="${apartamento.propietario.idPropietario}"><span th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
-                <td th:title="${apartamento.disponible}">
-                    <span th:if="${apartamento.disponible}"><i class="fas fa-home" style="color: green"></i></span>
-                    <span th:unless= "${apartamento.disponible}"><i class="fas fa-home" style="color: red"></i></span>
+                <td th:title="${apartamento.huesped == null} ? '': ${apartamento.huesped.idHuesped}">
+                    <span th:if="${apartamento.huesped != null}"><i class="fas fa fa-home" style="color: red"></i></span>
+                    <span th:if="${apartamento.huesped == null}"><i class="fas fa fa-home" style="color: green"></i></span>
                 </td>
+
             </tr>
             </tbody>
-
         </table>
     </div>
 </div>

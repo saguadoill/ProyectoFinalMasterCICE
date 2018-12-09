@@ -131,7 +131,16 @@ function cargarModalListaApartamentos(fila, origen) {
     var td_piso = fila.children[4].innerText;
     var td_puerta = fila.children[5].innerText;
     var td_propietario = fila.children[6].getAttribute("title");
-    var td_disponible = fila.children[7].getAttribute("title");
+    var td_huesped = fila.children[7].getAttribute("title");
+    var td_disponible;
+
+    if (td_huesped == null){
+        console.log("huesped es null:"+td_huesped);
+        td_disponible = true;
+    } else{
+        console.log("huesped No es null: "+td_huesped);
+        td_disponible = false;
+    }
 
     var apartamento = {
         idApartamento: td_idApartamento,
@@ -153,12 +162,13 @@ function cargarModalListaApartamentos(fila, origen) {
     $('#piso').val(apartamento.piso);
     $('#puerta').val(apartamento.puerta);
     $('#select_propietario').val(apartamento.propietario);
-    if (apartamento.disponible == "true"){
+    if (apartamento.disponible){
         $('#btn_disponible').attr('checked', 'checked');
     }else {
         $('#btn_nodisponible').attr('checked', 'checked');
     }
     $('#origen').val(origen);
+    $('#huesped').val(td_huesped);
 
     var nombre = $('#nombre');
     var apellidos = $('#apellidos');

@@ -12,7 +12,7 @@ public interface HuespedImp {
 
     Boolean modificarHuesped(HuespedDTO huespedDTO);
 
-    HuespedDTO buscarPropietario(Long idHuesped);
+    HuespedDTO buscarHuesped(Long idHuesped);
 
     List<HuespedDTO> listaHuespedes();
 

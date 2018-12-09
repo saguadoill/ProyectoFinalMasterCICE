@@ -3,10 +3,7 @@ package com.saguadopro.gestionapartamentos.services;
 import com.saguadopro.gestionapartamentos.entities.Apartamento;
 import com.saguadopro.gestionapartamentos.repositories.ApartamentosRepo;
 import com.saguadopro.gestionapartamentos.rest.dto.ApartamentoDTO;
-import com.saguadopro.gestionapartamentos.services.conversores.CapacidadConverter;
-import com.saguadopro.gestionapartamentos.services.conversores.PropietarioConverter;
-import com.saguadopro.gestionapartamentos.services.conversores.ApartamentoConverter;
-import com.saguadopro.gestionapartamentos.services.conversores.HuespedConverter;
+import com.saguadopro.gestionapartamentos.services.conversores.*;
 import com.saguadopro.gestionapartamentos.services.impl.ApartamentosImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +17,16 @@ import java.util.Optional;
 public class ApartamentosService implements ApartamentosImp {
 
     @Autowired
-    private FotosService fotosService;
-
-    @Autowired
-    private ApartamentoConverter apartamentoConverter;
-
-    @Autowired
     private ApartamentosRepo apartamentosRepo;
+
+    @Autowired
+    private HuespedService huespedService;
 
     @Override
     public Boolean crearApartamento(ApartamentoDTO apartamentoDTO) {
         if (apartamentoDTO != null) {
             System.out.println("entrando en donde la foto no esta vacia");
-            Apartamento apartamentoBBDD = apartamentoConverter.dtoToApartamento(apartamentoDTO);
+            Apartamento apartamentoBBDD = ApartamentoConverter.dtoToApartamento(apartamentoDTO);
             apartamentosRepo.save(apartamentoBBDD);
             return true;
         } else {
@@ -56,10 +50,12 @@ public class ApartamentosService implements ApartamentosImp {
 
     @Override
     public Boolean modificarApartamento(ApartamentoDTO apartamentoDTOModificado) {
+        System.out.println("Apartamneto Modificado: "+apartamentoDTOModificado.toString());
         try {
             Optional<Apartamento> apartamentoOriginal = apartamentosRepo.findById(apartamentoDTOModificado.getIdApartamento());
+            System.out.println("Apartamneto Original: "+apartamentoOriginal.toString());
             if (apartamentoOriginal.isPresent()) {
-                BufferedImage fotoUsuarioModificada = fotosService.decodificarFoto(apartamentoDTOModificado.getFoto());
+                BufferedImage fotoUsuarioModificada = FotoConverter.decodificarFoto(apartamentoDTOModificado.getFoto());
 
                 if (apartamentoOriginal.get().getCapacidad().getIdCapacidad() != apartamentoDTOModificado.getCapacidad().getIdCapacidad()) {
                     apartamentoOriginal.get().setCapacidad(CapacidadConverter.dtoToCapacidad(apartamentoDTOModificado.getCapacidad()));
@@ -76,14 +72,13 @@ public class ApartamentosService implements ApartamentosImp {
                 if (apartamentoOriginal.get().getPuerta() != apartamentoDTOModificado.getPuerta()) {
                     apartamentoOriginal.get().setPuerta(apartamentoDTOModificado.getPuerta());
                 }
-//                if (apartamentoOriginal.get().getTipo() != apartamentoDTOModificado.getTipo()) {
-//                    apartamentoOriginal.get().setTipo(apartamentoDTOModificado.getTipo());
-//                }
-                if (apartamentoOriginal.get().getHuesped().getIdHuesped() != apartamentoDTOModificado.getHuesped().getIdHuesped()) {
+                if (apartamentoDTOModificado.getHuesped() != null){
                     apartamentoOriginal.get().setHuesped(HuespedConverter.dtoToHuesped(apartamentoDTOModificado.getHuesped()));
+                } else{
+                    apartamentoOriginal.get().setHuesped(null);
                 }
                 if (!apartamentoDTOModificado.getFoto().equals("")) {
-                    apartamentoOriginal.get().setFoto_url(fotosService.guardarFoto(apartamentoOriginal.get().getIdApartamento(), fotoUsuarioModificada));
+                    apartamentoOriginal.get().setFoto_url(FotoConverter.guardarFoto(apartamentoOriginal.get().getIdApartamento(), fotoUsuarioModificada));
                 }
                 apartamentosRepo.save(apartamentoOriginal.get());
                 return true;
@@ -100,28 +95,19 @@ public class ApartamentosService implements ApartamentosImp {
     public List<ApartamentoDTO> buscarApartamento(Long idApartamento) {
         List<ApartamentoDTO> apartamentosDtoEncontrado = new ArrayList<>();
         List<Apartamento> apartamentoEncontrado = new ArrayList<>();
-        try {
-            apartamentoEncontrado.addAll(apartamentosRepo.encontrarApartamentosPorId(idApartamento));
-            for (Apartamento apartamento : apartamentoEncontrado) {
-                apartamentosDtoEncontrado.add(apartamentoConverter.apartamentoToDto(apartamento));
-            }
-            return apartamentosDtoEncontrado;
-        } catch (NumberFormatException e) {
-            apartamentoEncontrado.addAll(apartamentosRepo.encontrarApartamentosPorId(idApartamento));
-            for (Apartamento apartamento : apartamentoEncontrado) {
-                apartamentosDtoEncontrado.add(apartamentoConverter.apartamentoToDto(apartamento));
-            }
-            return apartamentosDtoEncontrado;
-        } catch (NullPointerException e) {
-            return null;
+        apartamentoEncontrado.addAll(apartamentosRepo.encontrarApartamentosPorId(idApartamento));
+        for (Apartamento apartamento : apartamentoEncontrado) {
+            apartamentosDtoEncontrado.add(ApartamentoConverter.apartamentoToDto(apartamento));
         }
+        return apartamentosDtoEncontrado;
+
     }
 
     @Override
     public List<ApartamentoDTO> listaApartamentos() {
         List<ApartamentoDTO> listaApartamentosDto = new ArrayList<>();
         for (Apartamento apartamento : apartamentosRepo.findAll()) {
-            listaApartamentosDto.add(apartamentoConverter.apartamentoToDto(apartamento));
+            listaApartamentosDto.add(ApartamentoConverter.apartamentoToDto(apartamento));
         }
         return listaApartamentosDto;
     }

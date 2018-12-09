@@ -1,9 +1,11 @@
 package com.saguadopro.gestionapartamentos.rest;
 
 import com.saguadopro.gestionapartamentos.rest.dto.ApartamentoDTO;
+import com.saguadopro.gestionapartamentos.rest.dto.HuespedDTO;
 import com.saguadopro.gestionapartamentos.rest.dto.PropietarioDTO;
 import com.saguadopro.gestionapartamentos.rest.dto.CapacidadDTO;
 import com.saguadopro.gestionapartamentos.services.ApartamentosService;
+import com.saguadopro.gestionapartamentos.services.HuespedService;
 import com.saguadopro.gestionapartamentos.services.PropietariosService;
 import com.saguadopro.gestionapartamentos.services.CapacidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class GestionApartamentosRest {
     @Autowired
     CapacidadService tipoModelosService;
 
+    @Autowired
+    HuespedService huespedService;
+
 
     @RequestMapping(value = "/apartamentos",method = RequestMethod.POST)
     public HttpStatus crearApartamento(@RequestBody ApartamentoDTO apartamentoDTO){   // para probar con el postman @RequestBody
@@ -43,7 +48,7 @@ public class GestionApartamentosRest {
         }
     }
 
-    @RequestMapping(value = "/apartamentos",method = RequestMethod.PUT)
+    @RequestMapping(value = "/apartamentos/modificar",method = RequestMethod.PUT)
     public HttpStatus modificarApartamento(@RequestBody ApartamentoDTO apartamentoDTOModificado){
         if (apartamentosService.modificarApartamento(apartamentoDTOModificado)){
             return HttpStatus.OK;
@@ -84,5 +89,13 @@ public class GestionApartamentosRest {
         return tipoModelosService.buscarPorCapacidad(Integer.parseInt(capacidad));
     }
 
+    @RequestMapping(value = "/apartamentos/huesped/{idHuesped}", method = RequestMethod.GET)
+    public HuespedDTO buscarHuesped(@PathVariable(value = "idHuesped") String idHuesped){
+        if (idHuesped.equals("")){
+            return null;
+        }else {
+            return huespedService.buscarHuesped(Long.parseLong(idHuesped));
+        }
+    }
 
 }

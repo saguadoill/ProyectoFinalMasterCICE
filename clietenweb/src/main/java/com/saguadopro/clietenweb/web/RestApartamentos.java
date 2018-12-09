@@ -45,7 +45,6 @@ public class RestApartamentos {
         apartamentoDTO.setDireccion(direccion);
         apartamentoDTO.setPiso(piso);
         apartamentoDTO.setPuerta(puerta);
-        apartamentoDTO.setDisponible(true);
         apartamentoDTO.setCapacidad(apartamentosWebService.buscarCapacidad(capacidad));
         apartamentoDTO.setPropietario(apartamentosWebService.buscarPropietario(propietario));
         System.out.println(apartamentoDTO);
@@ -76,15 +75,23 @@ public class RestApartamentos {
 
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
     public ModelAndView modificarApartamento(@RequestParam String idApartamento,@RequestParam String direccion,@RequestParam String capacidad
-            ,@RequestParam String piso,@RequestParam String puerta,@RequestParam String propietario,@RequestParam String disponible, @RequestParam MultipartFile file,@RequestParam String origen ,Principal principal) {
+            ,@RequestParam String piso,@RequestParam String puerta,@RequestParam String propietario,@RequestParam String idHuesped,@RequestParam String disponible,@RequestParam MultipartFile file,@RequestParam String origen ,Principal principal) {
         ApartamentoDTO apartamentoDtoModificado = new ApartamentoDTO();
         apartamentoDtoModificado.setIdApartamento(Long.parseLong(idApartamento));
         apartamentoDtoModificado.setDireccion(direccion);
         apartamentoDtoModificado.setPiso(piso);
         apartamentoDtoModificado.setPuerta(puerta);
-        System.out.println("modificar: disponible: "+disponible);
-        apartamentoDtoModificado.setDisponible(Boolean.parseBoolean(disponible.toUpperCase()));
-        System.out.println("modificar: disponible: "+apartamentoDtoModificado.getDisponible());
+        System.out.println("Disponible: "+disponible);
+        System.out.println("Huesped: "+idHuesped);
+        if (disponible.equalsIgnoreCase("true")){
+            apartamentoDtoModificado.setHuesped(null);
+        }else{
+            if (idHuesped.isEmpty()){
+                apartamentoDtoModificado.setHuesped(apartamentosWebService.buscarHuesped("0"));
+            }else{
+                apartamentoDtoModificado.setHuesped(apartamentosWebService.buscarHuesped(idHuesped));
+            }
+        }
         apartamentoDtoModificado.setCapacidad(apartamentosWebService.buscarCapacidad(capacidad));
         apartamentoDtoModificado.setPropietario(apartamentosWebService.buscarPropietario(propietario));
         return apartamentosWebService.modificarApartamento(apartamentoDtoModificado,file,principal,origen);

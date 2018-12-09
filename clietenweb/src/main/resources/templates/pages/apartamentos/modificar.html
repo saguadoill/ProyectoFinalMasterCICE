@@ -55,6 +55,7 @@
                                     <input type="hidden" id="idApartamento" name="idApartamento">
                                     <input type="hidden" id="idPropietario" name="idPropietario">
                                     <input type="hidden" id="origen" name="origen" class="form-control">
+                                    <input type="hidden" id="huesped" name="idHuesped" class="form-control">
                                 </p>
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
                                      aria-labelledby="datos-tab">
@@ -87,6 +88,7 @@
                                                 <option th:each="capacidad : ${listaCapacidades}" th:value="${capacidad.idCapacidad}" th:text="${capacidad.maxPersonas}">
                                             </select>
                                         </div>
+                                        <!--TODO: modificar la disponibilidad por Huesped, aki y en el javasscript para rellenar el modal. Solo lo pmodificara el admin-->
                                         <!--Disponibilidad-->
                                         <div class="col-2">
                                             <h6>Disponible?</h6>

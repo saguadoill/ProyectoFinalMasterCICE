@@ -1,6 +1,7 @@
 package com.saguadopro.clietenweb.services;
 
 import com.saguadopro.clietenweb.dto.ApartamentoDTO;
+import com.saguadopro.clietenweb.dto.HuespedDTO;
 import com.saguadopro.clietenweb.dto.PropietarioDTO;
 import com.saguadopro.clietenweb.dto.CapacidadDTO;
 import com.saguadopro.clietenweb.feign.ApartamentosFeign;
@@ -50,13 +51,13 @@ public class ApartamentosWebService {
     public ModelAndView eliminarApartamento(String idApartamento, Principal principal, String origen) {
         apartamentosFeign.eliminarApartamentos(idApartamento);
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
-        gestionarListaSegunOrigen(origen, vista, idApartamento);
+        vista.addObject("lista",gestionarListaSegunOrigen(origen, idApartamento));
         vista.addObject("pagina", "pages/apartamentos/"+origen);
         vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
         vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
         return vista;
     }
-//TODO: comprobar si el buscar apartamento tambien actiualiza despues de modificar y ver la opcion de ELIMINAR
+
     public ModelAndView buscarApartamento(String idApartamento, Principal principal) {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("pagina","pages/apartamentos/buscar");
@@ -75,8 +76,7 @@ public class ApartamentosWebService {
             vista.addObject("listaPropietarios", apartamentosFeign.listaPropietarios());
             vista.addObject("listaCapacidades", apartamentosFeign.listaCapacidades());
             vista.addObject("apartamentoFoto", "data:image/png;base64," + apartamentosFeign.buscarApartamento(String.valueOf(apartamentoDtoModificado.getIdApartamento())).get(0).getFoto());
-            gestionarListaSegunOrigen(origen, vista, String.valueOf(apartamentoDtoModificado.getIdApartamento()));
-
+            vista.addObject("lista",gestionarListaSegunOrigen(origen, String.valueOf(apartamentoDtoModificado.getIdApartamento())));
             vista.addObject("pagina","pages/apartamentos/"+origen);
             return vista;
         } catch (IOException e) {
@@ -90,8 +90,10 @@ public class ApartamentosWebService {
         List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
         List<ApartamentoDTO> listaDisponibles = new ArrayList<>();
         for (ApartamentoDTO apartamentoDTO : listaCompleta) {
-            if (apartamentoDTO.getDisponible()) {
+
+            if (apartamentoDTO.getHuesped() == null) {
                 listaDisponibles.add(apartamentoDTO);
+                System.out.println(apartamentoDTO);
             }
         }
         vista.addObject("lista", listaDisponibles);
@@ -106,7 +108,7 @@ public class ApartamentosWebService {
         List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
         List<ApartamentoDTO> listaNoDisponibles = new ArrayList<>();
         for (ApartamentoDTO apartamentoDTO : listaCompleta) {
-            if (!apartamentoDTO.getDisponible()) {
+            if (apartamentoDTO.getHuesped() != null) {
                 listaNoDisponibles.add(apartamentoDTO);
             }
         }
@@ -136,26 +138,32 @@ public class ApartamentosWebService {
         return capacidadDTO;
     }
 
-    private void gestionarListaSegunOrigen(String origen, ModelAndView vista, String idApartamento){
+    public HuespedDTO buscarHuesped(String idHuesped){
+        return apartamentosFeign.buscarHuesped(idHuesped);
+    }
+
+    private List<ApartamentoDTO> gestionarListaSegunOrigen(String origen, String idApartamento){
         List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
         List<ApartamentoDTO> listaFiltrada = new ArrayList<>();
         if (origen.equals("disponibles")){
-
             for (ApartamentoDTO apartamentoDTO : listaCompleta) {
-                if (apartamentoDTO.getDisponible()) {
+                if (apartamentoDTO.getHuesped() == null) {
                     listaFiltrada.add(apartamentoDTO);
                 }
             }
-            vista.addObject("lista", listaFiltrada);
+//            vista.addObject("lista", listaFiltrada);
+            return listaFiltrada;
         }else if (origen.equals("nodisponibles")){
             for (ApartamentoDTO apartamentoDTO : listaCompleta) {
-                if (!apartamentoDTO.getDisponible()) {
+                if (apartamentoDTO.getHuesped() != null) {
                     listaFiltrada.add(apartamentoDTO);
                 }
             }
-            vista.addObject("lista", listaFiltrada);
+//            vista.addObject("lista", listaFiltrada);
+            return listaFiltrada;
         }else {
-            vista.addObject("lista", apartamentosFeign.buscarApartamento(idApartamento));
+//            vista.addObject("lista", apartamentosFeign.buscarApartamento(idApartamento));
+            return apartamentosFeign.buscarApartamento(idApartamento);
         }
     }
 }

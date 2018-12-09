@@ -42,7 +42,7 @@ public class Apartamento {
 //    private Boolean disponible;
 
     @ManyToOne
-    @Column(name = "id_huesped")
+    @JoinColumn(name = "id_huesped")
     private Huesped huesped;
 
     @ManyToOne

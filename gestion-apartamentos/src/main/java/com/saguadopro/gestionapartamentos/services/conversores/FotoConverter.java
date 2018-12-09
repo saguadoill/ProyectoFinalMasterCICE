@@ -1,4 +1,4 @@
-package com.saguadopro.gestionapartamentos.services;
+package com.saguadopro.gestionapartamentos.services.conversores;
 
 import com.mortennobel.imagescaling.ResampleFilters;
 import com.mortennobel.imagescaling.ResampleOp;
@@ -12,11 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 
-@Service
-public class FotosService {
+public class FotoConverter {
 
 
-    public String codificarFoto(String foto_url) {
+    public static String codificarFoto(String foto_url) {
         String fotoParaEnviar = "";
         try {
             BufferedImage fotoCodificada = ImageIO.read(new File(foto_url));
@@ -32,7 +31,7 @@ public class FotosService {
         return fotoParaEnviar;
     }
 
-    public BufferedImage decodificarFoto(String foto) {
+    public static BufferedImage decodificarFoto(String foto) {
         BufferedImage fotoDecodificada = null;
         try {
             byte[] fotByte = Base64.getDecoder().decode(foto);
@@ -45,7 +44,7 @@ public class FotosService {
         return fotoDecodificada;
     }
 
-    public String guardarFoto(Long idApartamento, BufferedImage fotoParaGuardar) {
+    public static String guardarFoto(Long idApartamento, BufferedImage fotoParaGuardar) {
         fotoParaGuardar = resize(fotoParaGuardar,75,75);
         String foto_url = "src/main/resources/fotos/foto_" + idApartamento + ".png";
         try {
@@ -63,11 +62,8 @@ public class FotosService {
         return foto_url;
     }
 
-    public void recuperarFoto() {
 
-    }
-
-    public BufferedImage resize(BufferedImage img, int newW, int newH) {
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
 //        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING);
 //        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 //
