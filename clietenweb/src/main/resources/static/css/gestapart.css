@@ -19,6 +19,75 @@
 input[data-readonly] {
     pointer-events: none;
 }
+
+.highlight{
+    background-color: #6c757d;
+}
+
+/*.table-scroll {*/
+    /*display: block;*/
+    /*max-height: 200px;*/
+    /*overflow-y: auto;*/
+    /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+/*}*/
+
+#table-wrapper {
+    position:relative;
+}
+#table-scroll {
+    height:150px;
+    overflow:auto;
+    margin-top:20px;
+}
+#table-wrapper table {
+    width:100%;
+
+}
+#table-wrapper table thead th input,
+#table-wrapper table thead th .text {
+    position:absolute;
+    top:-20px;
+    z-index:2;
+    height:20px;
+    width:35%;
+}
+
+/*CSS para mantener cabecera tabla fija*/
+/*.header-fixed {*/
+    /*width: 100%*/
+/*}*/
+
+/*.header-fixed > thead,*/
+/*.header-fixed > tbody,*/
+/*.header-fixed > thead > tr,*/
+/*.header-fixed > tbody > tr,*/
+/*.header-fixed > thead > tr > th,*/
+/*.header-fixed > tbody > tr > td,*/
+/*.header-fixed > tbody > tr > td >input{*/
+    /*display: block;*/
+/*}*/
+
+/*.header-fixed > tbody > tr:after,*/
+/*.header-fixed > thead > tr:after {*/
+    /*content: ' ';*/
+    /*display: block;*/
+    /*visibility: hidden;*/
+    /*clear: both;*/
+/*}*/
+
+/*.header-fixed > tbody {*/
+    /*overflow-y: auto;*/
+    /*height: 150px;*/
+/*}*/
+
+/*.header-fixed > tbody > tr > td,*/
+/*.header-fixed > tbody > tr > td >input,*/
+/*.header-fixed > thead > tr > th {*/
+    /*!*width: 20%;*!*/
+    /*float: left;*/
+    /*text-align: center;*/
+/*}*/
+
 /*Scrollbar, solo para Chrome, Safari, Opera.*/
 /* ancho */
  ::-webkit-scrollbar {

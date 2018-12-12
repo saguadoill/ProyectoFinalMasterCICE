@@ -11,6 +11,8 @@ public interface ReservasImpl {
 
     Boolean eliminarReserva(ReservaDTO reservaDTO);
 
-    ReservaDTO buscarReserva(Long idReserva);
+    ReservaDTO buscarReserva(String idReserva);
+
+    void getBookinReservas(String xmlFile);
 
 }

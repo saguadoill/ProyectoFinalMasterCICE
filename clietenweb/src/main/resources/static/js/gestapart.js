@@ -1,5 +1,3 @@
-
-
 /**
  * Genera los campos de username y passwd y los carga en el formulario
  */
@@ -134,11 +132,11 @@ function cargarModalListaApartamentos(fila, origen) {
     var td_huesped = fila.children[7].getAttribute("title");
     var td_disponible;
 
-    if (td_huesped == null){
-        console.log("huesped es null:"+td_huesped);
+    if (td_huesped == null) {
+        console.log("huesped es null:" + td_huesped);
         td_disponible = true;
-    } else{
-        console.log("huesped No es null: "+td_huesped);
+    } else {
+        console.log("huesped No es null: " + td_huesped);
         td_disponible = false;
     }
 
@@ -162,9 +160,9 @@ function cargarModalListaApartamentos(fila, origen) {
     $('#piso').val(apartamento.piso);
     $('#puerta').val(apartamento.puerta);
     $('#select_propietario').val(apartamento.propietario);
-    if (apartamento.disponible){
+    if (apartamento.disponible) {
         $('#btn_disponible').attr('checked', 'checked');
-    }else {
+    } else {
         $('#btn_nodisponible').attr('checked', 'checked');
     }
     $('#origen').val(origen);
@@ -180,23 +178,23 @@ function cargarModalListaApartamentos(fila, origen) {
     telefono.prop('disabled', true);
     email.prop('disabled', true);
     $.ajax({
-        url: '/apartamentos/propietarios/'+apartamento.propietario,
+        url: '/apartamentos/propietarios/' + apartamento.propietario,
         type: 'GET',
         success: function (data, textStatus, xhr) {
             nombre.attr("placeholder", data.nombre);
             nombre.val("");
-            apellidos.attr("placeholder",data.apellidos);
+            apellidos.attr("placeholder", data.apellidos);
             apellidos.val("");
-            telefono.attr("placeholder",data.telefono);
+            telefono.attr("placeholder", data.telefono);
             telefono.val("");
-            email.attr("placeholder",data.email);
+            email.attr("placeholder", data.email);
             email.val("");
         },
         error: function (data, textStatus, xhr) {
         }
-    })
+    });
     $.ajax({
-        url: '/apartamentos/capacidades/'+apartamento.capacidad,
+        url: '/apartamentos/capacidades/' + apartamento.capacidad,
         type: 'GET',
         success: function (data, textStatus, xhr) {
             selectorCapacidad.val(data.idCapacidad);
@@ -208,81 +206,39 @@ function cargarModalListaApartamentos(fila, origen) {
 }
 
 /**
- * Cargar datos del apartamento de la fila seleccionada al modal.
+ * Cargar datos de la Reserva seleccionada al modal para asignar Apartamento, Huesped y Parking
  * @param fila - la fila seleccionada
  */
 function cargarModalAsignacionApartamentos(fila, origen) {
-    var td_idApartamento = fila.children[0].innerText;
-    var td_foto = fila.children[1].querySelector('img').getAttribute('src');
-    var td_direccion = fila.children[2].innerText;
-    var td_capacidad = fila.children[3].getAttribute("title");
-    var td_piso = fila.children[4].innerText;
-    var td_puerta = fila.children[5].innerText;
-    var td_propietario = fila.children[6].getAttribute("title");
-    var td_disponible = fila.children[7].getAttribute("title");
+    var td_idApartamento = fila.children[5].innerText;
+    var td_idReserva = fila.children[0].innerText;
 
-    var apartamento = {
-        idApartamento: td_idApartamento,
-        foto: td_foto,
-        direccion: td_direccion,
-        capacidad: td_capacidad,
-        piso: td_piso,
-        puerta: td_puerta,
-        propietario: td_propietario,
-        disponible: td_disponible
-    };
+    console.log("ID Apartamento: "+td_idApartamento);
+    console.log("ID Reserva: "+td_idReserva);
 
     $('#myModal').modal('show');
-    $('#idApartamento').val(apartamento.idApartamento);
-    $('#foto_preview').attr("src", apartamento.foto);
-    $('#foto_fantasma').val(apartamento.foto);
-    $('#selector_capacidad').val(apartamento.capacidad);
-    $('#direccion').val(apartamento.direccion);
-    $('#piso').val(apartamento.piso);
-    $('#puerta').val(apartamento.puerta);
-    $('#select_propietario').val(apartamento.propietario);
-    if (apartamento.disponible == "true"){
-        $('#btn_disponible').attr('checked', 'checked');
-    }else {
-        $('#btn_nodisponible').attr('checked', 'checked');
-    }
+    $('#idReserva').val(td_idReserva);
     $('#origen').val(origen);
 
-    var nombre = $('#nombre');
-    var apellidos = $('#apellidos');
-    var telefono = $('#telefono');
-    var email = $('#email');
-    var selectorCapacidad = $('#selector_capacidad');
-    nombre.prop('disabled', true);
-    apellidos.prop('disabled', true);
-    telefono.prop('disabled', true);
-    email.prop('disabled', true);
     $.ajax({
-        url: '/apartamentos/propietarios/'+apartamento.propietario,
+        url: '/apartamentos/buscar/' + td_idApartamento,
         type: 'GET',
         success: function (data, textStatus, xhr) {
-            nombre.attr("placeholder", data.nombre);
-            nombre.val("");
-            apellidos.attr("placeholder",data.apellidos);
-            apellidos.val("");
-            telefono.attr("placeholder",data.telefono);
-            telefono.val("");
-            email.attr("placeholder",data.email);
-            email.val("");
-        },
-        error: function (data, textStatus, xhr) {
-        }
-    })
-    $.ajax({
-        url: '/apartamentos/capacidades/'+apartamento.capacidad,
-        type: 'GET',
-        success: function (data, textStatus, xhr) {
-            selectorCapacidad.val(data.idCapacidad);
-        },
-        error: function (data, textStatus, xhr) {
-        }
-    })
+            console.log(data.idApartamento)
+            $('#idselect').html(data.idApartamento);
+            $('#capacidadselect').html(data.capacidad);
+            $('#direccionselect').html(data.direccion);
+            $('#pisoselect').html(data.piso);
+            $('#puertaselect').html(data.puerta);
+            $('input[name=apartamentoSeleccionado]:checked').val(data.idApartamento);
 
+        },
+        error: function (data, textStatus, xhr) {
+            console.log(data);
+            console.log(textStatus);
+            console.log(xhr);
+        }
+    })
 }
 
 /**
@@ -315,11 +271,11 @@ function gestionNuevoApartamento() {
             nombre.prop('disabled', false);
             nombre.attr("placeholder", "Nombre");
             apellidos.prop('disabled', false);
-            apellidos.attr("placeholder","Apellidos");
+            apellidos.attr("placeholder", "Apellidos");
             telefono.prop('disabled', false);
-            telefono.attr("placeholder","Telefono");
+            telefono.attr("placeholder", "Telefono");
             email.prop('disabled', false);
-            email.attr("placeholder","Email");
+            email.attr("placeholder", "Email");
 
         } else {
             nombre.prop('disabled', true);
@@ -327,7 +283,7 @@ function gestionNuevoApartamento() {
             telefono.prop('disabled', true);
             email.prop('disabled', true);
             $.ajax({
-                url: '/apartamentos/propietarios/'+selector.val(),
+                url: '/apartamentos/propietarios/' + selector.val(),
                 type: 'GET',
                 success: function (data, textStatus, xhr) {
                     // console.log(data);
@@ -335,11 +291,11 @@ function gestionNuevoApartamento() {
                     // console.log(xhr);
                     nombre.attr("placeholder", data.nombre);
                     nombre.val("");
-                    apellidos.attr("placeholder",data.apellidos);
+                    apellidos.attr("placeholder", data.apellidos);
                     apellidos.val("");
-                    telefono.attr("placeholder",data.telefono);
+                    telefono.attr("placeholder", data.telefono);
                     telefono.val("");
-                    email.attr("placeholder",data.email);
+                    email.attr("placeholder", data.email);
                     email.val("");
                 },
                 error: function (data, textStatus, xhr) {

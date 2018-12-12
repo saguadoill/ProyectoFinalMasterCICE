@@ -42,9 +42,8 @@ public class ReservasService  implements ReservasImpl {
     }
 
     @Override
-    public ReservaDTO buscarReserva(Long idReserva) {
-        ReservaDTO reservaEncontrada = Conversor.reservaToDto(reservasRepo.findById(idReserva).get());
-        return reservaEncontrada;
+    public ReservaDTO buscarReserva(String idReserva) {
+        return Conversor.reservaToDto(reservasRepo.findById(Long.parseLong(idReserva)).get());
     }
 
     public void getBookinReservas(String xmlFile){

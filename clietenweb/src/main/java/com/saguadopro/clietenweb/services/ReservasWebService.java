@@ -1,5 +1,7 @@
 package com.saguadopro.clietenweb.services;
 
+import com.saguadopro.clietenweb.dto.ApartamentoDTO;
+import com.saguadopro.clietenweb.dto.HuespedDTO;
 import com.saguadopro.clietenweb.dto.ReservaDTO;
 import com.saguadopro.clietenweb.feign.ReservasFeign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,13 @@ public class ReservasWebService {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         List<ReservaDTO> reservasPendientes = new ArrayList<>();
         for (ReservaDTO reservaDTO: reservasFeign.listaReservas()) {
-            System.out.println("Reserva: "+reservaDTO);
             if (reservaDTO.getFechaEntrada().isAfter(LocalDate.now())){
                 reservasPendientes.add(reservaDTO);
                 System.out.println("Reserva Pendiente: "+reservaDTO);
             }
         }
+        List<ApartamentoDTO> apartDispoPorCapacidad  = apartamentosWebService.gestionarListaSegunOrigen("disponibles",null);
+        vista.addObject("listaPorCapacidad", apartDispoPorCapacidad);
         vista.addObject("lista", reservasPendientes);
         vista.addObject("pagina", "pages/reservas/pendientes");
         return vista;
@@ -42,7 +45,6 @@ public class ReservasWebService {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         List<ReservaDTO> reservasPendientes = new ArrayList<>();
         for (ReservaDTO reservaDTO: reservasFeign.listaReservas()) {
-            System.out.println("Reserva: "+reservaDTO);
             if (reservaDTO.getFechaSalida().isBefore(LocalDate.now())){
                 reservasPendientes.add(reservaDTO);
                 System.out.println("Reserva Finalizadas: "+reservaDTO);
@@ -57,7 +59,6 @@ public class ReservasWebService {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         List<ReservaDTO> reservasPendientes = new ArrayList<>();
         for (ReservaDTO reservaDTO: reservasFeign.listaReservas()) {
-            System.out.println("Reserva: "+reservaDTO);
             if (reservaDTO.getFechaEntrada().isBefore(LocalDate.now()) & reservaDTO.getFechaSalida().isAfter(LocalDate.now())){
                 reservasPendientes.add(reservaDTO);
                 System.out.println("Reserva Activas: "+reservaDTO);
@@ -68,5 +69,12 @@ public class ReservasWebService {
         return vista;
     }
 
-    //TODO:  before te pone las actuale y las activas. Hay q poner en las activas que sean before y after fecha actual
+    public ModelAndView asignarApartamentoToReserva(Principal principal, String origen, String idApartamento, String idReserva, HuespedDTO huesped){
+        ModelAndView vista = reservasPendientesService(principal);
+        ReservaDTO reservaDT = reservasFeign.buscarReserva(idReserva);
+        ApartamentoDTO apartamentoDTO = apartamentosWebService.buscarApartamentoPorId(idApartamento);
+        apartamentoDTO.setHuesped(huesped);
+        reservaDT.setIdApartamento(Long.parseLong(idApartamento));
+        return vista;
+    }
 }

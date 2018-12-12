@@ -63,6 +63,11 @@ public class RestApartamentos {
         return apartamentosWebService.buscarApartamento(idApartamento,principal);
     }
 
+    @RequestMapping(value = "buscar/{idApartamento}", method = RequestMethod.GET)
+    public ApartamentoDTO buscarApartamentoPorId(@PathVariable String idApartamento){
+        return apartamentosWebService.buscarApartamentoPorId(idApartamento);
+    }
+
     @RequestMapping(value = "/disponibles", method = RequestMethod.GET)
     public ModelAndView paginaApartamentosDisponibles(Principal principal) {
         return apartamentosWebService.paginaListaApartamentosDisponibles(principal);

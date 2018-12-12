@@ -1,7 +1,7 @@
 package com.saguadopro.gestioreservas.rest;
 
 import com.saguadopro.gestioreservas.rest.dto.ReservaDTO;
-import com.saguadopro.gestioreservas.service.ReservasService;
+import com.saguadopro.gestioreservas.service.impl.ReservasImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,20 +12,20 @@ import java.util.List;
 public class RestReservas {
 
     @Autowired
-    ReservasService reservasService;
+    ReservasImpl reservas;
 
     @RequestMapping(value = "/reservas",method = RequestMethod.GET)
     public List<ReservaDTO> listaReservas(){
-        return reservasService.listaReservas();
+        return reservas.listaReservas();
     }
 
-    @RequestMapping(value = "/reservas/{idReserva}")
-    public ReservaDTO buscarReserva(@PathParam(value = "idReserva") Long idReserva){
-        return reservasService.buscarReserva(idReserva);
+    @RequestMapping(value = "/reservas/{idReserva}", method = RequestMethod.GET)
+    public ReservaDTO buscarReserva(@PathVariable(value = "idReserva") String idReserva){
+        return reservas.buscarReserva(idReserva);
     }
 
     @RequestMapping(value = "/reservas/booking", method = RequestMethod.POST)
     public void getBookinReservas(@RequestBody String xmlFile){
-        reservasService.getBookinReservas(xmlFile);
+        reservas.getBookinReservas(xmlFile);
     }
 }

@@ -67,6 +67,10 @@ public class ApartamentosWebService {
         return vista;
     }
 
+    public ApartamentoDTO buscarApartamentoPorId(String idApartamento){
+        return apartamentosFeign.buscarApartamento(idApartamento).get(0);
+    }
+
     public ModelAndView modificarApartamento(ApartamentoDTO apartamentoDtoModificado, MultipartFile file, Principal principal, String origen) {
         ModelAndView vista  = inicioWebService.paginaInicioService(principal);
         try {
@@ -142,7 +146,7 @@ public class ApartamentosWebService {
         return apartamentosFeign.buscarHuesped(idHuesped);
     }
 
-    private List<ApartamentoDTO> gestionarListaSegunOrigen(String origen, String idApartamento){
+    public List<ApartamentoDTO> gestionarListaSegunOrigen(String origen, String idApartamento){
         List<ApartamentoDTO> listaCompleta = apartamentosFeign.listaApartamentos();
         List<ApartamentoDTO> listaFiltrada = new ArrayList<>();
         if (origen.equals("disponibles")){

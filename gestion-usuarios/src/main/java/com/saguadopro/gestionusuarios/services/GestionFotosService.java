@@ -18,6 +18,7 @@ public class GestionFotosService {
 
 
     public String codificarFoto(String foto_url) {
+        System.out.println("URL de la foto: "+foto_url);
         String fotoParaEnviar = "";
         try {
             BufferedImage fotoCodificada = ImageIO.read(new File(foto_url));
