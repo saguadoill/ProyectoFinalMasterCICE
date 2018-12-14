@@ -26,5 +26,7 @@ public class ReservaDTO {
 
     private Double precioTotal;
 
-    private Boolean parking;
+    private Boolean tieneParking;
+
+    private Boolean estaAsignada;
 }

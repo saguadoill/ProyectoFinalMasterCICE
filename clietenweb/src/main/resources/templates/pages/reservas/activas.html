@@ -22,9 +22,8 @@
                 <th>Apartamento</th>
                 <th>Precio Total</th>
                 <th>Parking</th>
+                <th>Asignada</th>
                 <th></th>
-                <th></th>
-                <!--TODO: ver como hacemo sla asignacion del apartmaneto y la plaza de parking(si la desea el cliente)-->
             </tr>
             </thead>
             <tbody id="tb">
@@ -34,14 +33,32 @@
             <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'pendientes')">
                 <td><span th:text="${reserva.idReserva}"> </span></td>
                 <td><span th:text="${reserva.cliente}"></span></td>
-                <td><span th:text="${reserva.fechaEntrada}">  </span></td>
-                <td><span th:text="${reserva.fechaSalida}">  </span></td>
+                <td>
+                    <span th:if="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaEntrada}" style="color: green"></span>
+                    </span>
+                    <span th:unless="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaEntrada}" style="color: red"></span>
+                    </span>
+                </td>
+                <td>
+                    <span th:if="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaSalida}" style="color: green"></span>
+                    </span>
+                    <span th:unless="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaSalida}" style="color: red"></span>
+                    </span>
+                </td>
                 <td><span th:text="${reserva.capacidad}">  </span></td>
                 <td><span th:text="${reserva.idApartamento}">  </span></td>
                 <td><span th:text="${reserva.precioTotal}"> </span></td>
-                <td th:title="${reserva.parking}">
-                    <span th:if="${reserva.parking}"><i class="fas fa-taxi" style="color: green"></i></span>
-                    <span th:unless= "${reserva.parking}"><i class="fas fa-taxi" style="color: red"></i></span>
+                <td th:title="${reserva.tieneParking}">
+                    <span th:if="${reserva.tieneParking}"><i class="fas fa-taxi" style="color: green"></i></span>
+                    <span th:unless= "${reserva.tieneParking}"><i class="fas fa-taxi" style="color: red"></i></span>
+                </td>
+                <td th:title="${reserva.estaAsignada}">
+                    <span th:if="${reserva.estaAsignada}"><i class="fas fa-bed" style="color: green"></i></span>
+                    <span th:unless= "${reserva.estaAsignada}"><i class="fas fa-bed" style="color: red"></i></span>
                 </td>
             </tr>
             </tbody>

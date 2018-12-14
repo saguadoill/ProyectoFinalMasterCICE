@@ -2,27 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b1ba59f-6508-4bbd-8003-1fc9906540a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/dto/ReservaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/dto/ReservaDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/feign/ReservasFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/feign/ReservasFeign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/services/ApartamentosWebService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/services/ApartamentosWebService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/services/ReservasWebService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/services/ReservasWebService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/web/RestApartamentos.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/web/RestApartamentos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/web/RestReservas.java" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/java/com/saguadopro/clietenweb/web/RestReservas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/static/css/gestapart.css" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/static/css/gestapart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/static/js/gestapart.js" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/static/js/gestapart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/activas.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/activas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/asignacion.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/asignacion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/finalizadas.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/finalizadas.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/pendientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/../clietenweb/src/main/resources/templates/pages/reservas/pendientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a09f023e-a267-44d0-b365-1facd48d238a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a09f023e-a267-44d0-b365-1facd48d238a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gestio-reservas.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gestio-reservas.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/ReservasService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/ReservasService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/conversor/Conversor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/conversor/Conversor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/entities/Reserva.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/entities/Reserva.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/rest/RestReservas.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/rest/RestReservas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/service/ReservasService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/service/ReservasService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/service/ReservasService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/service/impl/ReservasImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/saguadopro/gestioreservas/service/impl/ReservasImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/GestionFotosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/GestionFotosService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/repositories/GestionUsuariosRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/repositories/UsuariosRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/rest/GestionUsuariosRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/rest/UsuariosRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/ConvertidorUsuariosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/conversor/Conversor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/GenerarUserPasswdService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/GenerarUserPasswdService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/GestionUsuariosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/UsuariosService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/impl/GestionUsuariosImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gestion-usuarios/src/main/java/com/saguadopro/gestionusuarios/services/impl/UsuariosImp.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -47,43 +54,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#545#546#0" expanded="true" />
-                <element signature="e#592#593#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/ReservasService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -111,14 +82,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/booking/com/Customer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/booking/com/Reservations.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/CapacidadDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/ReservasService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
       </list>
     </option>
   </component>
@@ -164,6 +135,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -273,7 +245,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -285,7 +256,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544633330830" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544720861463" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -342,7 +313,10 @@
       <workItem from="1544196212160" duration="3896000" />
       <workItem from="1544355933898" duration="741000" />
       <workItem from="1544383064171" duration="655000" />
-      <workItem from="1544629232325" duration="2025000" />
+      <workItem from="1544629232325" duration="2027000" />
+      <workItem from="1544698773054" duration="3332000" />
+      <workItem from="1544703301179" duration="5488000" />
+      <workItem from="1544719542956" duration="681000" />
     </task>
     <task id="LOCAL-00001" summary="Solucionado mapeo de la supuesta respuesta de Booking a un objeto Reserva de nuestra BBDD H2">
       <created>1544030168969</created>
@@ -355,7 +329,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33808000" />
+    <option name="totallyTimeSpent" value="43311000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -368,9 +342,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26812366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -380,7 +353,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3288889" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3288889" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -512,13 +485,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/CapacidadDTO.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="88" selection-start-column="73" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -529,44 +495,10 @@
     <entry file="file://$PROJECT_DIR$/mvnw.cmd">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/repositories/ReservasRepo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="22" column="29" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
@@ -579,8 +511,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/RestReservas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        <state relative-caret-position="340">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#545#546#0" expanded="true" />
@@ -591,8 +523,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/ReservasService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+        <state relative-caret-position="510">
+          <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/conversor/Conversor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/service/impl/ReservasImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/entities/Reserva.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/saguadopro/gestioreservas/rest/dto/ReservaDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

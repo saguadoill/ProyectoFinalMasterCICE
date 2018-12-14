@@ -1,9 +1,10 @@
 package com.saguadopro.gestionusuarios.services;
 
+import com.saguadopro.gestionusuarios.conversor.Conversor;
 import com.saguadopro.gestionusuarios.entities.Usuario;
-import com.saguadopro.gestionusuarios.repositories.GestionUsuariosRepo;
+import com.saguadopro.gestionusuarios.repositories.UsuariosRepo;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
-import com.saguadopro.gestionusuarios.services.impl.GestionUsuariosImp;
+import com.saguadopro.gestionusuarios.services.impl.UsuariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +22,18 @@ import java.util.Optional;
 
 
 @Service
-public class GestionUsuariosService implements GestionUsuariosImp {
+public class UsuariosService implements UsuariosImp {
 
 //    private final static Logger logger = Logger.getLogger(GestionUsuariosService.class);
 
     @Autowired
-    private GestionUsuariosRepo gestionUsuariosRepo;
+    private UsuariosRepo usuariosRepo;
 
     @Autowired
     private GestionFotosService gestionFotosService;
 
     @Autowired
-    private ConvertidorUsuariosService convertidorUsuariosService;
+    private Conversor conversor;
 
     @Autowired
     private GenerarUserPasswdService generarUserPasswdService;
@@ -43,8 +44,8 @@ public class GestionUsuariosService implements GestionUsuariosImp {
         System.out.println(usuarioDTO);
         if (usuarioDTO != null) {
             System.out.println("entrando en donde la foto no esta vacia");
-            Usuario usuarioBBDD = convertidorUsuariosService.usuarioDtoToUsuario(usuarioDTO);
-            gestionUsuariosRepo.save(usuarioBBDD);
+            Usuario usuarioBBDD = conversor.usuarioDtoToUsuario(usuarioDTO);
+            usuariosRepo.save(usuarioBBDD);
             return true;
         } else {
 //            logger.error("El usuario no se ha podido crear");
@@ -53,9 +54,9 @@ public class GestionUsuariosService implements GestionUsuariosImp {
     }
     @Override
     public Boolean eliminarUsuario(Long idUsuario) {
-        Usuario usuarioParaEliminar = gestionUsuariosRepo.findById(idUsuario).get();
+        Usuario usuarioParaEliminar = usuariosRepo.findById(idUsuario).get();
         try {
-            gestionUsuariosRepo.delete(usuarioParaEliminar);
+            usuariosRepo.delete(usuarioParaEliminar);
             return true;
         } catch (Exception e) {
 //            logger.error("Usuario no se ha podido eliminar:" + e.getMessage());
@@ -66,7 +67,7 @@ public class GestionUsuariosService implements GestionUsuariosImp {
     @Override
     public Boolean modificarUsuario(UsuarioDTO usuarioDtoModificado) {
         try {
-            Optional<Usuario> usuarioOriginal = gestionUsuariosRepo.findById(usuarioDtoModificado.getIdUsuario());
+            Optional<Usuario> usuarioOriginal = usuariosRepo.findById(usuarioDtoModificado.getIdUsuario());
             if (usuarioOriginal.isPresent()) {
                 BufferedImage fotoUsuarioModificada = gestionFotosService.decodificarFoto(usuarioDtoModificado.getFoto());
 
@@ -85,7 +86,7 @@ public class GestionUsuariosService implements GestionUsuariosImp {
                 if (!usuarioDtoModificado.getFoto().equals("")) {
                     usuarioOriginal.get().setFoto_url(gestionFotosService.guardarFoto(usuarioOriginal.get().getUsername(), fotoUsuarioModificada));
                 }
-                gestionUsuariosRepo.save(usuarioOriginal.get());
+                usuariosRepo.save(usuarioOriginal.get());
                 return true;
             } else {
                 System.out.println("log4j: el usuario no se ha podido modificar");
@@ -102,15 +103,15 @@ public class GestionUsuariosService implements GestionUsuariosImp {
         List<Usuario> usuariosEncontrados = new ArrayList<>();
         try {
             Long id = Long.parseLong(username_id);
-            usuariosEncontrados.addAll(gestionUsuariosRepo.encontrarUsuarioById(id));
+            usuariosEncontrados.addAll(usuariosRepo.encontrarUsuarioById(id));
             for (Usuario usuario : usuariosEncontrados) {
-                usuariosDtoEncontrados.add(convertidorUsuariosService.usuarioToDto(usuario));
+                usuariosDtoEncontrados.add(conversor.usuarioToDto(usuario));
             }
             return usuariosDtoEncontrados;
         } catch (NumberFormatException e) {
-            usuariosEncontrados.addAll(gestionUsuariosRepo.encontrarUsuario(username_id));
+            usuariosEncontrados.addAll(usuariosRepo.encontrarUsuario(username_id));
             for (Usuario usuario : usuariosEncontrados) {
-                usuariosDtoEncontrados.add(convertidorUsuariosService.usuarioToDto(usuario));
+                usuariosDtoEncontrados.add(conversor.usuarioToDto(usuario));
             }
             return usuariosDtoEncontrados;
         } catch (NullPointerException e) {
@@ -121,8 +122,8 @@ public class GestionUsuariosService implements GestionUsuariosImp {
     @Override
     public List<UsuarioDTO> listarUsuarios() {
         List<UsuarioDTO> listaUsuariosDto = new ArrayList<>();
-        for (Usuario usuario : gestionUsuariosRepo.findAll()) {
-            listaUsuariosDto.add(convertidorUsuariosService.usuarioToDto(usuario));
+        for (Usuario usuario : usuariosRepo.findAll()) {
+            listaUsuariosDto.add(conversor.usuarioToDto(usuario));
         }
         return listaUsuariosDto;
     }
@@ -130,7 +131,7 @@ public class GestionUsuariosService implements GestionUsuariosImp {
     @Override
     public Boolean noPasswdInicial(Long idUsuario) {
         if (idUsuario != null & !buscarUsuario(String.valueOf(idUsuario)).isEmpty()) {
-            return gestionUsuariosRepo.verificarCambioPasswd(idUsuario);
+            return usuariosRepo.verificarCambioPasswd(idUsuario);
         } else {
             return false;
             //loj4j indicar que el id usuario es null
@@ -141,10 +142,10 @@ public class GestionUsuariosService implements GestionUsuariosImp {
     @Override
     public Boolean cambiarPasswd(Long idUsuario, String passwd) {
         if (idUsuario != null & !passwd.isEmpty()) {
-            if (gestionUsuariosRepo.cambiarPasswd(passwd, idUsuario) > 0) {
-                Usuario usuario = gestionUsuariosRepo.encontrarUsuarioById(idUsuario).get(0);
+            if (usuariosRepo.cambiarPasswd(passwd, idUsuario) > 0) {
+                Usuario usuario = usuariosRepo.encontrarUsuarioById(idUsuario).get(0);
                 usuario.setCambioPasswd(true);
-                gestionUsuariosRepo.save(usuario);
+                usuariosRepo.save(usuario);
                 return true;
             } else {
                 return false;

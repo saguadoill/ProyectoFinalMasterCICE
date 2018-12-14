@@ -46,6 +46,27 @@ public class ReservasService  implements ReservasImpl {
         return Conversor.reservaToDto(reservasRepo.findById(Long.parseLong(idReserva)).get());
     }
 
+    public Boolean modificarReserva(ReservaDTO reservaDTO){
+        try{
+            Reserva reservaModificada = Conversor.dtoToReserva(reservaDTO);
+//            reservaOriginal.setEstaAsignada(reservaDTO.getEstaAsignada());
+//            reservaOriginal.setTieneParking(reservaDTO.getTieneParking());
+//            reservaOriginal.setNumero_personas(reservaDTO.getCapacidad());
+//            reservaOriginal.setCliente(reservaDTO.getCliente());
+//            reservaOriginal.setFechaEntrada(reservaDTO.getFechaEntrada());
+//            reservaOriginal.setFechaSalida(reservaDTO.getFechaSalida());
+//            reservaOriginal.setIdApartamento(reservaDTO.getIdApartamento());
+            reservasRepo.save(reservaModificada);
+            return true;
+        }catch (Exception e){
+            //log4j e.printStackTrace();
+            e.printStackTrace();
+            return false;
+        }
+
+
+    }
+
     public void getBookinReservas(String xmlFile){
         Reservations reservations;
         try {

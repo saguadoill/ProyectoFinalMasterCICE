@@ -40,6 +40,9 @@ public class Reserva {
     private Double precioTotal;
 
     @Column(name = "parking")
-    private Boolean parking;
+    private Boolean tieneParking;
+
+    @Column(name = "asignada")
+    private Boolean estaAsignada;
 
 }

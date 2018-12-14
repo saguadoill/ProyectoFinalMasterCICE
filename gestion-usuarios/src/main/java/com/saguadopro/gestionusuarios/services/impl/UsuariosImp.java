@@ -6,7 +6,7 @@ import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import java.awt.*;
 import java.util.List;
 
-public interface GestionUsuariosImp {
+public interface UsuariosImp {
     
     Boolean crearUsuario(UsuarioDTO usuarioDTO);
     
@@ -25,4 +25,6 @@ public interface GestionUsuariosImp {
     String subirFoto(Image foto_usuario, Long idUsuario);
 
     Boolean descargarFoto(String foto_url,  Long idUsuario);
+
+    List<String> generarCampos(String nombre, String apellidos);
 }

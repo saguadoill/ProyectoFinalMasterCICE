@@ -24,6 +24,11 @@ public class RestReservas {
         return reservas.buscarReserva(idReserva);
     }
 
+    @RequestMapping(value = "/reservas", method = RequestMethod.PUT)
+    public Boolean modificarReserva(@RequestBody ReservaDTO reservaDTO){
+        return reservas.modificarReserva(reservaDTO);
+    }
+
     @RequestMapping(value = "/reservas/booking", method = RequestMethod.POST)
     public void getBookinReservas(@RequestBody String xmlFile){
         reservas.getBookinReservas(xmlFile);

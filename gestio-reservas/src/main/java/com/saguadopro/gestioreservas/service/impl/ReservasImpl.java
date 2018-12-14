@@ -15,4 +15,6 @@ public interface ReservasImpl {
 
     void getBookinReservas(String xmlFile);
 
+   Boolean modificarReserva(ReservaDTO reservaDTO);
+
 }

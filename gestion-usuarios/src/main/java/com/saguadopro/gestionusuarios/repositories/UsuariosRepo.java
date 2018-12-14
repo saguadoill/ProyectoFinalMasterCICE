@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface GestionUsuariosRepo extends JpaRepository<Usuario,Long> {
+public interface UsuariosRepo extends JpaRepository<Usuario,Long> {
 
     @Query(value = "SELECT * FROM usuarios WHERE username = :username", nativeQuery = true)
     List<Usuario> encontrarUsuario(@Param("username") String username);

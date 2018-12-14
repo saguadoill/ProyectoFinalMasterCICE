@@ -1,12 +1,13 @@
-package com.saguadopro.gestionusuarios.services;
+package com.saguadopro.gestionusuarios.conversor;
 
 import com.saguadopro.gestionusuarios.entities.Usuario;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
+import com.saguadopro.gestionusuarios.services.GestionFotosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConvertidorUsuariosService {
+public class Conversor {
 
     @Autowired
     GestionFotosService gestionFotosService;

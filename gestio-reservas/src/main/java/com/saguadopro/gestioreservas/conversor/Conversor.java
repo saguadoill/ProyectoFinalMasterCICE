@@ -16,8 +16,9 @@ public class Conversor {
         reserva.setFechaSalida(reservaDTO.getFechaSalida());
         reserva.setIdApartamento(reservaDTO.getIdApartamento());
         reserva.setNumero_personas(reservaDTO.getCapacidad());
-        reserva.setParking(reservaDTO.getParking());
+        reserva.setTieneParking(reservaDTO.getTieneParking());
         reserva.setPrecioTotal(reservaDTO.getPrecioTotal());
+        reserva.setEstaAsignada(reservaDTO.getEstaAsignada());
         return reserva;
     }
 
@@ -29,7 +30,8 @@ public class Conversor {
         reservaDTO.setFechaSalida(reserva.getFechaSalida());
         reservaDTO.setIdApartamento(reserva.getIdApartamento());
         reservaDTO.setCapacidad(reserva.getNumero_personas());
-        reservaDTO.setParking(reserva.getParking());
+        reservaDTO.setTieneParking(reserva.getTieneParking());
+        reservaDTO.setEstaAsignada(reserva.getEstaAsignada());
         reservaDTO.setPrecioTotal(reserva.getPrecioTotal());
         return reservaDTO;
     }

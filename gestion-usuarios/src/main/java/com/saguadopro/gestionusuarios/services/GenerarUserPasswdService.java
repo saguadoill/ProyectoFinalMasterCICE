@@ -1,8 +1,6 @@
 package com.saguadopro.gestionusuarios.services;
 
 
-import com.saguadopro.gestionusuarios.entities.Usuario;
-import com.saguadopro.gestionusuarios.repositories.GestionUsuariosRepo;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import java.util.List;
 public class GenerarUserPasswdService {
 
     @Autowired
-    private GestionUsuariosService gestionUsuariosService;
+    private UsuariosService gestionUsuariosService;
 
     public String generarUsername(String nombre, String apellidos) {
         nombre = StringUtils.stripAccents(nombre).trim();
