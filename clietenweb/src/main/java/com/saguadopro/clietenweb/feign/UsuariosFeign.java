@@ -1,6 +1,7 @@
 package com.saguadopro.clietenweb.feign;
 
 
+import com.saguadopro.clietenweb.dto.PerfilDTO;
 import com.saguadopro.clietenweb.dto.UsuarioDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,9 @@ public interface UsuariosFeign {
     @RequestMapping(value = "/usuarios/{id}",method = RequestMethod.PUT)
     HttpStatus cambiarPasswd(@PathVariable(value = "id") Long id,@RequestBody String passwd);
 
-    @RequestMapping(value = "/usuarios/campos")
+    @RequestMapping(value = "/usuarios/campos",method = RequestMethod.GET)
     List<String> generarUserPass(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "apellidos") String apellidos);
+
+    @RequestMapping(value = "/usuarios/perfiles",method = RequestMethod.GET)
+    List<PerfilDTO> listaPerfiles();
 }

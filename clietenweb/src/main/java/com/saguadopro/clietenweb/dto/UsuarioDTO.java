@@ -3,9 +3,6 @@ package com.saguadopro.clietenweb.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.awt.*;
 
 @Data
 @NoArgsConstructor
@@ -18,7 +15,7 @@ public class UsuarioDTO {
 
     private String passwd;
 
-    private String perfil;
+    private PerfilDTO perfil;
 
     private String nombre;
 
@@ -27,5 +24,4 @@ public class UsuarioDTO {
     private Boolean cambioPasswd;
 
     private String foto;
-
 }

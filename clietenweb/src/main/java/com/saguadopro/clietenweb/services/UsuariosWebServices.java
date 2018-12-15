@@ -1,5 +1,6 @@
 package com.saguadopro.clietenweb.services;
 
+import com.saguadopro.clietenweb.dto.PerfilDTO;
 import com.saguadopro.clietenweb.dto.UsuarioDTO;
 import com.saguadopro.clietenweb.feign.UsuariosFeign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,10 @@ public class UsuariosWebServices {
     InicioWebService inicioWebService;
 
 
-    public ModelAndView crearUsuario(UsuarioDTO usuarioDTO, MultipartFile file, Principal principal){
+    public ModelAndView crearUsuario(UsuarioDTO usuarioDTO,MultipartFile file, Principal principal){
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("pagina","pages/usuarios/nuevo");
+
         try{
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             usuarioDTO.setPasswd(passwordEncoder.encode(usuarioDTO.getPasswd()));
@@ -53,6 +55,7 @@ public class UsuariosWebServices {
     }
 
     public ResponseEntity<List<String>> generarUserPass(String nombre, String apellidos){
+        System.out.println("Llega al service: "+nombre+" "+apellidos);
         try {
             List<String> lista = usuariosFeign.generarUserPass(nombre, apellidos);
             return new ResponseEntity<>(lista, HttpStatus.OK);
@@ -121,6 +124,10 @@ public class UsuariosWebServices {
         vista.addObject("lista", usuariosFeign.listarUsuarios());
         vista.addObject("pagina","pages/usuarios/lista");
         return vista;
+    }
+
+    public List<PerfilDTO> listaPerfiles(){
+        return usuariosFeign.listaPerfiles();
     }
 
     public ResponseEntity cambiarPasswd(Map<String, String> campos, Principal principal) {

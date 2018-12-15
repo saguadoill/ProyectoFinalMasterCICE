@@ -24,8 +24,12 @@ public class Usuario {
     @Column(name = "passwd")
     private String passwd;
 
-    @Column(name = "perfil")
-    private String perfil;
+//    @Column(name = "perfil")
+//    private String perfil;
+
+    @OneToOne
+    @JoinColumn(name = "perfil")
+    private Perfil perfil;
 
     @Column(name = "nombre")
     private String nombre;

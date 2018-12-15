@@ -29,7 +29,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         //Obtenemos un a lista de los roles que tiene el usuario
         List<String> roleNames = new ArrayList<>();
-        roleNames.add(appUser.get(0).getPerfil());
+        roleNames.add(appUser.get(0).getPerfil().getNombrePerfil());
         //Añadir los roles de la base de datos
         List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {

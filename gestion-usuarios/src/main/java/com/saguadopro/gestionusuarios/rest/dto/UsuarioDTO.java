@@ -20,7 +20,7 @@ public class UsuarioDTO {
 
     private String passwd;
 
-    private String perfil;
+    private PerfilDTO perfil;
 
     private String nombre;
 

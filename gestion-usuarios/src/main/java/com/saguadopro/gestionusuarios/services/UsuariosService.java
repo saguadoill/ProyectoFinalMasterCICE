@@ -1,8 +1,11 @@
 package com.saguadopro.gestionusuarios.services;
 
 import com.saguadopro.gestionusuarios.conversor.Conversor;
+import com.saguadopro.gestionusuarios.entities.Perfil;
 import com.saguadopro.gestionusuarios.entities.Usuario;
+import com.saguadopro.gestionusuarios.repositories.PerfilesRepo;
 import com.saguadopro.gestionusuarios.repositories.UsuariosRepo;
+import com.saguadopro.gestionusuarios.rest.dto.PerfilDTO;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import com.saguadopro.gestionusuarios.services.impl.UsuariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class UsuariosService implements UsuariosImp {
 
     @Autowired
     private UsuariosRepo usuariosRepo;
+
+    @Autowired
+    private PerfilesRepo perfilesRepo;
 
     @Autowired
     private GestionFotosService gestionFotosService;
@@ -80,8 +86,8 @@ public class UsuariosService implements UsuariosImp {
                 if (!usuarioOriginal.get().getApellidos().equals(usuarioDtoModificado.getApellidos())) {
                     usuarioOriginal.get().setApellidos(usuarioDtoModificado.getApellidos());
                 }
-                if (!usuarioOriginal.get().getPerfil().equals(usuarioDtoModificado.getPerfil())) {
-                    usuarioOriginal.get().setPerfil(usuarioDtoModificado.getPerfil());
+                if (!usuarioOriginal.get().getPerfil().getNombrePerfil().equals(usuarioDtoModificado.getPerfil().getNombrePerfil())) {
+                    usuarioOriginal.get().setPerfil(conversor.perfilDtoToPerfil(usuarioDtoModificado.getPerfil()));
                 }
                 if (!usuarioDtoModificado.getFoto().equals("")) {
                     usuarioOriginal.get().setFoto_url(gestionFotosService.guardarFoto(usuarioOriginal.get().getUsername(), fotoUsuarioModificada));
@@ -128,16 +134,16 @@ public class UsuariosService implements UsuariosImp {
         return listaUsuariosDto;
     }
 
-    @Override
-    public Boolean noPasswdInicial(Long idUsuario) {
-        if (idUsuario != null & !buscarUsuario(String.valueOf(idUsuario)).isEmpty()) {
-            return usuariosRepo.verificarCambioPasswd(idUsuario);
-        } else {
-            return false;
-            //loj4j indicar que el id usuario es null
-        }
-
-    }
+//    @Override
+//    public Boolean noPasswdInicial(Long idUsuario) {
+//        if (idUsuario != null & !buscarUsuario(String.valueOf(idUsuario)).isEmpty()) {
+//            return usuariosRepo.verificarCambioPasswd(idUsuario);
+//        } else {
+//            return false;
+//            //loj4j indicar que el id usuario es null
+//        }
+//
+//    }
 
     @Override
     public Boolean cambiarPasswd(Long idUsuario, String passwd) {
@@ -155,21 +161,6 @@ public class UsuariosService implements UsuariosImp {
         }
     }
 
-    @Override
-    public String subirFoto(Image foto_usuario, Long idUsuario) {
-        String foto_url = "/resource/fotos/foto_user_" + idUsuario;
-        try {
-            ImageIO.write((RenderedImage) foto_usuario, "png", new File(foto_url));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return foto_url;
-    }
-
-    @Override
-    public Boolean descargarFoto(String foto_url, Long idUsuario) {
-        return null;
-    }
 
     public List<String> generarCampos(String nombre, String apellidos) {
         List<String> camposGenerados = new ArrayList<>();
@@ -179,5 +170,14 @@ public class UsuariosService implements UsuariosImp {
         camposGenerados.add(generarUserPasswdService.generarPasswd(usuarioGenerado));
         System.out.println(generarUserPasswdService.generarPasswd(usuarioGenerado));
         return camposGenerados;
+    }
+
+    @Override
+    public List<PerfilDTO> listaPerfiles() {
+        List<PerfilDTO> listaPerfilesDTO = new ArrayList<>();
+        for (Perfil perfil:perfilesRepo.findAll()) {
+            listaPerfilesDTO.add(conversor.perfilToDto(perfil));
+        }
+        return listaPerfilesDTO;
     }
 }

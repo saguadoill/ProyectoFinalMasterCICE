@@ -1,5 +1,6 @@
 package com.saguadopro.gestionusuarios.rest;
 
+import com.saguadopro.gestionusuarios.rest.dto.PerfilDTO;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import com.saguadopro.gestionusuarios.services.impl.UsuariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,15 @@ public class UsuariosRest {
         return usuarios.listarUsuarios();
     }
 
-    @RequestMapping(value = "/campos", method = RequestMethod.GET)
-    public List<String> generarCampos(@RequestParam(value = "nombre") String nombre, @RequestParam(value = "apellidos") String apellidos){
+    @RequestMapping(value = "/usuarios/perfiles", method = RequestMethod.GET)
+    public List<PerfilDTO> listaPerfiles(){
+        return usuarios.listaPerfiles();
+    }
+
+    @RequestMapping(value = "/usuarios/campos", method = RequestMethod.GET)
+    public List<String> generarCampos(@RequestParam(value="nombre")String nombre, @RequestParam(value = "apellidos") String apellidos ){
         return usuarios.generarCampos(nombre,apellidos);
     }
+
+
 }

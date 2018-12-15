@@ -4,24 +4,19 @@
 function generarCampos() {
     var nombre = document.getElementById("nombre");
     var apellidos = document.getElementById("apellidos");
-    if (nombre.value === "") {
-        alert("Falta nombre de usuario");
-        return;
-    }
-    if (apellidos.value === "") {
-        alert("Faltan apellidos del usuario");
-        return;
-    }
+
+    console.log(nombre.value+" "+apellidos.value);
+
     $.ajax({
         url: '/usuarios/campos',
         data: {nombre: nombre.value, apellidos: apellidos.value},
         type: 'GET',
-        contentType: 'application/json; charset=utf-8',
+        // contentType: 'application/json; charset=utf-8',
         success: function (data, textStatus, xhr) {
-            // alert(xhr.status);
-            var usuario = document.getElementById('username');
+            console.log("Respuesta del script: "+data);
+            var username = document.getElementById('username');
             var passwd = document.getElementById('passwd');
-            usuario.value = data[0];
+            username.value = data[0];
             passwd.value = data[1];
             console.log(data)
 

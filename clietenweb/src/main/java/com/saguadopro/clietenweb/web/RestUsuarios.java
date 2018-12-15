@@ -1,5 +1,6 @@
 package com.saguadopro.clietenweb.web;
 
+import com.saguadopro.clietenweb.dto.PerfilDTO;
 import com.saguadopro.clietenweb.dto.UsuarioDTO;
 import com.saguadopro.clietenweb.services.InicioWebService;
 import com.saguadopro.clietenweb.services.UsuariosWebServices;
@@ -38,12 +39,13 @@ public class RestUsuarios {
     @RequestMapping(value = "/nuevo", method = RequestMethod.GET)
     public ModelAndView paginaUsuariosNuevo(Principal principal) {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
+        vista.addObject("listaPerfiles",usuariosWebServices.listaPerfiles());
         vista.addObject("pagina","pages/usuarios/nuevo");
         return vista;
     }
 
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-    public ModelAndView crearNuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO,@RequestParam MultipartFile file, Principal principal) {
+    public ModelAndView crearNuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO, @ModelAttribute PerfilDTO perfilDTO, @RequestParam MultipartFile file, Principal principal) {
         return usuariosWebServices.crearUsuario(usuarioDTO,file,principal);
     }
 
@@ -62,7 +64,8 @@ public class RestUsuarios {
 
 
     @RequestMapping(value = "/campos", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> generarUserPass(String nombre, String apellidos) {
+    public ResponseEntity<List<String>> generarUserPass(@RequestParam String nombre,@RequestParam String apellidos) {
+        System.out.println(nombre+" "+apellidos);
         return usuariosWebServices.generarUserPass(nombre,apellidos);
     }
 
