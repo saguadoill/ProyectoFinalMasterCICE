@@ -27,6 +27,7 @@ public class RestUsuarios {
     @RequestMapping(value = "/buscar", method = RequestMethod.GET)
     public ModelAndView paginaUsuariosBuscar(Principal principal) {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
+        vista.addObject("listaPerfiles",usuariosWebServices.listaPerfiles());
         vista.addObject("pagina","pages/usuarios/buscar");
         return vista;
     }
@@ -45,8 +46,8 @@ public class RestUsuarios {
     }
 
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-    public ModelAndView crearNuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO, @ModelAttribute PerfilDTO perfilDTO, @RequestParam MultipartFile file, Principal principal) {
-        return usuariosWebServices.crearUsuario(usuarioDTO,file,principal);
+    public ModelAndView crearNuevoUsuario(@ModelAttribute UsuarioDTO usuarioDTO,@RequestParam String idPerfil,@RequestParam MultipartFile file, Principal principal) {
+        return usuariosWebServices.crearUsuario(usuarioDTO,idPerfil,file,principal);
     }
 
     @RequestMapping(value = "/lista", method = RequestMethod.GET)
@@ -77,8 +78,8 @@ public class RestUsuarios {
 
 
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
-    public ModelAndView modificarUsuario(@ModelAttribute UsuarioDTO usuarioModificadoDto,@RequestParam MultipartFile file,Principal principal,@RequestParam String origen) {
-        return usuariosWebServices.modificarUsuario(usuarioModificadoDto,file,principal,origen);
+    public ModelAndView modificarUsuario(@ModelAttribute UsuarioDTO usuarioModificadoDto,@RequestParam String idPerfil,@RequestParam MultipartFile file,Principal principal,@RequestParam String origen) {
+        return usuariosWebServices.modificarUsuario(usuarioModificadoDto,idPerfil,file,principal,origen);
     }
 
     @RequestMapping(value = "/passwd", method = RequestMethod.POST)

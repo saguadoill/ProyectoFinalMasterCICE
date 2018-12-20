@@ -68,7 +68,7 @@
                 <!--<option value="ROLE_CLEAN">Limpieza</option>-->
                 <!--<option value="ROLE_ADMIN">Admistrador</option>-->
             <!--</select>-->
-            <select name="perfil">
+            <select name="idPerfil">
                 <option th:each="perfil:${listaPerfiles}" th:value="${perfil.idPerfil}" th:text="${perfil.nombrePerfil}"></option>
             </select>
         </div>

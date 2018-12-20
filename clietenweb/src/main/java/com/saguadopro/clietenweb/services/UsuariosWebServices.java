@@ -28,11 +28,15 @@ public class UsuariosWebServices {
     InicioWebService inicioWebService;
 
 
-    public ModelAndView crearUsuario(UsuarioDTO usuarioDTO,MultipartFile file, Principal principal){
+    public ModelAndView crearUsuario(UsuarioDTO usuarioDTO, String idPerfil,MultipartFile file, Principal principal){
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
+        vista.addObject("listaPerfiles",usuariosFeign.listaPerfiles());
         vista.addObject("pagina","pages/usuarios/nuevo");
 
+//        UsuarioDTO usuarioDTO = new UsuarioDTO(null,username,passwd,usuariosFeign.buscarPerfil(idPerfil),nombre,apellidos,null, null);
+
         try{
+            usuarioDTO.setPerfil(usuariosFeign.buscarPerfil(idPerfil));
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             usuarioDTO.setPasswd(passwordEncoder.encode(usuarioDTO.getPasswd()));
             byte[] fotoForm = file.getBytes();
@@ -94,17 +98,23 @@ public class UsuariosWebServices {
     public ModelAndView buscarUsuario(String username_id, Principal principal){
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("pagina","pages/usuarios/buscar");
+        vista.addObject("listaPerfiles",usuariosFeign.listaPerfiles());
         vista.addObject("lista", usuariosFeign.buscarUsuario(username_id));
         return vista;
     }
 
-    public ModelAndView modificarUsuario(UsuarioDTO usuarioModificadoDto, MultipartFile file, Principal principal, String origen){
+    public ModelAndView modificarUsuario(UsuarioDTO usuarioModificadoDto,String idPerfil, MultipartFile file, Principal principal, String origen){
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
+        vista.addObject("listaPerfiles",usuariosFeign.listaPerfiles());
         try {
             byte[] fotoForm = file.getBytes();
             usuarioModificadoDto.setFoto(Base64.getEncoder().encodeToString(fotoForm));
+            usuarioModificadoDto.setPerfil(usuariosFeign.buscarPerfil(idPerfil));
             usuariosFeign.modificarUsuario(usuarioModificadoDto);
-            vista.addObject("usuarioFoto", "data:image/png;base64,"+ usuariosFeign.buscarUsuario(usuarioModificadoDto.getUsername()).get(0).getFoto());
+            if (usuarioModificadoDto.getUsername().equals(principal.getName())){
+                vista.addObject("usuarioFoto", "data:image/png;base64,"+ usuariosFeign.buscarUsuario(usuarioModificadoDto.getUsername()).get(0).getFoto());
+            }
+//            vista.addObject("usuarioFoto", "data:image/png;base64,"+ usuariosFeign.buscarUsuario(usuarioModificadoDto.getUsername()).get(0).getFoto());
             if (origen.equals("lista")){
                 vista.addObject("lista", usuariosFeign.listarUsuarios());
                 vista.addObject("pagina","pages/usuarios/lista");
@@ -122,6 +132,7 @@ public class UsuariosWebServices {
     public ModelAndView paginaListaUsuarios(Principal principal) {
         ModelAndView vista = inicioWebService.paginaInicioService(principal);
         vista.addObject("lista", usuariosFeign.listarUsuarios());
+        vista.addObject("listaPerfiles",usuariosFeign.listaPerfiles());
         vista.addObject("pagina","pages/usuarios/lista");
         return vista;
     }

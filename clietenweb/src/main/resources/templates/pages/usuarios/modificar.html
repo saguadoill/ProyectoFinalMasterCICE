@@ -106,11 +106,8 @@
                                     <div class="form-row mb-4">
                                         <div class="col-3"></div>
                                         <div class="col-4">
-                                            <select id="perfil" name="perfil" class="mdb-select md-form" required>
-                                                <option value="" disabled selected>Seleccionar perfil</option>
-                                                <option value="ROLE_USER">Usuario</option>
-                                                <option value="ROLE_CLEAN">Limpieza</option>
-                                                <option value="ROLE_ADMIN">Admistrador</option>
+                                            <select id="selector_perfiles" name="idPerfil">
+                                                <option th:each="perfil:${listaPerfiles}" th:value="${perfil.idPerfil}" th:text="${perfil.nombrePerfil}"></option>
                                             </select>
                                         </div>
                                         <div class="col-3">

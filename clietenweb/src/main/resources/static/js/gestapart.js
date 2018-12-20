@@ -91,6 +91,15 @@ function cargarModalListaUsuarios(fila, origen) {
     var td_perfil = fila.children[3].innerText;
     var td_nombre = fila.children[4].innerText;
     var td_apellidos = fila.children[5].innerText;
+    var perfiles =  document.getElementById("selector_perfiles");
+
+    for (var i = 0; i < perfiles.options.length; i++) {
+        console.log(perfiles.options[i].text);
+        if (perfiles.options[i].text === td_perfil){
+                perfiles.selectedIndex = i;
+                break;
+            }
+        }
 
     var usuario = {
         idUsuario: td_idUsuario,
@@ -107,7 +116,7 @@ function cargarModalListaUsuarios(fila, origen) {
     $('#nombre').val(usuario.nombre);
     $('#apellidos').val(usuario.apellidos);
     $('#username').val(usuario.username);
-    $('#perfil').val(usuario.perfil);
+    // $('#perfil').val(usuario.perfil);
     $('#passwd').val("*privada*");
     $('#origen').val(origen);
 }

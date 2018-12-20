@@ -33,7 +33,7 @@
                     <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
                               th:src="'data:image/png;base64,'+${usuario.foto}"/></td>
                     <td ><span th:text="${usuario.username}">  </span></td>
-                    <td><span th:text="${usuario.perfil}">  </span></td>
+                    <td><span th:text="${usuario.perfil.nombrePerfil}">  </span></td>
                     <td><span th:text="${usuario.nombre}">  </span></td>
                     <td><span th:text="${usuario.apellidos}">  </span></td>
                     <td><span th:if="!${usuario.cambioPasswd}"><i class="fas fa-question-circle" style="color: red" title="El usuaro debe cambiar la contraseña"></i></span></td>

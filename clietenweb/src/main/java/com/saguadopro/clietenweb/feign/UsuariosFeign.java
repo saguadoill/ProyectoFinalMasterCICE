@@ -37,4 +37,7 @@ public interface UsuariosFeign {
 
     @RequestMapping(value = "/usuarios/perfiles",method = RequestMethod.GET)
     List<PerfilDTO> listaPerfiles();
+
+    @RequestMapping(value = "/usuarios/perfiles/{idPerfil}", method = RequestMethod.GET)
+    PerfilDTO buscarPerfil(@PathVariable(value = "idPerfil") String idPerfil);
 }

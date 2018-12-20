@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class UsuariosRest {
+public class RestUsuarios {
 
     @Autowired
     UsuariosImp usuarios;
@@ -53,7 +53,6 @@ public class UsuariosRest {
 
     @RequestMapping(value = "/usuarios/{username}", method = RequestMethod.GET)
     public List<UsuarioDTO> buscarUsuario(@PathVariable(value = "username") String username){
-
         return usuarios.buscarUsuario(username);
     }
 
@@ -65,6 +64,11 @@ public class UsuariosRest {
     @RequestMapping(value = "/usuarios/perfiles", method = RequestMethod.GET)
     public List<PerfilDTO> listaPerfiles(){
         return usuarios.listaPerfiles();
+    }
+
+    @RequestMapping(value = "/usuarios/perfiles/{idPerfil}", method = RequestMethod.GET)
+    public PerfilDTO buscarPerfil(@PathVariable(value = "idPerfil") String idPerfil){
+        return usuarios.buscarPerfil(idPerfil);
     }
 
     @RequestMapping(value = "/usuarios/campos", method = RequestMethod.GET)

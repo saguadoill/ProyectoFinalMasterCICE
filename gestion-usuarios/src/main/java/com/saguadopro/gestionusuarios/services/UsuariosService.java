@@ -1,22 +1,23 @@
 package com.saguadopro.gestionusuarios.services;
 
-import com.saguadopro.gestionusuarios.conversor.Conversor;
 import com.saguadopro.gestionusuarios.entities.Perfil;
 import com.saguadopro.gestionusuarios.entities.Usuario;
+import com.saguadopro.gestionusuarios.feign.ConversorFeign;
+import com.saguadopro.gestionusuarios.feign.FotosFeign;
 import com.saguadopro.gestionusuarios.repositories.PerfilesRepo;
 import com.saguadopro.gestionusuarios.repositories.UsuariosRepo;
 import com.saguadopro.gestionusuarios.rest.dto.PerfilDTO;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import com.saguadopro.gestionusuarios.services.impl.UsuariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +37,10 @@ public class UsuariosService implements UsuariosImp {
     private PerfilesRepo perfilesRepo;
 
     @Autowired
-    private GestionFotosService gestionFotosService;
+    private ConversorFeign conversorFeign;
 
     @Autowired
-    private Conversor conversor;
+    private FotosFeign fotosFeign;
 
     @Autowired
     private GenerarUserPasswdService generarUserPasswdService;
@@ -50,7 +51,7 @@ public class UsuariosService implements UsuariosImp {
         System.out.println(usuarioDTO);
         if (usuarioDTO != null) {
             System.out.println("entrando en donde la foto no esta vacia");
-            Usuario usuarioBBDD = conversor.usuarioDtoToUsuario(usuarioDTO);
+            Usuario usuarioBBDD = conversorFeign.usuarioDtoToEntity(usuarioDTO);
             usuariosRepo.save(usuarioBBDD);
             return true;
         } else {
@@ -75,7 +76,8 @@ public class UsuariosService implements UsuariosImp {
         try {
             Optional<Usuario> usuarioOriginal = usuariosRepo.findById(usuarioDtoModificado.getIdUsuario());
             if (usuarioOriginal.isPresent()) {
-                BufferedImage fotoUsuarioModificada = gestionFotosService.decodificarFoto(usuarioDtoModificado.getFoto());
+//                InputStream in = new ByteArrayInputStream(fotosFeign.decodificarFoto(usuarioDtoModificado.getFoto()));
+//                BufferedImage fotoUsuarioModificada = ImageIO.read(in);
 
                 if (!usuarioOriginal.get().getUsername().equals(usuarioDtoModificado.getUsername())) {
                     usuarioOriginal.get().setUsername(usuarioDtoModificado.getUsername());
@@ -87,10 +89,10 @@ public class UsuariosService implements UsuariosImp {
                     usuarioOriginal.get().setApellidos(usuarioDtoModificado.getApellidos());
                 }
                 if (!usuarioOriginal.get().getPerfil().getNombrePerfil().equals(usuarioDtoModificado.getPerfil().getNombrePerfil())) {
-                    usuarioOriginal.get().setPerfil(conversor.perfilDtoToPerfil(usuarioDtoModificado.getPerfil()));
+                    usuarioOriginal.get().setPerfil(conversorFeign.perfilEntityToDto(usuarioDtoModificado.getPerfil()));
                 }
                 if (!usuarioDtoModificado.getFoto().equals("")) {
-                    usuarioOriginal.get().setFoto_url(gestionFotosService.guardarFoto(usuarioOriginal.get().getUsername(), fotoUsuarioModificada));
+                    usuarioOriginal.get().setFoto_url(fotosFeign.guardarFoto(usuarioOriginal.get().getUsername(),fotosFeign.decodificarFoto(usuarioDtoModificado.getFoto()) ));
                 }
                 usuariosRepo.save(usuarioOriginal.get());
                 return true;
@@ -111,13 +113,13 @@ public class UsuariosService implements UsuariosImp {
             Long id = Long.parseLong(username_id);
             usuariosEncontrados.addAll(usuariosRepo.encontrarUsuarioById(id));
             for (Usuario usuario : usuariosEncontrados) {
-                usuariosDtoEncontrados.add(conversor.usuarioToDto(usuario));
+                usuariosDtoEncontrados.add(conversorFeign.usuarioEntityToDto(usuario));
             }
             return usuariosDtoEncontrados;
         } catch (NumberFormatException e) {
             usuariosEncontrados.addAll(usuariosRepo.encontrarUsuario(username_id));
             for (Usuario usuario : usuariosEncontrados) {
-                usuariosDtoEncontrados.add(conversor.usuarioToDto(usuario));
+                usuariosDtoEncontrados.add(conversorFeign.usuarioEntityToDto(usuario));
             }
             return usuariosDtoEncontrados;
         } catch (NullPointerException e) {
@@ -129,7 +131,7 @@ public class UsuariosService implements UsuariosImp {
     public List<UsuarioDTO> listarUsuarios() {
         List<UsuarioDTO> listaUsuariosDto = new ArrayList<>();
         for (Usuario usuario : usuariosRepo.findAll()) {
-            listaUsuariosDto.add(conversor.usuarioToDto(usuario));
+            listaUsuariosDto.add(conversorFeign.usuarioEntityToDto(usuario));
         }
         return listaUsuariosDto;
     }
@@ -176,8 +178,13 @@ public class UsuariosService implements UsuariosImp {
     public List<PerfilDTO> listaPerfiles() {
         List<PerfilDTO> listaPerfilesDTO = new ArrayList<>();
         for (Perfil perfil:perfilesRepo.findAll()) {
-            listaPerfilesDTO.add(conversor.perfilToDto(perfil));
+            listaPerfilesDTO.add(conversorFeign.perfilEntityToDto(perfil));
         }
         return listaPerfilesDTO;
+    }
+
+    @Override
+    public PerfilDTO buscarPerfil(String idPerfil) {
+        return conversorFeign.perfilEntityToDto(perfilesRepo.findById(Integer.parseInt(idPerfil)).get());
     }
 }

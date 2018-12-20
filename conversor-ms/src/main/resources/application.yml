@@ -1,0 +1,19 @@
+#PUERTO
+server:
+  port: 9006
+
+spring:
+  application:
+    name: conversor-ms
+
+#EUREKA
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+
+feign:
+  hystrix:
+    enabled: false

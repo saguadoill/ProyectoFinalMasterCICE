@@ -1,0 +1,16 @@
+#PUERTO
+server:
+  port: 9007
+
+#SPRING
+spring:
+  application:
+    name: fotos-ms
+
+#EUREKA
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
