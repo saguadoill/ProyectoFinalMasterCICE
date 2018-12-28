@@ -20,9 +20,9 @@ VALUES (0,'Admin','Admin','','','0'),
 
 
 INSERT INTO apartamentos (id_apartamento,capacidad, direccion, piso, puerta, id_propietario,foto_url,id_huesped)
-VALUES (1,3, 'Edificio Esmeralda I, Calle Ronda 24' ,'2', 'A',1,'src/main/resources/fotos/logo_apartamento.png',null),
-       (2,2, 'Edificio Esmeralda I, Calle Ronda 24' ,'4', 'D',1,'src/main/resources/fotos/logo_apartamento.png',1),
-       (3,1, 'Edificio Esmeralda II, Calle Cicuta 2' ,'8', 'B',1,'src/main/resources/fotos/logo_apartamento.png',null),
+VALUES (1,3, 'Edificio Esmeralda I, Calle Ronda 24' ,'2', 'A',1,'src/main/resources/fotos/logo_apartamento.png',2),
+       (2,2, 'Edificio Esmeralda I, Calle Ronda 24' ,'4', 'D',1,'src/main/resources/fotos/logo_apartamento.png',null),
+       (3,1, 'Edificio Esmeralda II, Calle Cicuta 2' ,'8', 'B',1,'src/main/resources/fotos/logo_apartamento.png',1),
        (4,6, 'Calle Cicuta 6' ,'', '',2,'src/main/resources/fotos/logo_apartamento.png',null) ,
        (5,3, 'Rio Hermosillo 24' ,'2', 'A',3,'src/main/resources/fotos/logo_apartamento.png',null),
        (6,2, 'Calle Pobedilla 4' ,'1', 'Izquierda',3,'src/main/resources/fotos/logo_apartamento.png',3),

@@ -18,7 +18,7 @@
                 <th>Cliente</th>
                 <th>Fecha de entrada</th>
                 <th>Fecha de salida</th>
-                <th>Nº Personas</th>
+                <th>PAX</th>
                 <th>Apartamento</th>
                 <th>Precio Total</th>
                 <th>Parking</th>
@@ -30,7 +30,7 @@
             <tr th:if="${#lists.isEmpty(lista)}">
                 <td colspan="8" class="text-center">Ninguna reserva encontrado</td>
             </tr>
-            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'pendientes')">
+            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalAsignacionApartamentos(this,'activas')">
                 <td><span th:text="${reserva.idReserva}"> </span></td>
                 <td><span th:text="${reserva.cliente}"></span></td>
                 <td>
@@ -67,6 +67,6 @@
     </div>
 </div>
 <!--Modal para modificacion usuario-->
-<div th:include="/pages/apartamentos/modificar.html :: panel_modificar"></div>
+<div th:include="/pages/reservas/asignacion.html :: panel_asignacion"></div>
 </body>
 </html>

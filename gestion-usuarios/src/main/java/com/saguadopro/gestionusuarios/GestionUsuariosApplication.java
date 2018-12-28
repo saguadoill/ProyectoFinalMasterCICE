@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Microservicio encargado de la gestion de los usuarios
  */
 @SpringBootApplication
-//@EnableSwagger2
+@EnableSwagger2
 @EnableEurekaClient
 @EnableFeignClients
 public class GestionUsuariosApplication  {

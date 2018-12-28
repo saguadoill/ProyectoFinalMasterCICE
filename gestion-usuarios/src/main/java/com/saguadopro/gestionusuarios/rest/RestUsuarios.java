@@ -6,9 +6,12 @@ import com.saguadopro.gestionusuarios.services.impl.UsuariosImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+/**
+ * Controlador de los endpoints para la gestion de lo susuarios
+ * @see {@link com.saguadopro.gestionusuarios.services.UsuariosService}
+ */
 @RestController
 public class RestUsuarios {
 

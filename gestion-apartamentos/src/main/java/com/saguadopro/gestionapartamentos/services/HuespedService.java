@@ -1,8 +1,8 @@
 package com.saguadopro.gestionapartamentos.services;
 
+import com.saguadopro.gestionapartamentos.feign.ConversorFeign;
 import com.saguadopro.gestionapartamentos.repositories.HuespedRepo;
 import com.saguadopro.gestionapartamentos.rest.dto.HuespedDTO;
-import com.saguadopro.gestionapartamentos.services.conversores.HuespedConverter;
 import com.saguadopro.gestionapartamentos.services.impl.HuespedImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,9 @@ public class HuespedService implements HuespedImp {
 
     @Autowired
     HuespedRepo huespedRepo;
+
+    @Autowired
+    ConversorFeign conversorFeign;
 
     @Override
     public Boolean addHuesped(HuespedDTO huespedDTO) {
@@ -32,7 +35,7 @@ public class HuespedService implements HuespedImp {
 
     @Override
     public HuespedDTO buscarHuesped(Long idHuesped) {
-        return HuespedConverter.huespedToDto(huespedRepo.findById(idHuesped).get());
+        return conversorFeign.huespedEntityToDto(huespedRepo.findById(idHuesped).get());
     }
 
     @Override

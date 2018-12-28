@@ -16,8 +16,11 @@ public interface ReservasFeign {
     List<ReservaDTO> listaReservas();
 
     @RequestMapping(value = "/reservas/{idReserva}", method = RequestMethod.GET)
-    ReservaDTO buscarReserva(@PathVariable(value = "idReserva") String idReserva);
+    List<ReservaDTO> buscarReserva(@PathVariable(value = "idReserva") String idReserva);
 
     @RequestMapping(value = "/reservas", method = RequestMethod.PUT)
     Boolean modificarReserva(@RequestBody ReservaDTO reservaDTO);
+
+    @RequestMapping(value = "/reservas/{idReserva}", method = RequestMethod.DELETE)
+    ReservaDTO eliminarReserva(@PathVariable(value = "idReserva") String idReserva);
 }

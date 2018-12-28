@@ -1,7 +1,7 @@
 package com.saguadopro.gestioreservas.service;
 
-import com.saguadopro.gestioreservas.conversor.Conversor;
 import com.saguadopro.gestioreservas.entities.Reserva;
+import com.saguadopro.gestioreservas.feign.ConversorFeign;
 import com.saguadopro.gestioreservas.repositories.ReservasRepo;
 import com.saguadopro.gestioreservas.rest.dto.ReservaDTO;
 import com.saguadopro.gestioreservas.rest.dto.booking.com.Reservation;
@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ReservasService  implements ReservasImpl {
@@ -26,29 +27,43 @@ public class ReservasService  implements ReservasImpl {
     @Autowired
     ReservasRepo reservasRepo;
 
+    @Autowired
+    ConversorFeign conversorFeign;
+
     @Override
     public List<ReservaDTO> listaReservas() {
         List<ReservaDTO> listaReservasDto = new ArrayList<>();
         for (Reserva reserva: reservasRepo.findAll()) {
-            listaReservasDto.add(Conversor.reservaToDto(reserva));
+            listaReservasDto.add(conversorFeign.reservaEntityToDto(reserva));
         }
         return listaReservasDto;
     }
 
     @Override
-    public Boolean eliminarReserva(ReservaDTO reservaDTO) {
-        reservasRepo.delete(Conversor.dtoToReserva(reservaDTO));
+    public Boolean eliminarReserva(String idReserva) {
+        reservasRepo.delete(conversorFeign.reservaDtoToEntity(buscarReserva(idReserva).get(0)));
         return null;
     }
 
     @Override
-    public ReservaDTO buscarReserva(String idReserva) {
-        return Conversor.reservaToDto(reservasRepo.findById(Long.parseLong(idReserva)).get());
+    public List<ReservaDTO> buscarReserva(String idReserva) {
+        List<ReservaDTO> reservasDtoEncontradas = new ArrayList<>();
+        List<Reserva> reservasEncontradas = new ArrayList<>();
+        try {
+            Long id = Long.parseLong(idReserva);
+            reservasEncontradas.add(reservasRepo.findById(id).get());
+            for (Reserva reserva : reservasEncontradas) {
+                reservasDtoEncontradas.add(conversorFeign.reservaEntityToDto(reserva));
+            }
+            return reservasDtoEncontradas;
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     public Boolean modificarReserva(ReservaDTO reservaDTO){
         try{
-            Reserva reservaModificada = Conversor.dtoToReserva(reservaDTO);
+            Reserva reservaModificada = conversorFeign.reservaDtoToEntity(reservaDTO);
 //            reservaOriginal.setEstaAsignada(reservaDTO.getEstaAsignada());
 //            reservaOriginal.setTieneParking(reservaDTO.getTieneParking());
 //            reservaOriginal.setNumero_personas(reservaDTO.getCapacidad());

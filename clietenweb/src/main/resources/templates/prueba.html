@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,6 +17,9 @@
 <script th:src="@{/js/popper.min.js}"></script>
 <!-- Bootstrap JS -->
 <script th:src="@{/js/bootstrap.min.js}"></script>
+
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
 
 </body>
 </html>

@@ -25,6 +25,11 @@ spring:
   application:
     name: gestion-usuarios
 
+
+feign:
+  hystrix:
+    enabled: false
+
 #EUREKA
 eureka:
   client:

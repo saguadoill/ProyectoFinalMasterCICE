@@ -58,7 +58,7 @@
                                     <!--Campos ocultos-->
                                     <input type="hidden" id="idReserva" name="idReserva">
                                     <input type="hidden" id="origen" name="origen">
-                                    <!--<input type="hidden" id="apartamentoSeleccionado" name="apartamentoSeleccionado">-->
+                                    <input type="hidden" id="idHuesped" name="idHuesped">
                                 </p>
                                 <h6 class="text-center">Apartamento seleccionado</h6>
                                 <div class="tab-pane fade show active" id="tab_apartamentos" role="tabpanel"
@@ -177,45 +177,16 @@
                                 <div class="tab-pane fade" id="tab_parking" role="tabpanel"
                                      aria-labelledby="tab_parking">
                                     <p></p>
-                                    <!--<div class="form-row mb-4">-->
-                                        <!--<table id="tabla_parking" class="table table-hover">-->
-                                            <!--<thead>-->
-                                            <!--<tr>-->
-                                                <!--<th>Id</th>-->
-                                                <!--<th>Foto</th>-->
-                                                <!--<th>Direccion</th>-->
-                                                <!--<th>Capacidad</th>-->
-                                                <!--<th>Piso</th>-->
-                                                <!--<th>Puerta</th>-->
-                                                <!--<th></th>-->
-                                            <!--</tr>-->
-                                            <!--</thead>-->
-                                            <!--<tbody id="tb_parking">-->
-                                            <!--<tr th:if="${#lists.isEmpty(listaParkingsDisponibles)}">-->
-                                                <!--<td colspan="8" class="text-center">Ningun apartamento disponible</td>-->
-                                            <!--</tr>-->
-                                            <!--<tr th:each="apartamento : ${listaParkingsDisponibles}" data-toggle="modal"-->
-                                                <!--data-target="#myModal"-->
-                                                <!--onclick="cargarModalListaApartamentos(this,'disponibles')">-->
-                                                <!--<td><span th:text="${apartamento.idApartamento}"> </span></td>-->
-                                                <!--<td><img class="rounded-circle img-fluid w-25 h-auto float-left"-->
-                                                         <!--th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>-->
-                                                <!--<td><span th:text="${apartamento.direccion}">  </span></td>-->
-                                                <!--<td th:title="${apartamento.capacidad.idCapacidad}"><span-->
-                                                        <!--th:text="${apartamento.capacidad.maxPersonas}">  </span></td>-->
-                                                <!--<td><span th:text="${apartamento.piso}">  </span></td>-->
-                                                <!--<td><span th:text="${apartamento.puerta}">  </span></td>-->
-                                            <!--</tr>-->
-                                            <!--</tbody>-->
 
-                                        <!--</table>-->
-                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="col-4">
+                            <button class="btn btn-danger btn-rounded" type="submit" onclick="anularCamposHuesped()" formaction="/reservas/eliminar">
+                                Eliminar
+                            </button>
                         </div>
                         <div class="col-4">
                         </div>
@@ -229,31 +200,6 @@
         </div>
     </form>
 </div>
-<script>
-    // TODO:Hacer que se seleccione automaticamente el apartamento que te salia en la reserva y comprobar que llega al controller los datos
-    //     var rows = document.getElementById('tabla_id_apartamentos').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-    //     for (i = 0; i < rows.length; i++) {
-    //         rows[i].onclick = function() {
-    //             if($(this).hasClass("highlight"))
-    //                     $(this).removeClass('highlight');
-    //                 else
-    //                     $(this).addClass('highlight').siblings().removeClass('highlight');
-    //             var td_idApartamento = this.children[0].innerText;
-    //             $('#apartamentoSeleccionado').val(td_idApartamento);
-    //             console.log("Seleccionada fila: "+this.rowIndex);
-    //         }
-    //     }
-
-    // $("#tb_id_apartamentos").click(function(){
-    //     if($(this).hasClass("highlight"))
-    //         $(this).removeClass('highlight');
-    //     else
-    //         $(this).addClass('highlight').siblings().removeClass('highlight');
-    // })
-    function f() {
-        console.log("presiono asignar");
-    }
-</script>
 </body>
 </html>
 

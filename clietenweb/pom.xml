@@ -84,7 +84,6 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-            <version>LATEST</version>
         </dependency>
         <!--Spring Security-->
         <dependency>

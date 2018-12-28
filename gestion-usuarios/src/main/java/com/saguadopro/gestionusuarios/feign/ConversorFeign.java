@@ -9,6 +9,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Repositorio Feign para la conversion de Entidades a Dtos y viceversa.
+ * @see "ConversorMsApplication"
+ */
 @Repository
 @FeignClient("conversor-ms")
 public interface ConversorFeign {

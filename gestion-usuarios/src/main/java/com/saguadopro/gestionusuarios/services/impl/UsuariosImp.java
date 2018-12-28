@@ -4,6 +4,10 @@ import com.saguadopro.gestionusuarios.rest.dto.PerfilDTO;
 import com.saguadopro.gestionusuarios.rest.dto.UsuarioDTO;
 import java.util.List;
 
+/**
+ * Interface para manejar la gestion de usuarios
+ * @see {@link com.saguadopro.gestionusuarios.services.UsuariosService}
+ */
 public interface UsuariosImp {
     
     Boolean crearUsuario(UsuarioDTO usuarioDTO);

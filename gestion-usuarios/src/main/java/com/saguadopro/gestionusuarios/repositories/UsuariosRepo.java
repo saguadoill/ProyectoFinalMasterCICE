@@ -10,29 +10,38 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Repositorio de Usuarios
+ */
 @Repository
 public interface UsuariosRepo extends JpaRepository<Usuario,Long> {
 
+    /**
+     * Busca un Usuario a partir del username o nombre de usuario
+     * @param username - Nombre de usuario
+     * @return - Lista de Entidades de tipo Usuario
+     */
     @Query(value = "SELECT * FROM usuarios WHERE username = :username", nativeQuery = true)
     List<Usuario> encontrarUsuario(@Param("username") String username);
 
+    /**
+     * Buscar un usuario por el Id
+     * @param id - Id o numero de usuario
+     * @return - Lista de Entidades de tipo Usuario
+     */
     @Query(value = "SELECT * FROM usuarios WHERE id_usuario = :id", nativeQuery = true)
     List<Usuario> encontrarUsuarioById(@Param("id") Long id);
 
-//    @Query(value = "SELECT cambio_passwd FROM usuarios WHERE id_usuario = :id", nativeQuery = true)
-//    Boolean verificarCambioPasswd(@Param("id") Long id);
-
+    /**
+     * Modifica el password o contraseña del usuario
+     * @param passwd - Password o contraseña nueva
+     * @param id - Id del usuario al que hay que cambiar la constraseña o password
+     * @return - >0 true, <0 false
+     */
     @Modifying
     @Transactional
     @Query(value = "UPDATE usuarios SET passwd = ? WHERE id_usuario = ?", nativeQuery = true)
     Integer cambiarPasswd( String passwd, Long id);
-//
-//    @Query(value = "SELECT foto_url FROM usuarios WHERE id_usuario = :id", nativeQuery = true)
-//    String getFotoUrl(@Param("id") Long id);
-//
-//    @Modifying
-//    @Transactional
-//    @Query(value = "UPDATE usuarios SET foto_url = ? WHERE id_usuario = ?", nativeQuery = true)
-//    Integer setFotoUrl( String foto_url, Long id);
+
 }
 

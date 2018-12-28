@@ -1,21 +1,21 @@
 package com.saguadopro.conversorms.rest;
 
-import com.saguadopro.conversorms.entities.Perfil;
-import com.saguadopro.conversorms.entities.Usuario;
+import com.saguadopro.conversorms.entities.*;
 
-import com.saguadopro.conversorms.rest.dto.PerfilDTO;
-import com.saguadopro.conversorms.rest.dto.UsuarioDTO;
+import com.saguadopro.conversorms.rest.dto.*;
 import com.saguadopro.conversorms.services.impl.DtoToEntityImpl;
 import com.saguadopro.conversorms.services.impl.EntityToDtoImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Clase Controladora de los endpoints del microservicio encagrgado de las conversiones de Entity a DTO y viceversa
+ * @see {@link com.saguadopro.conversorms.services.DtoToEntityService}
+ * @see {@link com.saguadopro.conversorms.services.EntityToDtoService}
+ */
 @RestController
 @RequestMapping(value = "/conversor")
-public class RestConversor<T> {
-    private Logger logger = LoggerFactory.getLogger(RestConversor.class);
+public class RestConversor {
 
     @Autowired
     DtoToEntityImpl dtoToEntity;
@@ -23,7 +23,7 @@ public class RestConversor<T> {
     @Autowired
     EntityToDtoImpl entityToDto;
 
-    //DTO to ENTITY
+    //DTO TO ENTITY-----------------------------------------------------------------------------------------------------
     @RequestMapping(value = "/usuario/dto-entity", method = RequestMethod.POST)
     public Usuario usuarioDtoToEntity(@RequestBody UsuarioDTO usuarioDTO){
         return dtoToEntity.usuarioDtoToEntity(usuarioDTO);
@@ -35,11 +35,35 @@ public class RestConversor<T> {
         return dtoToEntity.perfilDtoToPerfil(perfilDTO);
     }
 
-    //ENTITY to DTO
+    @RequestMapping(value = "/apartamento/dto-entity",method = RequestMethod.POST)
+    public Apartamento apartamentoDtoToEntity(@RequestBody ApartamentoDTO apartamentoDTO) {
+        return dtoToEntity.apartamentoDtoToEntity(apartamentoDTO);
+    }
+
+    @RequestMapping(value = "/reserva/dto-entity",method = RequestMethod.POST)
+    public Reserva reservaDtoToEntity(@RequestBody ReservaDTO reservaDTO){
+        return dtoToEntity.reservaDtoToEntity(reservaDTO);
+    }
+
+    @RequestMapping(value = "/capacidad/dto-entity",method = RequestMethod.POST)
+    public Capacidad capacidadDtoToEntity(@RequestBody CapacidadDTO capacidadDTO){
+        return dtoToEntity.capacidadDtoToEntity(capacidadDTO);
+    }
+
+    @RequestMapping(value = "/propietario/dto-entity",method = RequestMethod.POST)
+    public Propietario propietarioDtoToEntity(@RequestBody PropietarioDTO propietarioDTO) {
+        return dtoToEntity.propietarioDtoToEntity(propietarioDTO);
+    }
+
+    @RequestMapping(value = "/huesped/dto-entity",method = RequestMethod.POST)
+    public Huesped huespedDtoToEntity(@RequestBody HuespedDTO huespedDTO) {
+        return dtoToEntity.huespedDtoToEntity(huespedDTO);
+    }
+
+    //ENTITY TO DTO-----------------------------------------------------------------------------------------------------
     @RequestMapping(value = "/usuario/entity-dto", method = RequestMethod.POST)
     public UsuarioDTO usuarioEntityToDto(@RequestBody Usuario usuario){
         return entityToDto.usuarioEntityToDto(usuario);
-
     }
 
     @RequestMapping(value = "/perfil/entity-dto",method = RequestMethod.POST)
@@ -47,5 +71,29 @@ public class RestConversor<T> {
         return entityToDto.perfilEntityToDto(perfil);
     }
 
+    @RequestMapping(value = "/apartamento/entity-dto",method = RequestMethod.POST)
+    public ApartamentoDTO apartamentoEntityToDto(@RequestBody Apartamento apartamento){
+        return entityToDto.apartamentoEntityToDto(apartamento);
+    }
+
+    @RequestMapping(value = "/reserva/entity-dto",method = RequestMethod.POST)
+    public ReservaDTO reservaEntityToDto(@RequestBody Reserva reserva) {
+        return entityToDto.reservaEntityToDto(reserva);
+    }
+
+    @RequestMapping(value = "/capacidad/entity-dto",method = RequestMethod.POST)
+    public CapacidadDTO capacidadEntityToDto(@RequestBody Capacidad capacidad) {
+        return entityToDto.capacidadEntityToDto(capacidad);
+    }
+
+    @RequestMapping(value = "/propietario/entity-dto",method = RequestMethod.POST)
+    public PropietarioDTO propietarioEntityToDton(@RequestBody Propietario propietario) {
+        return entityToDto.propietarioEntityToDton(propietario);
+    }
+
+    @RequestMapping(value = "/huesped/entity-dto",method = RequestMethod.POST)
+    public HuespedDTO huespedEntityToDto(@RequestBody Huesped huesped) {
+        return entityToDto.huespedEntityToDto(huesped);
+    }
 
 }

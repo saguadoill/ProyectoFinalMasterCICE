@@ -1,12 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Busqueda de apartamentos</title>
 </head>
-<body>
+<body onload="gestionNuevoApartamento()">
+<!--Contenido-->
+<div id="titulo">
+    <h4>Buscar reserva</h4>
+</div>
+<form action="/reservas/buscar" method="post">
+    <div class="row">
+        <div class="col-lg-10">
+            <input id="entrada" name="idReserva" class="form-control mr-sm-2" type="text" placeholder="ID Reserva" aria-label="Search">
+        </div>
+        <div class="col-lg-2">
+            <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Buscar</button>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <hr/>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="resultados" class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cliente</th>
+                <th>Fecha de entrada</th>
+                <th>Fecha de salida</th>
+                <th>PAX</th>
+                <th>Apartamento</th>
+                <th>Precio Total</th>
+                <th>Parking</th>
+                <th>Asignada</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tb">
+            <tr th:if="${#lists.isEmpty(lista)}">
+                <td colspan="8" class="text-center">Ninguna reserva encontrado</td>
+            </tr>
+            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalAsignacionApartamentos(this,'buscar')">
+                <td><span th:text="${reserva.idReserva}"> </span></td>
+                <td><span th:text="${reserva.cliente}"></span></td>
+                <td>
+                    <span th:if="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaEntrada}" style="color: green"></span>
+                    </span>
+                    <span th:unless="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaEntrada}" style="color: red"></span>
+                    </span>
+                </td>
+                <td>
+                    <span th:if="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaSalida}" style="color: green"></span>
+                    </span>
+                    <span th:unless="${reserva.estaAsignada}">
+                        <span th:text="${reserva.fechaSalida}" style="color: red"></span>
+                    </span>
+                </td>
+                <td><span th:text="${reserva.capacidad}">  </span></td>
+                <td><span th:text="${reserva.idApartamento}">  </span></td>
+                <td><span th:text="${reserva.precioTotal}"> </span></td>
+                <td th:title="${reserva.tieneParking}">
+                    <span th:if="${reserva.tieneParking}"><i class="fas fa-taxi" style="color: green"></i></span>
+                    <span th:unless= "${reserva.tieneParking}"><i class="fas fa-taxi" style="color: red"></i></span>
+                </td>
+                <td th:title="${reserva.estaAsignada}">
+                    <span th:if="${reserva.estaAsignada}"><i class="fas fa-bed" style="color: green"></i></span>
+                    <span th:unless= "${reserva.estaAsignada}"><i class="fas fa-bed" style="color: red"></i></span>
+                </td>
+            </tr>
+            </tbody>
 
-<!--TODO: hacer web buscar reservas-->
-
+        </table>
+    </div>
+</div>
+<!--Modal para modificacion usuario-->
+<div th:include="/pages/reservas/asignacion.html :: panel_asignacion"></div>
 </body>
 </html>

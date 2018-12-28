@@ -5,7 +5,7 @@ function generarCampos() {
     var nombre = document.getElementById("nombre");
     var apellidos = document.getElementById("apellidos");
 
-    console.log(nombre.value+" "+apellidos.value);
+    console.log(nombre.value + " " + apellidos.value);
 
     $.ajax({
         url: '/usuarios/campos',
@@ -13,7 +13,7 @@ function generarCampos() {
         type: 'GET',
         // contentType: 'application/json; charset=utf-8',
         success: function (data, textStatus, xhr) {
-            console.log("Respuesta del script: "+data);
+            console.log("Respuesta del script: " + data);
             var username = document.getElementById('username');
             var passwd = document.getElementById('passwd');
             username.value = data[0];
@@ -91,15 +91,15 @@ function cargarModalListaUsuarios(fila, origen) {
     var td_perfil = fila.children[3].innerText;
     var td_nombre = fila.children[4].innerText;
     var td_apellidos = fila.children[5].innerText;
-    var perfiles =  document.getElementById("selector_perfiles");
+    var perfiles = document.getElementById("selector_perfiles");
 
     for (var i = 0; i < perfiles.options.length; i++) {
         console.log(perfiles.options[i].text);
-        if (perfiles.options[i].text === td_perfil){
-                perfiles.selectedIndex = i;
-                break;
-            }
+        if (perfiles.options[i].text === td_perfil) {
+            perfiles.selectedIndex = i;
+            break;
         }
+    }
 
     var usuario = {
         idUsuario: td_idUsuario,
@@ -214,11 +214,9 @@ function cargarModalListaApartamentos(fila, origen) {
  * @param fila - la fila seleccionada
  */
 function cargarModalAsignacionApartamentos(fila, origen) {
-    var td_idApartamento = fila.children[5].innerText;
     var td_idReserva = fila.children[0].innerText;
-
-    console.log("ID Apartamento: "+td_idApartamento);
-    console.log("ID Reserva: "+td_idReserva);
+    var td_huesped = fila.children[8].getAttribute("title");
+    var td_idApartamento = fila.children[5].innerText;
 
     $('#myModal').modal('show');
     $('#idReserva').val(td_idReserva);
@@ -228,13 +226,26 @@ function cargarModalAsignacionApartamentos(fila, origen) {
         url: '/apartamentos/buscar/' + td_idApartamento,
         type: 'GET',
         success: function (data, textStatus, xhr) {
-            console.log(data.idApartamento)
+            // console.log(data)
             $('#idselect').html(data.idApartamento);
             $('#capacidadselect').html(data.capacidad);
             $('#direccionselect').html(data.direccion);
             $('#pisoselect').html(data.piso);
             $('#puertaselect').html(data.puerta);
             $('input[name=apartamentoSeleccionado]:checked').val(data.idApartamento);
+            if (data.huesped  !== null) {
+                $('#nombre').val(data.huesped.nombre);
+                $('#apellidos').val(data.huesped.apellidos);
+                $('#telefono').val(data.huesped.telefono);
+                $('#email').val(data.huesped.email);
+                $('#dni').val(data.huesped.dni);
+            }else {
+                $('#nombre').val("");
+                $('#apellidos').val("");
+                $('#telefono').val("");
+                $('#email').val("");
+                $('#dni').val("");
+            }
 
         },
         error: function (data, textStatus, xhr) {
@@ -242,7 +253,16 @@ function cargarModalAsignacionApartamentos(fila, origen) {
             console.log(textStatus);
             console.log(xhr);
         }
-    })
+    });
+
+}
+
+function anularCamposHuesped() {
+    $('#nombre').val(" ");
+    $('#apellidos').val(" ");
+    $('#telefono').val(" ");
+    $('#email').val(" ");
+    $('#dni').val(" ");
 }
 
 /**

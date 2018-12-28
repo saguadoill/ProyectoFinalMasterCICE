@@ -42,13 +42,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         //Las siguientes paginas no requieren login.
-        http.authorizeRequests().antMatchers("/login","/logout","/prueba").permitAll();
+        http.authorizeRequests().antMatchers("/login","/logout","/prueba","/403page").permitAll();
 
         // la web userInfoPage requiere role de admin y usuario. Si no se loga, se redireccionara a /login
-        http.authorizeRequests().antMatchers("/home","/*","/index","/crearUsuario").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_CLEAN')");
+        http.authorizeRequests().antMatchers("/home","/*","/crearUsuario").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_CLEAN')");
+//
+//        //Paginas accesibles para el usuario con perfil de Administrador
+//        http.authorizeRequests().antMatchers("/*","/apartamentos*").access("hasAnyRole('ROLE_ADMIN')");
+//
+//        //Paginas accesibles para el usuario con perfil de Usuario
+//        http.authorizeRequests().antMatchers("/home","/apartamentos/*","/reservas/*","/parkins/*","/servicios/*").access("hasAnyRole('ROLE_USER')");
+//
+//        //Paginas accesibles para el usuario con perfil de Administrador
+//        http.authorizeRequests().antMatchers("/home","/limpieza").access("hasAnyRole('ROLE_CLEAN')");
 
-        //Paginas accesibles para el usuario con perfil de Administrador
-        http.authorizeRequests().antMatchers("/*").access("hasAnyRole('ROLE_ADMIN')");
 
         // pagina de "acceso denengado" para los usuarios que quieren acceder a páginas a las que no tienen acceso
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");

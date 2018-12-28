@@ -20,8 +20,13 @@ public class RestReservas {
     }
 
     @RequestMapping(value = "/reservas/{idReserva}", method = RequestMethod.GET)
-    public ReservaDTO buscarReserva(@PathVariable(value = "idReserva") String idReserva){
+    public  List<ReservaDTO> buscarReserva(@PathVariable(value = "idReserva") String idReserva){
         return reservas.buscarReserva(idReserva);
+    }
+
+    @RequestMapping(value = "/reservas/{idReserva}", method = RequestMethod.DELETE)
+    public Boolean eliminarReserva(@PathVariable(value = "idReserva") String idReserva){
+        return reservas.eliminarReserva(idReserva);
     }
 
     @RequestMapping(value = "/reservas", method = RequestMethod.PUT)
