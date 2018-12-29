@@ -11,12 +11,18 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Repositorio que conecta con la Base de datos de los Apartamentos
+ */
 @Repository
 public interface ApartamentosRepo extends JpaRepository<Apartamento,Long> {
 
+    /**
+     * Metodo que busca apartamentos segun el Id
+     * @param idApartamento - Id del apartamento
+     * @return Lista de Entidades de tipo Apartamento
+     */
     @Query(value = "SELECT * FROM apartamentos WHERE id_apartamento = :id", nativeQuery = true)
     List<Apartamento> encontrarApartamentosPorId(@Param("id") Long idApartamento);
 
 }
-
-//    SELECT APARTAMENTOS.*, NOMBRE, APELLIDOS, EMAIL, TELEFONO FROM APARTAMENTOS JOIN PROPIETARIOS WHERE APARTAMENTOS.ID_PROPIETARIO = PROPIETARIOS.ID_PROPIETARIO;

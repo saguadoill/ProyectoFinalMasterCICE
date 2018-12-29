@@ -39,7 +39,7 @@ public class Apartamento {
     private String puerta;
 
     /**
-     * Foto del inmueble que lo identifique si es necesario.
+     * Url o direccion de la Foto del inmueble que lo identifique si es necesario.
      */
     private String foto_url;
 

@@ -3,14 +3,16 @@ package com.saguadopro.gestionapartamentos;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-//@EnableEurekaClient
+@EnableSwagger2
+@EnableEurekaClient
 @EnableFeignClients
-public class GestionApartamentosApplication {
+public class ApartamentosMicroservice {
 
     public static void main(String[] args) {
-        SpringApplication.run(GestionApartamentosApplication.class, args);
+        SpringApplication.run(ApartamentosMicroservice.class, args);
     }
 }

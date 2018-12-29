@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class GestionApartamentosRest {
+public class RestApartamentos {
 
     @Autowired
     ApartamentosService apartamentosService;

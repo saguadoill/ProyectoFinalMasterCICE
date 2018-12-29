@@ -15,10 +15,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableFeignClients
 @EnableEurekaClient
 @EnableSwagger2
-public class ConversorMsApplication {
+public class ConversorMicroservice {
 
     public static void main(String[] args) {
-        SpringApplication.run(ConversorMsApplication.class, args);
+        SpringApplication.run(ConversorMicroservice.class, args);
     }
 
 }

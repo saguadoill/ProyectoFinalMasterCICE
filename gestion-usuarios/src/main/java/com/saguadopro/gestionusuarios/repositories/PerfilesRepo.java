@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * Respoitorio de Perfiles/Roles de usuario
+ * Respoitorioque conecta con la Base de Datos de Perfiles/Roles de usuario
  */
 @Repository
 public interface PerfilesRepo extends JpaRepository<Perfil,Integer> {

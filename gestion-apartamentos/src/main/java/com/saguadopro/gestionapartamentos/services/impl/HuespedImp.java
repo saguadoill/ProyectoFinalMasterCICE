@@ -4,9 +4,13 @@ import com.saguadopro.gestionapartamentos.rest.dto.HuespedDTO;
 
 import java.util.List;
 
+/**
+ * Interface para la gestion de Huespedes
+ * @see {@link com.saguadopro.gestionapartamentos.services.HuespedService}
+ */
 public interface HuespedImp {
 
-    Boolean addHuesped(HuespedDTO huespedDTO);
+    Boolean crearHuesped(HuespedDTO huespedDTO);
 
     Boolean eliminarHuesped(Long idHuesped);
 

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Repositorio de Usuarios
+ * Repositorio que conecta con la Base de Datos de Usuarios
  */
 @Repository
 public interface UsuariosRepo extends JpaRepository<Usuario,Long> {

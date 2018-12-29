@@ -5,6 +5,10 @@ import com.saguadopro.gestionapartamentos.rest.dto.ApartamentoDTO;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Interface para la gestion de Apartamentos
+ * @see {@link com.saguadopro.gestionapartamentos.services.ApartamentosService}
+ */
 public interface ApartamentosImp {
 
     Boolean crearApartamento(ApartamentoDTO apartamentoDTO);

@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Repositorio Feign para la gestion de las imagenes o fotografias de los apartamentos
+ * @see "FotosMicroservice"
+ */
 @Repository
 @FeignClient("fotos-ms")
 public interface FotosFeign {

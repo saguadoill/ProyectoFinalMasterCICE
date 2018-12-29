@@ -13,10 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableEurekaClient
-public class FotosMsApplication {
+public class FotosMicroservice {
 
     public static void main(String[] args) {
-        SpringApplication.run(FotosMsApplication.class, args);
+        SpringApplication.run(FotosMicroservice.class, args);
     }
 
 }
