@@ -60,18 +60,25 @@ public class ApartamentosService implements ApartamentosImp {
      */
     @Override
     public Boolean eliminarApartamento(Long idApartamento) {
-        Apartamento apartamentoParaEliminar = apartamentosRepo.findById(idApartamento).get();
+        Apartamento apartamentoParaEliminar =  new Apartamento();
         try {
-            apartamentosRepo.delete(apartamentoParaEliminar);
-            return true;
+            if (apartamentosRepo.findById(idApartamento).isPresent()){
+                apartamentoParaEliminar = apartamentosRepo.findById(idApartamento).get();
+                apartamentosRepo.delete(apartamentoParaEliminar);
+                return true;
+            }else {
+                logger.error("El apartamento a eliminar no existe en la BBDD");
+                return false;
+            }
+
         } catch (Exception e) {
             logger.error("Apartamento no se ha podido eliminar:" + e.getMessage());
+            return false;
         }
-        return false;
     }
 
     /**
-     * Metodo para modificar los datos de un Apartamento den la BBDD
+     * Metodo para modificar los datos de un Apartamento en la BBDD
      * @param apartamentoDTOModificado - Dto de tipo Apartamento para modificar
      * @return True; si se ha modificado de forma correcta. False; si no se ha podido modificar
      */
@@ -79,7 +86,6 @@ public class ApartamentosService implements ApartamentosImp {
     public Boolean modificarApartamento(ApartamentoDTO apartamentoDTOModificado) {
         try {
             Optional<Apartamento> apartamentoOriginal = apartamentosRepo.findById(apartamentoDTOModificado.getIdApartamento());
-            System.out.println("Apartamneto Original: "+apartamentoOriginal.toString());
             if (apartamentoOriginal.isPresent()) {
                 if (!apartamentoOriginal.get().getCapacidad().getIdCapacidad().equals(apartamentoDTOModificado.getCapacidad().getIdCapacidad())) {
                     apartamentoOriginal.get().setCapacidad(conversorFeign.capacidadDtoToEntity(apartamentoDTOModificado.getCapacidad()));

@@ -30,12 +30,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--<exclusions>-->
-            <!--<exclusion>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-logging</artifactId>-->
-            <!--</exclusion>-->
-            <!--</exclusions>-->
+            <exclusions>
+            <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+            </exclusions>
         </dependency>
         <!--JPA-->
         <dependency>
@@ -53,11 +53,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!-- Log4j -->
-        <!--<dependency>-->
-        <!--<groupId>log4j</groupId>-->
-        <!--<artifactId>log4j</artifactId>-->
-        <!--<version>1.2.17</version>-->
-        <!--</dependency>-->
+        <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+        </dependency>
         <!--H2 DATABASE-->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -83,11 +83,11 @@
         </dependency>
 
         <!-- Java Image Scaling-->
-        <dependency>
-            <groupId>com.mortennobel</groupId>
-            <artifactId>java-image-scaling</artifactId>
-            <version>0.8.6</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.mortennobel</groupId>-->
+            <!--<artifactId>java-image-scaling</artifactId>-->
+            <!--<version>0.8.6</version>-->
+        <!--</dependency>-->
         <!-- JAXB API  -->
         <dependency>
             <groupId>javax.xml.bind</groupId>

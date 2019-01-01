@@ -7,9 +7,9 @@ import com.saguadopro.gestioreservas.rest.dto.ReservaDTO;
 import com.saguadopro.gestioreservas.rest.dto.booking.com.Reservation;
 import com.saguadopro.gestioreservas.rest.dto.booking.com.Reservations;
 import com.saguadopro.gestioreservas.service.impl.ReservasImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -19,10 +19,14 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
+/**
+ * Servicio encargado de la gestion de las reservas
+ */
 @Service
 public class ReservasService  implements ReservasImpl {
+
+    private final static Logger logger = Logger.getLogger(ReservasService.class);
 
     @Autowired
     ReservasRepo reservasRepo;
@@ -30,58 +34,90 @@ public class ReservasService  implements ReservasImpl {
     @Autowired
     ConversorFeign conversorFeign;
 
+    /**
+     * Metodo que devuelve una lista completa de todoas las reservas de la BBDD
+     * @return Lista de Dto tipo Reserva
+     */
     @Override
     public List<ReservaDTO> listaReservas() {
         List<ReservaDTO> listaReservasDto = new ArrayList<>();
-        for (Reserva reserva: reservasRepo.findAll()) {
-            listaReservasDto.add(conversorFeign.reservaEntityToDto(reserva));
+        try {
+            for (Reserva reserva: reservasRepo.findAll()) {
+                listaReservasDto.add(conversorFeign.reservaEntityToDto(reserva));
+            }
+        }catch (Exception e){
+            logger.error("No se ha podido obtener la lista de reservas: "+e.getMessage());
         }
         return listaReservasDto;
     }
 
+    /**
+     * Metodo que elimina una Reserva de la BBDD
+     * @param idReserva - Id o numero de identificacion de la reserva a eliminar
+     * @return True; si se ha eliminado de forma correcta. False; si no se ha podido eliminar
+     */
     @Override
     public Boolean eliminarReserva(String idReserva) {
-        reservasRepo.delete(conversorFeign.reservaDtoToEntity(buscarReserva(idReserva).get(0)));
-        return null;
+        Reserva reservaParaEliminar = new Reserva();
+        try {
+            if (buscarReserva(idReserva).get(0) != null){
+                reservaParaEliminar = conversorFeign.reservaDtoToEntity(buscarReserva(idReserva).get(0));
+                reservasRepo.delete(reservaParaEliminar);
+                return true;
+            }else {
+                logger.error("La reserva  a eliminar no existe en la BBDD");
+                return false;
+            }
+        }catch (Exception e){
+            logger.error("No s eha podido eliminar la reserva de la BBDD: "+e.getMessage());
+            return false;
+        }
     }
 
+    /**
+     * Metodo para buscar reservas por id
+     * @param idReserva - Id de la reserva a buscar
+     * @return - Lista de Dto tipo Reserva
+     */
     @Override
     public List<ReservaDTO> buscarReserva(String idReserva) {
         List<ReservaDTO> reservasDtoEncontradas = new ArrayList<>();
-        List<Reserva> reservasEncontradas = new ArrayList<>();
+        Reserva reservaBuscada;
         try {
-            Long id = Long.parseLong(idReserva);
-            reservasEncontradas.add(reservasRepo.findById(id).get());
-            for (Reserva reserva : reservasEncontradas) {
-                reservasDtoEncontradas.add(conversorFeign.reservaEntityToDto(reserva));
+            if (reservasRepo.findById(Long.parseLong(idReserva)).isPresent()){
+                reservaBuscada = reservasRepo.findById(Long.parseLong(idReserva)).get();
+                reservasDtoEncontradas.add(conversorFeign.reservaEntityToDto(reservaBuscada));
+                return reservasDtoEncontradas;
+            }else{
+                logger.error("La reserva a Buscar no existe en la BBDD");
+                return null;
             }
-            return reservasDtoEncontradas;
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
+            logger.error("No se ha podido buscar la reserva en la BBDD: "+e.getMessage());
             return null;
         }
     }
 
+    /**
+     * Metodo para modificar los datos de una Reserva en la BBDD
+     * @param reservaDTO - Dto de tipo Reserva para modificar
+     * @return True; si se ha modificado de forma correcta. False; si no se ha podido modificar
+     */
     public Boolean modificarReserva(ReservaDTO reservaDTO){
         try{
             Reserva reservaModificada = conversorFeign.reservaDtoToEntity(reservaDTO);
-//            reservaOriginal.setEstaAsignada(reservaDTO.getEstaAsignada());
-//            reservaOriginal.setTieneParking(reservaDTO.getTieneParking());
-//            reservaOriginal.setNumero_personas(reservaDTO.getCapacidad());
-//            reservaOriginal.setCliente(reservaDTO.getCliente());
-//            reservaOriginal.setFechaEntrada(reservaDTO.getFechaEntrada());
-//            reservaOriginal.setFechaSalida(reservaDTO.getFechaSalida());
-//            reservaOriginal.setIdApartamento(reservaDTO.getIdApartamento());
             reservasRepo.save(reservaModificada);
             return true;
         }catch (Exception e){
-            //log4j e.printStackTrace();
-            e.printStackTrace();
+            logger.error("No se ha podido modificar la reserva en la BBDD: "+e.getMessage());
             return false;
         }
-
-
     }
 
+    /**
+     * Metodo para parsear una reserva de Booking que llega como response en XML a una Resrva de nuestra BBDD
+     * @param xmlFile - ResponseBody del xml a parsear
+     */
     public void getBookinReservas(String xmlFile){
         Reservations reservations;
         try {
@@ -102,7 +138,7 @@ public class ReservasService  implements ReservasImpl {
                 reservasRepo.save(reserva);
             }
         } catch (JAXBException e) {
-            e.printStackTrace();
+            logger.warn("Las reserva procedentes de Booking.com no se han podido parsear: "+e.getErrorCode());
         }
     }
 }

@@ -5,9 +5,12 @@ import com.saguadopro.gestioreservas.service.impl.ReservasImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
+/**
+ * Clase Controladora de los endpoints de la gestion de reservas
+ * @see {@link com.saguadopro.gestioreservas.service.ReservasService}
+ */
 @RestController
 public class RestReservas {
 

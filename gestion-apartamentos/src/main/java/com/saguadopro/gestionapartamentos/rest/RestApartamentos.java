@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Clase Controladora los endpoints de la gestion de los apartamentos
+ * @see {@link ApartamentosService}
+ * @see {@link CapacidadService}
+ * @see {@link HuespedService}
+ * @see {@link PropietariosService}
+ */
 @RestController
 public class RestApartamentos {
 
