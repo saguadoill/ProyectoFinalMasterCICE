@@ -70,7 +70,7 @@ public class HuespedService implements HuespedImp {
                 huespedDTO = conversorFeign.huespedEntityToDto(huespedRepo.findById(idHuesped).get());
             }
         }catch (Exception e){
-
+            logger.error("No se ha podido buscar al huesped en la BBDD: "+e.getMessage());
         }
         return huespedDTO;
     }

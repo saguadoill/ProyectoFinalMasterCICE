@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Reservas activas</title>
 </head>
-<body onload="gestionNuevoApartamento()">
+<body>
 <!--Cuerpo-->
 <div id="titulo" class="text-center">
     <h4>Lista de Reservas activas</h4>
+    <small>*Las fechas en rojo indican un error de asignacion</small>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -30,7 +31,8 @@
             <tr th:if="${#lists.isEmpty(lista)}">
                 <td colspan="8" class="text-center">Ninguna reserva encontrado</td>
             </tr>
-            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalAsignacionApartamentos(this,'activas')">
+            <tr th:each="reserva : ${lista}" data-toggle="modal" data-target="#myModal"
+                onclick="cargarModalAsignacionApartamentos(this,'activas')">
                 <td><span th:text="${reserva.idReserva}"> </span></td>
                 <td><span th:text="${reserva.cliente}"></span></td>
                 <td>
@@ -54,15 +56,14 @@
                 <td><span th:text="${reserva.precioTotal}"> </span></td>
                 <td th:title="${reserva.tieneParking}">
                     <span th:if="${reserva.tieneParking}"><i class="fas fa-taxi" style="color: green"></i></span>
-                    <span th:unless= "${reserva.tieneParking}"><i class="fas fa-taxi" style="color: red"></i></span>
+                    <span th:unless="${reserva.tieneParking}"><i class="fas fa-taxi" style="color: red"></i></span>
                 </td>
                 <td th:title="${reserva.estaAsignada}">
                     <span th:if="${reserva.estaAsignada}"><i class="fas fa-bed" style="color: green"></i></span>
-                    <span th:unless= "${reserva.estaAsignada}"><i class="fas fa-bed" style="color: red"></i></span>
+                    <span th:unless="${reserva.estaAsignada}"><i class="fas fa-bed" style="color: red"></i></span>
                 </td>
             </tr>
             </tbody>
-
         </table>
     </div>
 </div>

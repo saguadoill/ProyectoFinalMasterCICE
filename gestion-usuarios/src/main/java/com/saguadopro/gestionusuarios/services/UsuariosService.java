@@ -103,7 +103,7 @@ public class UsuariosService implements UsuariosImp {
                     usuarioOriginal.get().setPerfil(conversorFeign.perfilEntityToDto(usuarioDtoModificado.getPerfil()));
                 }
                 if (!usuarioDtoModificado.getFoto().equals("")) {
-                    usuarioOriginal.get().setFoto_url(fotosFeign.guardarFoto(usuarioOriginal.get().getUsername(),fotosFeign.decodificarFoto(usuarioDtoModificado.getFoto()) ));
+                    usuarioOriginal.get().setFoto_url(fotosFeign.guardarFoto(usuarioOriginal.get().getUsername(),fotosFeign.decodificarFoto(usuarioDtoModificado.getFoto()),"usuario"));
                 }
                 usuariosRepo.save(usuarioOriginal.get());
                 return true;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class RestFoto {
 
     @Autowired
-    FotoImpl fotos;
+    private FotoImpl fotos;
 
     @RequestMapping(value = "/fotos/codificar", method = RequestMethod.POST)
     public String codificarFoto(@RequestBody String foto_url) {

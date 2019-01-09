@@ -3,17 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear nuevo apartamento</title>
-    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/gestapart.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/style.css">-->
-    <!--<script src="../../../static/js/jquery-3.3.1.js"></script>-->
-    <!--<script src="../../../static/js/popper.min.js"></script>-->
-    <!--<script src="../../../static/js/gestapart.js"></script>-->
-    <!--<script src="../../../static/js/bootstrap.min.js"></script>-->
-
-
 </head>
-<body onload="gestionNuevoApartamento()">
+<body onload="cargaDatosPropietario()">
 <!--Contenido-->
 <form role="form" name="formulario_nuevo_apartamento" class="text-center border border-light p-5" method="POST"
       action="/apartamentos/nuevo"
@@ -103,7 +94,7 @@
     </div>
     <p class="h6 mb-4">Propietario existente</p>
     <small class="form-text text-muted mb-4">
-        <!--Mensjae si se ve que no queda claro el funcionameinto, en caso de estar elegido otra cosa que no sea Añadir nuevo, se incluira ese propietario-->
+        En caso de querer añadir un Nuevo propietario. Elija "Añadir nuevo" y rellene los datos del formulario
     </small>
     <div class="form-row mb-4">
         <div class="col-2"></div>

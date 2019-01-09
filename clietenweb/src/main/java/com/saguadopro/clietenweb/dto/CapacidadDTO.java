@@ -1,15 +1,21 @@
 package com.saguadopro.clietenweb.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+/**
+ * POJO que defina la capacidad de personas que pueden usar un apartamento. Ejm: ..2PAX...4PAX...
+ */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CapacidadDTO {
 
+    /**
+     * Id o numero identificativo de la Capacidad
+     */
     private Integer idCapacidad;
 
+    /**
+     * Maximo numero de personas que admine el apartamento.
+     */
     private String maxPersonas;
+
 }

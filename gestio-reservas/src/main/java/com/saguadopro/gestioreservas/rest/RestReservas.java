@@ -15,7 +15,7 @@ import java.util.List;
 public class RestReservas {
 
     @Autowired
-    ReservasImpl reservas;
+    private ReservasImpl reservas;
 
     @RequestMapping(value = "/reservas",method = RequestMethod.GET)
     public List<ReservaDTO> listaReservas(){

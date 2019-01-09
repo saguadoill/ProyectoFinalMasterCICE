@@ -25,16 +25,16 @@ import java.util.List;
 public class RestApartamentos {
 
     @Autowired
-    ApartamentosService apartamentosService;
+    private ApartamentosService apartamentosService;
 
     @Autowired
-    PropietariosService propietariosService;
+    private PropietariosService propietariosService;
 
     @Autowired
-    CapacidadService tipoModelosService;
+    private CapacidadService tipoModelosService;
 
     @Autowired
-    HuespedService huespedService;
+    private HuespedService huespedService;
 
 
     @RequestMapping(value = "/apartamentos",method = RequestMethod.POST)

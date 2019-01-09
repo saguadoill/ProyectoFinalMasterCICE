@@ -3,17 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Asignacion de Reservas</title>
-    <!--<script src="../../../static/js/gestapart.js"></script>-->
-    <!--<script src="../../../static/js/jquery-3.3.1.js"></script>-->
-    <!--<script src="../../../static/js/popper.min.js"></script>-->
-    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/gestapart.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/style.css">-->
-    <!--<script src="../../../static/js/bootstrap.min.js"></script>-->
-    <!--<script src="../../../static/fonts/fontawesome.js"></script>-->
-    <!--<script src="../../../static/fonts/solid.js"></script>-->
-
-    <!--TODO: hacer un modal para asignar apartamento y parking por id o por capacidad en caso de los apartamentos. Los parkings ya veremos-->
 </head>
 <body>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -35,21 +24,25 @@
                         <div class="text-center border border-light p-2">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="por_id-tab" data-toggle="tab"
+                                    <a class="nav-link active" id="huesped-tab" data-toggle="tab"
+                                       href="#tab_huesped"
+                                       role="tab"
+                                       aria-controls="tab_huesped"
+                                       aria-selected="true">Huesped Principal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="por_id-tab" data-toggle="tab"
                                        href="#tab_apartamentos"
                                        role="tab"
                                        aria-controls="tab_apartamentos"
-                                       aria-selected="true">Apartamentos</a>
+                                       aria-selected="false">Apartamentos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="por_capacidad-tab" data-toggle="tab" href="#tab_huesped"
+                                    <a class="nav-link" id="propietario-tab" data-toggle="tab"
+                                       href="#tab_parking"
                                        role="tab"
-                                       aria-controls="tab_huesped" aria-selected="false">Huesped Principal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="propietario-tab" data-toggle="tab" href="#tab_parking"
-                                       role="tab"
-                                       aria-controls="tab_parking" aria-selected="false">Parking</a>
+                                       aria-controls="tab_parking"
+                                       aria-selected="false">Parking</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
@@ -61,7 +54,7 @@
                                     <input type="hidden" id="idHuesped" name="idHuesped">
                                 </p>
                                 <h6 class="text-center">Apartamento seleccionado</h6>
-                                <div class="tab-pane fade show active" id="tab_apartamentos" role="tabpanel"
+                                <div class="tab-pane fade" id="tab_apartamentos" role="tabpanel"
                                      aria-labelledby="tab_apartamentos">
                                     <div class="form-row mb-4">
                                         <table id="tabla_apart_select" class="table table-primary">
@@ -78,53 +71,52 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-
                                         </table>
                                     </div>
                                     <h6 class="text-center">Seleccionar otro Apartamento</h6>
-                                    <!--<div class="form-row mb-4">-->
-                                        <div id="table-wrapper">
-                                            <div id="table-scroll">
-                                                <table id="tabla_id_apartamentos" class="table table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style="width: 10%">Id</th>
-                                                        <th style="width: 10%">Capacidad</th>
-                                                        <th style="width: 40%">Direccion</th>
-                                                        <th style="width: 10%">Piso</th>
-                                                        <th style="width: 10%;">Puerta</th>
-                                                        <th style="width: 20%;">Asignar</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="tb_id_apartamentos">
-                                                    <tr th:if="${#lists.isEmpty(listaPorCapacidad)}">
-                                                        <td colspan="8" class="text-center">Ningun apartamento disponible</td>
-                                                    </tr>
-                                                    <tr th:each="apartamento : ${listaPorCapacidad}">
-                                                        <td style="width: 10%"><span
-                                                                th:text="${apartamento.idApartamento}"> </span></td>
-                                                        <td style="width: 10%"><span
-                                                                th:text="${apartamento.capacidad.maxPersonas}"> </span></td>
-                                                        <td style="width: 40%"><span
-                                                                th:text="${apartamento.direccion}">  </span></td>
-                                                        <td style="width: 20%"><span th:text="${apartamento.piso}">  </span>
-                                                        </td>
-                                                        <td style="width: 10%"><span th:text="${apartamento.puerta}">  </span>
-                                                        </td>
-                                                        <td style="width: 10%">
-                                                            <input th:value="${apartamento.idApartamento}" type="radio" class="form-check"
-                                                                   name="apartamentoSeleccionado">
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
+                                    <div id="table-wrapper">
+                                        <div id="table-scroll">
+                                            <table id="tabla_id_apartamentos" class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 10%">Id</th>
+                                                    <th style="width: 10%">Capacidad</th>
+                                                    <th style="width: 40%">Direccion</th>
+                                                    <th style="width: 10%">Piso</th>
+                                                    <th style="width: 10%;">Puerta</th>
+                                                    <th style="width: 20%;">Asignar</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tb_id_apartamentos">
+                                                <tr th:if="${#lists.isEmpty(listaPorCapacidad)}">
+                                                    <td colspan="8" class="text-center">Ningun apartamento disponible
+                                                    </td>
+                                                </tr>
+                                                <tr th:each="apartamento : ${listaPorCapacidad}">
+                                                    <td style="width: 10%"><span
+                                                            th:text="${apartamento.idApartamento}"> </span></td>
+                                                    <td style="width: 10%"><span
+                                                            th:text="${apartamento.capacidad.maxPersonas}"> </span></td>
+                                                    <td style="width: 40%"><span
+                                                            th:text="${apartamento.direccion}">  </span></td>
+                                                    <td style="width: 20%"><span th:text="${apartamento.piso}">  </span>
+                                                    </td>
+                                                    <td style="width: 10%"><span
+                                                            th:text="${apartamento.puerta}">  </span>
+                                                    </td>
+                                                    <td style="width: 10%">
+                                                        <input th:value="${apartamento.idApartamento}" type="radio"
+                                                               class="form-check"
+                                                               name="apartamentoSeleccionado">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    <!--</div>-->
+                                    </div>
                                 </div>
                                 <!--Panel Huesped Principal-->
-                                <div class="tab-pane fade" id="tab_huesped" role="tabpanel"
+                                <div class="tab-pane fade show active" id="tab_huesped" role="tabpanel"
                                      aria-labelledby="tab_huesped">
                                     <p></p>
                                     <div class="form-row mb-4">
@@ -177,22 +169,21 @@
                                 <div class="tab-pane fade" id="tab_parking" role="tabpanel"
                                      aria-labelledby="tab_parking">
                                     <p></p>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="col-4">
-                            <button class="btn btn-danger btn-rounded" type="submit" onclick="anularCamposHuesped()" formaction="/reservas/eliminar">
+                            <button class="btn btn-danger btn-rounded" type="submit" onclick="anularCamposHuesped()"
+                                    formaction="/reservas/eliminar">
                                 Eliminar
                             </button>
                         </div>
                         <div class="col-4">
                         </div>
                         <div class="col-4 text-right">
-                            <!--<button type="button" class="btn btn-secondary btn-rounded" type onclick="/modificarUsuario">Modificar</button>-->
-                            <input id="btn_crear" class="btn btn-info my-4 btn-block" type="submit" value="Asignar"/><
+                            <input id="btn_crear" class="btn btn-info my-4 btn-block" type="submit" value="Asignar"/>
                         </div>
                     </div>
                 </div>
@@ -202,5 +193,3 @@
 </div>
 </body>
 </html>
-
-<!--TODO: revisar jquery para rellenar el modal y volcar datos en las distintas pestañas-->

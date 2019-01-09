@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Lista de apartamentos no disponibles</title>
 </head>
-<body onload="gestionNuevoApartamento()">
+<body onload="cargaDatosPropietario()">
 <!--Cuerpo-->
 <div id="titulo" class="text-center">
     <h4>Lista completa de Apartamentos no disponibles</h4>
@@ -29,18 +29,23 @@
             <tr th:if="${#lists.isEmpty(lista)}">
                 <td colspan="8" class="text-center">Ningun apartamento encontrado</td>
             </tr>
-            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'nodisponibles')">
+            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal"
+                onclick="cargarModalListaApartamentos(this,'nodisponibles')">
                 <td><span th:text="${apartamento.idApartamento}"> </span></td>
-                <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
-                          th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
+                <td><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                         th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
                 <td><span th:text="${apartamento.direccion}">  </span></td>
-                <td th:title="${apartamento.capacidad.idCapacidad}"><span th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
+                <td th:title="${apartamento.capacidad.idCapacidad}"><span
+                        th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
                 <td><span th:text="${apartamento.piso}">  </span></td>
                 <td><span th:text="${apartamento.puerta}">  </span></td>
-                <td th:title="${apartamento.propietario.idPropietario}"><span th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
+                <td th:title="${apartamento.propietario.idPropietario}"><span
+                        th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
                 <td th:title="${apartamento.huesped == null} ? '': ${apartamento.huesped.idHuesped}">
-                    <span th:if="${apartamento.huesped != null}"><i class="fas fa fa-home" style="color: red"></i></span>
-                    <span th:if="${apartamento.huesped == null}"><i class="fas fa fa-home" style="color: green"></i></span>
+                    <span th:if="${apartamento.huesped != null}"><i class="fas fa fa-home"
+                                                                    style="color: red"></i></span>
+                    <span th:if="${apartamento.huesped == null}"><i class="fas fa fa-home"
+                                                                    style="color: green"></i></span>
                 </td>
             </tr>
             </tbody>

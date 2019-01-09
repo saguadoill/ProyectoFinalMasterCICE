@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public class RestConversor {
 
     @Autowired
-    DtoToEntityImpl dtoToEntity;
+    private DtoToEntityImpl dtoToEntity;
 
     @Autowired
-    EntityToDtoImpl entityToDto;
+    private EntityToDtoImpl entityToDto;
 
     //DTO TO ENTITY-----------------------------------------------------------------------------------------------------
     @RequestMapping(value = "/usuario/dto-entity", method = RequestMethod.POST)

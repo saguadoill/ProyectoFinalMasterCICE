@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Reservas pendientes</title>
 </head>
-<body onload="gestionNuevoApartamento()">
+<body>
 <!--Cuerpo-->
 <div id="titulo" class="text-center">
     <h4>Lista de Reservas pendientes</h4>
+    <small>*Las fechas en rojo indican un error de asignacion</small>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -67,7 +68,6 @@
         </table>
     </div>
 </div>
-
 <!--Modal para modificacion usuario-->
 <div th:include="/pages/reservas/asignacion.html :: panel_asignacion"></div>
 </body>

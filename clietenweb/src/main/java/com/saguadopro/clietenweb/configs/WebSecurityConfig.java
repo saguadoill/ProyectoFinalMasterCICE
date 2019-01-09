@@ -1,6 +1,7 @@
 package com.saguadopro.clietenweb.configs;
 
 import com.saguadopro.clietenweb.services.UserDetailServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,53 +12,63 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.sql.DataSource;
-
+/**
+ * Clase encargada de la configuración de la seguridad de la aplicación
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static Logger logger = Logger.getLogger(WebSecurityConfig.class);
+
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
-    @Autowired
-    private DataSource dataSource;
-
+    /**
+     * Método para encriptar el password del usuario
+     *
+     * @return - BCryptPasswordEncoder, password encriptado
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Método para buscar al usuario en la BBDD y setear el password
+     *
+     * @param auth - AuthenticationManagerBuilder
+     */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-
-        // Servicio para encontrar al usuario en la base de datos y setear el password
-        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
+        try {
+            auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+        } catch (Exception e) {
+            logger.fatal("No se ha podido recuperar el usuario de la BBDD: " + e.getMessage());
+        }
     }
 
-
+    /**
+     * Método para la configuración del acceso
+     *
+     * @param http HttpSecurity
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
 
-        //Las siguientes paginas no requieren login.
-        http.authorizeRequests().antMatchers("/login","/logout","/prueba","/403page").permitAll();
+        http.authorizeRequests().antMatchers("/login", "/logout", "/403page").permitAll();
 
-        // la web userInfoPage requiere role de admin y usuario. Si no se loga, se redireccionara a /login
-        http.authorizeRequests().antMatchers("/home","/*","/crearUsuario").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_CLEAN')");
-//
-//        //Paginas accesibles para el usuario con perfil de Administrador
-//        http.authorizeRequests().antMatchers("/*","/apartamentos*").access("hasAnyRole('ROLE_ADMIN')");
-//
-//        //Paginas accesibles para el usuario con perfil de Usuario
-//        http.authorizeRequests().antMatchers("/home","/apartamentos/*","/reservas/*","/parkins/*","/servicios/*").access("hasAnyRole('ROLE_USER')");
-//
-//        //Paginas accesibles para el usuario con perfil de Administrador
-//        http.authorizeRequests().antMatchers("/home","/limpieza").access("hasAnyRole('ROLE_CLEAN')");
+        http.authorizeRequests().antMatchers("/home", "/").access("hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_CLEAN')");
 
+        http.authorizeRequests().antMatchers("/apartamentos/*", "/reservas/*", "/parkins/*", "/servicios/*").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
 
-        // pagina de "acceso denengado" para los usuarios que quieren acceder a páginas a las que no tienen acceso
+        http.authorizeRequests().antMatchers("/limpieza/*").access("hasAnyRole('ROLE_CLEAN','ROLE_ADMIN')");
+
+        http.authorizeRequests().antMatchers("/*", "/usuarios/*").access("hasAnyRole('ROLE_ADMIN')");
+
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
         // Configuracion para el formulario de Login

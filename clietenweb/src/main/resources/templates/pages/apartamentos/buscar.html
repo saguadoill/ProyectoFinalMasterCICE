@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Busqueda de apartamentos</title>
 </head>
-<body onload="gestionNuevoApartamento()">
+<body onload="cargaDatosPropietario()">
 <!--Contenido-->
 <div id="titulo">
     <h4>Buscar apartamentos</h4>
@@ -12,7 +12,8 @@
 <form action="/apartamentos/buscar" method="post">
     <div class="row">
         <div class="col-lg-10">
-            <input id="entrada" name="idApartamento" class="form-control mr-sm-2" type="text" placeholder="ID Apartamento" aria-label="Search">
+            <input id="entrada" name="idApartamento" class="form-control mr-sm-2" type="text"
+                   placeholder="ID Apartamento" aria-label="Search">
         </div>
         <div class="col-lg-2">
             <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Buscar</button>
@@ -42,18 +43,23 @@
             <tr th:if="${#lists.isEmpty(lista)}">
                 <td colspan="8" class="text-center">Ningun apartamento encontrado</td>
             </tr>
-            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaApartamentos(this,'buscar')">
+            <tr th:each="apartamento : ${lista}" data-toggle="modal" data-target="#myModal"
+                onclick="cargarModalListaApartamentos(this,'buscar')">
                 <td><span th:text="${apartamento.idApartamento}"> </span></td>
-                <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
-                          th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
+                <td><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                         th:src="'data:image/png;base64,'+${apartamento.foto}"/></td>
                 <td><span th:text="${apartamento.direccion}">  </span></td>
-                <td th:title="${apartamento.capacidad.idCapacidad}"><span th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
+                <td th:title="${apartamento.capacidad.idCapacidad}"><span
+                        th:text="${apartamento.capacidad.maxPersonas}">  </span></td>
                 <td><span th:text="${apartamento.piso}">  </span></td>
                 <td><span th:text="${apartamento.puerta}">  </span></td>
-                <td th:title="${apartamento.propietario.idPropietario}"><span th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
+                <td th:title="${apartamento.propietario.idPropietario}"><span
+                        th:text="${apartamento.propietario.nombre+' '+apartamento.propietario.apellidos}"> </span></td>
                 <td th:title="${apartamento.huesped == null} ? '': ${apartamento.huesped.idHuesped}">
-                    <span th:if="${apartamento.huesped != null}"><i class="fas fa fa-home" style="color: red"></i></span>
-                    <span th:if="${apartamento.huesped == null}"><i class="fas fa fa-home" style="color: green"></i></span>
+                    <span th:if="${apartamento.huesped != null}"><i class="fas fa fa-home"
+                                                                    style="color: red"></i></span>
+                    <span th:if="${apartamento.huesped == null}"><i class="fas fa fa-home"
+                                                                    style="color: green"></i></span>
                 </td>
 
             </tr>
@@ -63,7 +69,6 @@
     </div>
 </div>
 
-<!--</div>-->
 <!--Modal para modificacion usuario-->
 <div th:include="/pages/apartamentos/modificar.html :: panel_modificar"></div>
 </body>

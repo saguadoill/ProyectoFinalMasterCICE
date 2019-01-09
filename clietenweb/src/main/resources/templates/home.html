@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>GestApart 1.0</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -24,14 +24,6 @@
     <script th:src="@{/js/popper.min.js}"></script>
     <!-- Bootstrap JS -->
     <script th:src="@{/js/bootstrap.min.js}"></script>
-
-
-
-    <!--<sec:authorize access="hasRole('ROLE_ADMIN')">-->
-        <!--Este contenido se muestra si el usuario tiene el privilegio: <b>ROLE_ADMIN</b>.-->
-    <!--</sec:authorize>-->
-
-
 </head>
 
 <body>
@@ -73,7 +65,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <a href="#apartamentosSubmenu" data-toggle="collapse" aria-expanded="false"
                            class="dropdown-toggle">Apartamentos</a>
                         <ul class="collapse list-unstyled" id="apartamentosSubmenu">
@@ -91,7 +83,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <a href="#parkingsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parkings</a>
                         <ul class="collapse list-unstyled" id="parkingsSubmenu">
                             <li>
@@ -102,7 +94,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <a href="#serviciosSubmenu" data-toggle="collapse" aria-expanded="false"
                            class="dropdown-toggle">Servicios</a>
                         <ul class="collapse list-unstyled" id="serviciosSubmenu">
@@ -117,7 +109,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li sec:authorize="hasRole('ROLE_CLEAN')">
+                    <li sec:authorize="hasAnyRole('ROLE_CLEAN','ROLE_ADMIN')">
                         <a href="#limpiezaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Limpieza</a>
                         <ul class="collapse list-unstyled" id="limpiezaSubmenu">
                             <li>
@@ -134,7 +126,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
                         <a href="#reservasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reservas</a>
                         <ul class="collapse list-unstyled" id="reservasSubmenu">
                             <li>
@@ -195,9 +187,5 @@
         </div>
     </div>
 </div>
-
-
-
 </body>
-
 </html>

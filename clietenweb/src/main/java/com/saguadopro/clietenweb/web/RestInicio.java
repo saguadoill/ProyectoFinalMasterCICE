@@ -13,17 +13,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
+/**
+ * Clase Controladora de los endpoints encargados de gestionar la informacion inicial y el login de la aplicación.
+ */
 @RestController
 public class RestInicio {
 
     @Autowired
-    InicioWebService inicioWebService;
+    private InicioWebService inicioWebService;
 
+    /**
+     * Método encargado de cargar la pagina principal
+     *
+     * @param principal - Usuario logado
+     * @return - Vista paágina principal
+     * @see {@link InicioWebService}
+     */
     @RequestMapping(value = {"/", "/index", "/home"}, method = RequestMethod.GET)
     public ModelAndView paginaInicio(Principal principal) {
         return inicioWebService.paginaInicioService(principal);
     }
 
+    /**
+     * Método encargado del login
+     *
+     * @return - Vista formulario login
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView paginaLogin() {
         ModelAndView vista = new ModelAndView();
@@ -31,9 +46,17 @@ public class RestInicio {
         return vista;
     }
 
+    /**
+     * Método encargado de mostrar la página de acceso denegado
+     *
+     * @param model     - Vista actual
+     * @param principal - Usuario logado
+     * @return - Vista página de acceso denegado
+     */
     @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String accessDenied(Model model, Principal principal) {
-
+    public ModelAndView accessDenied(Model model, Principal principal) {
+        ModelAndView vista = new ModelAndView();
+        vista.setViewName("403Page");
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
@@ -41,13 +64,11 @@ public class RestInicio {
 
             model.addAttribute("userInfo", userInfo);
 
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+            String message = "Hola " + principal.getName() //
+                    + "<br> No tienes permiso para acceder a esta página!";
             model.addAttribute("message", message);
 
         }
-
-        return "403Page";
+        return vista;
     }
-
 }

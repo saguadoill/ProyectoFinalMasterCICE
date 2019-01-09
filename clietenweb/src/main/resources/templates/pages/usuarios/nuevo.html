@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Crear nuevo usuario</title>
 </head>
 <body>
 <!--Contenido-->
@@ -29,7 +29,8 @@
         <!--Foto-->
         <div class="col-2"></div>
         <div class="col-3">
-            <img id="foto_preview" th:src="@{/img/logo_user_off.png}" class="img-fluid w-75 h-auto border border-primary">
+            <img id="foto_preview" th:src="@{/img/logo_user_off.png}"
+                 class="img-fluid w-75 h-auto border border-primary">
         </div>
         <!--Seleccionar foto-->
         <div class="col-5 my-auto text-left">
@@ -37,7 +38,7 @@
                 Selecionar foto del usuario
             </small>
             <div class="card card-block w-100">
-                <input name="file" type="file"  accept="image/jpeg,image/png" onchange="preview_image(event)">
+                <input name="file" type="file" accept="image/jpeg,image/png" onchange="preview_image(event)">
             </div>
         </div>
         <div class="col-2"></div>
@@ -62,14 +63,9 @@
     <div class="form-row mb-4">
         <div class="col-3"></div>
         <div class="col-4">
-            <!--<select id="perfil" name="perfil" class="mdb-select md-form" th:each="perfil : ${listaPerfiles}" required>-->
-                <!--<option value="default" disabled selected>Seleccionar perfil</option>-->
-                <!--<option value="ROLE_USER">Usuario</option>-->
-                <!--<option value="ROLE_CLEAN">Limpieza</option>-->
-                <!--<option value="ROLE_ADMIN">Admistrador</option>-->
-            <!--</select>-->
             <select name="idPerfil">
-                <option th:each="perfil:${listaPerfiles}" th:value="${perfil.idPerfil}" th:text="${perfil.nombrePerfil}"></option>
+                <option th:each="perfil:${listaPerfiles}" th:value="${perfil.idPerfil}"
+                        th:text="${perfil.nombrePerfil}"></option>
             </select>
         </div>
         <div class="col-3"></div>
@@ -89,6 +85,5 @@
     </div>
 </form>
 <!-- Default form register -->
-
 </body>
 </html>

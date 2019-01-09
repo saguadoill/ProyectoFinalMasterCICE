@@ -67,7 +67,6 @@ public class FotoService implements FotoImpl {
         }else if (origen.equalsIgnoreCase("apartamento")){
             foto_url = "src/main/resources/fotos/apartamentos/foto_apart_" + username + ".png";
         }
-
         try {
             InputStream in = new ByteArrayInputStream(fotoBytes);
             BufferedImage fotoParaGuardar = ImageIO.read(in);
@@ -81,7 +80,7 @@ public class FotoService implements FotoImpl {
                 }
             }
             ImageIO.write(fotoParaGuardar, "png", outputfile);
-            return foto_url;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

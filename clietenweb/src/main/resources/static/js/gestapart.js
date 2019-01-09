@@ -11,7 +11,6 @@ function generarCampos() {
         url: '/usuarios/campos',
         data: {nombre: nombre.value, apellidos: apellidos.value},
         type: 'GET',
-        // contentType: 'application/json; charset=utf-8',
         success: function (data, textStatus, xhr) {
             console.log("Respuesta del script: " + data);
             var username = document.getElementById('username');
@@ -47,14 +46,7 @@ function cambiarPasswd() {
         data: JSON.stringify({passwdActual: pass_actual, passwdNueva: pass_nueva, passwdRepetida: pass_repe}),
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
-
         success: function (data, textStatus, xhr) {
-            // $("#error_nueva").innerHTML = "  ";
-            // $("#error_repetir").innerHTML = "  ";
-            // $("#error_actual").innerHTML = "  ";
-            // $("#passwd_actual").innerText = " ";
-            // $("#passwd_nueva").innerText = " ";
-            // $("#passwd_repetir").innerText = "";
             alert("Cambio de contraseña realizado!");
             window.location.href = "/home";
         },
@@ -233,13 +225,13 @@ function cargarModalAsignacionApartamentos(fila, origen) {
             $('#pisoselect').html(data.piso);
             $('#puertaselect').html(data.puerta);
             $('input[name=apartamentoSeleccionado]:checked').val(data.idApartamento);
-            if (data.huesped  !== null) {
+            if (data.huesped !== null) {
                 $('#nombre').val(data.huesped.nombre);
                 $('#apellidos').val(data.huesped.apellidos);
                 $('#telefono').val(data.huesped.telefono);
                 $('#email').val(data.huesped.email);
                 $('#dni').val(data.huesped.dni);
-            }else {
+            } else {
                 $('#nombre').val("");
                 $('#apellidos').val("");
                 $('#telefono').val("");
@@ -254,15 +246,6 @@ function cargarModalAsignacionApartamentos(fila, origen) {
             console.log(xhr);
         }
     });
-
-}
-
-function anularCamposHuesped() {
-    $('#nombre').val(" ");
-    $('#apellidos').val(" ");
-    $('#telefono').val(" ");
-    $('#email').val(" ");
-    $('#dni').val(" ");
 }
 
 /**
@@ -273,7 +256,6 @@ function preview_image(event) {
     var reader = new FileReader();
     reader.onload = function () {
         var output = document.getElementById("foto_preview");
-        console.log(output);
         // console.log(reader.result);
         output.src = reader.result;
     };
@@ -284,7 +266,7 @@ function preview_image(event) {
  * Funcion para añadir de forma automatica los datos del propietario si lo eliges desde el selector y en caso de "Añadir nuevo" puedas
  * introducirlos de forma manual.
  */
-function gestionNuevoApartamento() {
+function cargaDatosPropietario() {
     var nombre = $('#nombre');
     var apellidos = $('#apellidos');
     var telefono = $('#telefono');
@@ -310,9 +292,6 @@ function gestionNuevoApartamento() {
                 url: '/apartamentos/propietarios/' + selector.val(),
                 type: 'GET',
                 success: function (data, textStatus, xhr) {
-                    // console.log(data);
-                    // console.log(textStatus);
-                    // console.log(xhr);
                     nombre.attr("placeholder", data.nombre);
                     nombre.val("");
                     apellidos.attr("placeholder", data.apellidos);
@@ -323,9 +302,7 @@ function gestionNuevoApartamento() {
                     email.val("");
                 },
                 error: function (data, textStatus, xhr) {
-                    // console.log(data);
-                    // console.log(textStatus);
-                    // console.log(xhr);
+
                 }
             })
         }
@@ -336,238 +313,236 @@ function gestionNuevoApartamento() {
 }
 
 /**
- * Eliminar usuario de la BBDD
+ * @deprecated - Por no uso.Eliminar usuario de la BBDD
  */
-// function eliminarUsuario() {
-//     // var entrada = document.getElementById("resultados").rows[1].cells[0].innerHTML;
-//     var idUsuario = document.getElementById("idUsuario");
-//     console.log(idUsuario.value);
-//     // console.log(entrada[0].value);
-//     $.ajax({
-//         url: '/eliminarUsuario/' + idUsuario.value,
-//         type: 'DELETE',
-//         contentType: 'application/json; charset=utf-8',
-//         dataType: "json",
-//         success: function (data, textStatus, xhr) {
-//         },
-//         error: function (data, textStatus, xhr) {
-//             var titulo = document.getElementById('titulo');
-//             console.log(titulo.innerText);
-//             if (titulo.innerText === "Buscar usuario") {
-//                 $('#myModal').modal('hide');
-//                 $('#tb').empty();
-//             } else {
-//                 alert("USUARIO ELIMINADO");
-//                 $('#myModal').modal('hide');
-//                 $('body').removeClass('modal-open');
-//                 $('.modal-backdrop').remove();
-//                 cargarCodigo('/usuariosLista');
-//             }
-//
-//
-//         }
-//     })
-// }
+function eliminarUsuario() {
+    // var entrada = document.getElementById("resultados").rows[1].cells[0].innerHTML;
+    var idUsuario = document.getElementById("idUsuario");
+    console.log(idUsuario.value);
+    // console.log(entrada[0].value);
+    $.ajax({
+        url: '/eliminarUsuario/' + idUsuario.value,
+        type: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+        },
+        error: function (data, textStatus, xhr) {
+            var titulo = document.getElementById('titulo');
+            console.log(titulo.innerText);
+            if (titulo.innerText === "Buscar usuario") {
+                $('#myModal').modal('hide');
+                $('#tb').empty();
+            } else {
+                alert("USUARIO ELIMINADO");
+                $('#myModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                cargarCodigo('/usuariosLista');
+            }
+
+
+        }
+    })
+}
 
 /**
- * Crea un nuevo usuario recogiendo los datos del formulario
+ * @deprecated - Por no uso.Crea un nuevo usuario recogiendo los datos del formulario
  */
-// function comprobarCamposNuevoUsuario() {
-//     var boton = document.getElementById("btn_crear");
-//     var idUsuario = null;
-//     var nombre = document.getElementById("nombre");
-//     var apellidos = document.getElementById("apellidos");
-//     var username = document.getElementById("username");
-//     var passwd = document.getElementById("passwd");
-//     var selectorPerfil = document.getElementById("perfil");
-//     var perfil = selectorPerfil.options[selectorPerfil.selectedIndex];
-//     var files = document.querySelector('[type=file]').files;
-//     var formData = new FormData();
-//     for (var i = 0; i < files.length; i++) {
-//         var file = files[i];
-//         formData.append('files[]', file);
-//     }
-//     var usuario = {
-//         idUsuario: idUsuario,
-//         nombre: nombre.value,
-//         apellidos: apellidos.value,
-//         username: username.value,
-//         passwd: passwd.value,
-//         perfil: perfil.value,
-//         foto: formData
-//     };
-//
-//
-//
-//     console.log(usuario);
-//
-//     if (nombre.value == "") {
-//         nombre.style.backgroundColor = "yellow";
-//     }
-//     else{
-//         nombre.style.backgroundColor = "";
-//     }
-//     if (usuario.apellidos === "") {
-//         // alert("Faltan apellidos del usuario");
-//         return;
-//     }
-//     if (usuario.username === "") {
-//         // alert("Falta generar campos profesionales");
-//         return;
-//     }
-//     if (usuario.perfil === "default") {
-//         // alert("Falta perfil del usuario");
-//         return;
-//     }
-//     boton.onmousedown = function (ev) {
-//         document.getElementById("formulario_nuevo_usuario").setAttribute("action","/crearUsuario");
-//         console.log(usuario)
-//
-//     }
-//
-//     $.ajax({
-//         url: '/crearUsuario',
-//         data: JSON.stringify(usuario),
-//         type: 'POST',
-//         contentType: 'application/json; charset=utf-8',
-//         dataType: "json",
-//         success: function (data, textStatus, xhr) {
-//
-//         },
-//         error: function (data, textStatus, xhr) {
-//             if (textStatus.toString() === 'parsererror') {
-//                 console.log("data: " + data.responseText);
-//                 console.log("textStatus: " + textStatus.toString());
-//                 console.log("xhr: " + xhr.toString());
-//                 nombre.value = " ";
-//                 apellidos.value = " ";
-//                 username.value = " ";
-//                 passwd.value = " ";
-//                 selectorPerfil.options[0].selected = true;
-//                 alert("Usuario creado de forma correcta");
-//             } else {
-//                 alert("No se ha podido crear al usuario")
-//             }
-//
-//         }
-//     })
-//
-// }
+function comprobarCamposNuevoUsuario() {
+    var boton = document.getElementById("btn_crear");
+    var idUsuario = null;
+    var nombre = document.getElementById("nombre");
+    var apellidos = document.getElementById("apellidos");
+    var username = document.getElementById("username");
+    var passwd = document.getElementById("passwd");
+    var selectorPerfil = document.getElementById("perfil");
+    var perfil = selectorPerfil.options[selectorPerfil.selectedIndex];
+    var files = document.querySelector('[type=file]').files;
+    var formData = new FormData();
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        formData.append('files[]', file);
+    }
+    var usuario = {
+        idUsuario: idUsuario,
+        nombre: nombre.value,
+        apellidos: apellidos.value,
+        username: username.value,
+        passwd: passwd.value,
+        perfil: perfil.value,
+        foto: formData
+    };
+
+
+    console.log(usuario);
+
+    if (nombre.value == "") {
+        nombre.style.backgroundColor = "yellow";
+    } else {
+        nombre.style.backgroundColor = "";
+    }
+    if (usuario.apellidos === "") {
+        // alert("Faltan apellidos del usuario");
+        return;
+    }
+    if (usuario.username === "") {
+        // alert("Falta generar campos profesionales");
+        return;
+    }
+    if (usuario.perfil === "default") {
+        // alert("Falta perfil del usuario");
+        return;
+    }
+    boton.onmousedown = function (ev) {
+        document.getElementById("formulario_nuevo_usuario").setAttribute("action", "/crearUsuario");
+        console.log(usuario)
+
+    };
+
+    $.ajax({
+        url: '/crearUsuario',
+        data: JSON.stringify(usuario),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+
+        },
+        error: function (data, textStatus, xhr) {
+            if (textStatus.toString() === 'parsererror') {
+                console.log("data: " + data.responseText);
+                console.log("textStatus: " + textStatus.toString());
+                console.log("xhr: " + xhr.toString());
+                nombre.value = " ";
+                apellidos.value = " ";
+                username.value = " ";
+                passwd.value = " ";
+                selectorPerfil.options[0].selected = true;
+                alert("Usuario creado de forma correcta");
+            } else {
+                alert("No se ha podido crear al usuario")
+            }
+
+        }
+    })
+
+}
 
 /**
- * Busca un usuario por username o id y carga los datos en caso de seleccionarle
+ * @deprecated - Por no uso.Busca un usuario por username o id y carga los datos en caso de seleccionarle
  */
-// function buscarUsuario() {
-//     var entrada = document.getElementById("entrada");
-//     var tableRef = document.getElementById('resultados').getElementsByTagName('tbody')[0];
-//
-//     $.ajax({
-//         url: '/buscarUsuario',
-//         data: entrada.value,
-//         type: 'POST',
-//         contentType: 'application/json; charset=utf-8',
-//         dataType: "json",
-//         success: function (data, textStatus, xhr) {
-//             if (data == undefined) {
-//                 alert("USUARIO NO ENCONTRADO");
-//             } else {
-//                 $('#tb').empty()
-//                 var newRow = tableRef.insertRow(tableRef.rows.length);
-//
-//                 for (var i = 0; i < 6; i++) {
-//                     if (i == 0) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode(data[0].idUsuario);
-//                         newCell.appendChild(newText);
-//                     }
-//                     if (i == 1) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode("FOTO");
-//                         newCell.appendChild(newText);
-//                     }
-//                     if (i == 2) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode(data[0].username);
-//                         newCell.appendChild(newText);
-//                     }
-//                     if (i == 3) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode(data[0].perfil);
-//                         newCell.appendChild(newText);
-//                     }
-//                     if (i == 4) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode(data[0].nombre);
-//                         newCell.appendChild(newText);
-//                     }
-//                     if (i == 5) {
-//                         var newCell = newRow.insertCell(i);
-//                         var newText = document.createTextNode(data[0].apellidos);
-//                         newCell.appendChild(newText);
-//                     }
-//                 }
-//                 newRow.onclick = function (ev) {
-//                     cargarModalListaUsuarios(this);
-//                 }
-//             }
-//             console.log("Esto es el DATA: " + JSON.stringify(data[0]));
-//         },
-//         error: function (data, textStatus, xhr) {
-//             console.log("USUARIO NO ENCONTRADO")
-//         }
-//     })
-//
-// }
+function buscarUsuario() {
+    var entrada = document.getElementById("entrada");
+    var tableRef = document.getElementById('resultados').getElementsByTagName('tbody')[0];
+
+    $.ajax({
+        url: '/buscarUsuario',
+        data: entrada.value,
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+            if (data == undefined) {
+                alert("USUARIO NO ENCONTRADO");
+            } else {
+                $('#tb').empty()
+                var newRow = tableRef.insertRow(tableRef.rows.length);
+
+                for (var i = 0; i < 6; i++) {
+                    if (i == 0) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode(data[0].idUsuario);
+                        newCell.appendChild(newText);
+                    }
+                    if (i == 1) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode("FOTO");
+                        newCell.appendChild(newText);
+                    }
+                    if (i == 2) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode(data[0].username);
+                        newCell.appendChild(newText);
+                    }
+                    if (i == 3) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode(data[0].perfil);
+                        newCell.appendChild(newText);
+                    }
+                    if (i == 4) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode(data[0].nombre);
+                        newCell.appendChild(newText);
+                    }
+                    if (i == 5) {
+                        var newCell = newRow.insertCell(i);
+                        var newText = document.createTextNode(data[0].apellidos);
+                        newCell.appendChild(newText);
+                    }
+                }
+                newRow.onclick = function (ev) {
+                    cargarModalListaUsuarios(this);
+                }
+            }
+            console.log("Esto es el DATA: " + JSON.stringify(data[0]));
+        },
+        error: function (data, textStatus, xhr) {
+            console.log("USUARIO NO ENCONTRADO")
+        }
+    })
+
+}
 
 /**
- * Modificar usuario de la BBDD
+ * @deprecated - Por no uso.Modificar usuario de la BBDD
  */
-// function modificarUsuario() {
-//     var idUsuario = document.getElementById("idUsuario");
-//     var nombre = document.getElementById("nombre");
-//     var apellidos = document.getElementById("apellidos");
-//     var username = document.getElementById("username");
-//     var selectorPerfil = document.getElementById("perfil");
-//     var perfil = selectorPerfil.options[selectorPerfil.selectedIndex];
-//
-//     var usuario = {
-//         idUsuario: idUsuario.value,
-//         nombre: nombre.value,
-//         apellidos: apellidos.value,
-//         username: username.value,
-//         passwd: passwd.value,
-//         perfil: perfil.value
-//     };
-//
-//     console.log(usuario)
-//
-//     $.ajax({
-//         url: '/modificarUsuario',
-//         data: JSON.stringify(usuario),
-//         type: 'PUT',
-//         contentType: 'application/json; charset=utf-8',
-//         dataType: "json",
-//         success: function (data, textStatus, xhr) {
-//             // console.log(xhr.status);
-//             alert("Usuario modificado de forma correcta")
-//             // borrar los datos del formulario para que queden en blanco, y ya lo usamos la funcion para el reset
-//         },
-//         error: function (data, textStatus, xhr) {
-//             // console.log(data.responseText);
-//             alert("Usuario modificado de forma correcta")
-//             $('#myModal').modal('hide');
-//             $('body').removeClass('modal-open');
-//             $('.modal-backdrop').remove();
-//             cargarCodigo('/usuariosLista');
-//         }
-//     })
-//
-// }
+function modificarUsuario() {
+    var idUsuario = document.getElementById("idUsuario");
+    var nombre = document.getElementById("nombre");
+    var apellidos = document.getElementById("apellidos");
+    var username = document.getElementById("username");
+    var selectorPerfil = document.getElementById("perfil");
+    var perfil = selectorPerfil.options[selectorPerfil.selectedIndex];
+
+    var usuario = {
+        idUsuario: idUsuario.value,
+        nombre: nombre.value,
+        apellidos: apellidos.value,
+        username: username.value,
+        passwd: passwd.value,
+        perfil: perfil.value
+    };
+
+    console.log(usuario)
+
+    $.ajax({
+        url: '/modificarUsuario',
+        data: JSON.stringify(usuario),
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+            // console.log(xhr.status);
+            alert("Usuario modificado de forma correcta")
+            // borrar los datos del formulario para que queden en blanco, y ya lo usamos la funcion para el reset
+        },
+        error: function (data, textStatus, xhr) {
+            // console.log(data.responseText);
+            alert("Usuario modificado de forma correcta")
+            $('#myModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            cargarCodigo('/usuariosLista');
+        }
+    })
+
+}
 
 /**
- * Carga el código HTML de una página externa en el div etiquetado como "#contenido"
+ * @deprecated - Por no uso.Carga el código HTML de una página externa en el div etiquetado como "#contenido"
  * @param url - direccion de la página a cargar
  */
-// function cargarCodigo(url) {
-//     $("#contenido").load(url);
-// }
+function cargarCodigo(url) {
+    $("#contenido").load(url);
+}

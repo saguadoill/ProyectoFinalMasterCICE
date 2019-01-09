@@ -3,22 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Modificar Apartamento</title>
-    <!--<script src="../../../static/js/gestapart.js"></script>-->
-    <!--<script src="../../../static/js/jquery-3.3.1.js"></script>-->
-    <!--<script src="../../../static/js/popper.min.js"></script>-->
-    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/gestapart.css">-->
-    <!--<link rel="stylesheet" href="../../../static/css/style.css">-->
-    <!--<script src="../../../static/js/bootstrap.min.js"></script>-->
-    <!--<script src="../../../static/fonts/fontawesome.js"></script>-->
-    <!--<script src="../../../static/fonts/solid.js"></script>-->
-
-
 </head>
 <body>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Open modal
-</button>
+<!--Boton para probar el Modal fuera de la aplicación-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">-->
+<!--Open modal-->
+<!--</button>-->
 <div id="panel_modificar" th:fragment="panel_modificar">
     <form role="form" class="text-center border border-light p-5" method="POST"
           action="/apartamentos/modificar"
@@ -63,7 +53,8 @@
                                         <div class="col-2"></div>
                                         <!--Direccion-->
                                         <div class="col-8">
-                                            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Direccion" required>
+                                            <input type="text" id="direccion" name="direccion" class="form-control"
+                                                   placeholder="Direccion" required>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
@@ -71,11 +62,13 @@
                                         <div class="col-2"></div>
                                         <!--Piso-->
                                         <div class="col-4">
-                                            <input type="text" id="piso" name="piso" class="form-control" placeholder="Piso">
+                                            <input type="text" id="piso" name="piso" class="form-control"
+                                                   placeholder="Piso">
                                         </div>
                                         <!--Puerta-->
                                         <div class="col-4">
-                                            <input type="text" id="puerta" name="puerta" class="form-control" placeholder="Puerta">
+                                            <input type="text" id="puerta" name="puerta" class="form-control"
+                                                   placeholder="Puerta">
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
@@ -83,17 +76,21 @@
                                     <div class="form-row mb-4">
                                         <div class="col-2"></div>
                                         <div class="col-6">
-                                            <select id="selector_capacidad" name="capacidad" class="mdb-select md-form" required>
+                                            <select id="selector_capacidad" name="capacidad" class="mdb-select md-form"
+                                                    required>
                                                 <option value="default">Seleccionar tipo</option>
-                                                <option th:each="capacidad : ${listaCapacidades}" th:value="${capacidad.idCapacidad}" th:text="${capacidad.maxPersonas}">
+                                                <option th:each="capacidad : ${listaCapacidades}"
+                                                        th:value="${capacidad.idCapacidad}"
+                                                        th:text="${capacidad.maxPersonas}">
                                             </select>
                                         </div>
-                                        <!--TODO: modificar la disponibilidad por Huesped, aki y en el javasscript para rellenar el modal. Solo lo pmodificara el admin-->
                                         <!--Disponibilidad-->
                                         <div class="col-2">
                                             <h6>Disponible?</h6>
-                                            <input type="radio" id="btn_disponible"  name="disponible" value="true"><i class="fas fa-home" style="color: green" title="NO DISPONIBLE"></i>
-                                            <input type="radio" id="btn_nodisponible" name="disponible" value="false"><i class="fas fa-home" style="color: red" title="DISPONIBLE"></i>
+                                            <input type="radio" id="btn_disponible" name="disponible" value="true"><i
+                                                class="fas fa-home" style="color: green" title="NO DISPONIBLE"></i>
+                                            <input type="radio" id="btn_nodisponible" name="disponible" value="false"><i
+                                                class="fas fa-home" style="color: red" title="DISPONIBLE"></i>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
@@ -110,7 +107,8 @@
                                                 Selecionar foto para el apartamento
                                             </small>
                                             <div class="card card-block w-100">
-                                                <input name="file" type="file" accept="image/jpeg,image/png" onchange="preview_image(event)">
+                                                <input name="file" type="file" accept="image/jpeg,image/png"
+                                                       onchange="preview_image(event)">
                                             </div>
                                         </div>
                                         <div class="col-2"></div>
@@ -125,7 +123,8 @@
                                         <div class="col-4"></div>
                                         <!--Nombre-->
                                         <div class="col-4">
-                                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                                            <input type="text" id="nombre" name="nombre" class="form-control"
+                                                   placeholder="Nombre" required>
                                         </div>
                                         <div class="col-4"></div>
                                     </div>
@@ -133,7 +132,8 @@
                                         <div class="col-4"></div>
                                         <!--Apellidos-->
                                         <div class="col-4">
-                                            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos" required>
+                                            <input type="text" id="apellidos" name="apellidos" class="form-control"
+                                                   placeholder="Apellidos" required>
                                         </div>
                                         <div class="col-4"></div>
                                     </div>
@@ -141,7 +141,8 @@
                                         <div class="col-4"></div>
                                         <!--Telefono-->
                                         <div class="col-4">
-                                            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Telefono" required>
+                                            <input type="text" id="telefono" name="telefono" class="form-control"
+                                                   placeholder="Telefono" required>
                                         </div>
                                         <div class="col-4"></div>
                                     </div>
@@ -149,7 +150,8 @@
                                         <div class="col-4"></div>
                                         <!--Email-->
                                         <div class="col-4">
-                                            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+                                            <input type="text" id="email" name="email" class="form-control"
+                                                   placeholder="Email" required>
                                         </div>
                                         <div class="col-4"></div>
                                     </div>
@@ -157,9 +159,12 @@
                                     <div class="form-row mb-4">
                                         <div class="col-2"></div>
                                         <div class="col-8">
-                                            <select id="select_propietario" name="propietario" class="mdb-select md-form" required>
+                                            <select id="select_propietario" name="propietario"
+                                                    class="mdb-select md-form" required>
                                                 <option value="default">Añadir nuevo</option>
-                                                <option th:each="propietario : ${listaPropietarios}" th:value="${propietario.idPropietario}" th:text="${propietario.nombre}+' '+${propietario.apellidos}">
+                                                <option th:each="propietario : ${listaPropietarios}"
+                                                        th:value="${propietario.idPropietario}"
+                                                        th:text="${propietario.nombre}+' '+${propietario.apellidos}">
                                                 </option>
                                             </select>
                                         </div>
@@ -171,17 +176,14 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-4">
-                            <!--<button type="button" class="btn btn-danger btn-rounded" onclick="eliminarUsuario()">-->
-                            <!--Eliminar-->
-                            <!--</button>-->
-                            <button class="btn btn-danger btn-rounded" type="submit" formaction="/apartamentos/eliminar">
+                            <button class="btn btn-danger btn-rounded" type="submit"
+                                    formaction="/apartamentos/eliminar">
                                 Eliminar
                             </button>
                         </div>
                         <div class="col-4">
                         </div>
                         <div class="col-4 text-right">
-                            <!--<button type="button" class="btn btn-secondary btn-rounded" type onclick="/modificarUsuario">Modificar</button>-->
                             <button id="btn_crear" class="btn btn-info my-4 btn-block" type="submit">Modificar</button>
                         </div>
                     </div>

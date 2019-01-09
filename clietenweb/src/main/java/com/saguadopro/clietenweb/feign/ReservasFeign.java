@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Cliente Feign que se comunica con el microservicio reservas-ms
+ * @see "ReservasMicroservice"
+ */
 @Repository
 @FeignClient("gestion-reservas")
 public interface ReservasFeign {

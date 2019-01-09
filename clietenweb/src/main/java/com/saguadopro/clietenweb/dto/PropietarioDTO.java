@@ -1,22 +1,36 @@
 package com.saguadopro.clietenweb.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+/**
+ * POJO que define al propietario de un apartamento o inmueble
+ */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class PropietarioDTO {
 
+    /**
+     * ID o numero de identificacion del propietario
+     */
     private Integer idPropietario;
 
+    /**
+     * Nombre del propietario
+     */
     private String nombre;
 
+    /**
+     * Apellidos del propietario
+     */
     private String apellidos;
 
+    /**
+     * Numero de telefono de contacto del propietario
+     */
     private String telefono;
 
+    /**
+     * Correo electronico del propietario
+     */
     private String email;
 
 }

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Cliente Feign que se comunica con el microservicio usuarios-ms
+ * @see "UsuariosMicroservice"
+ */
 @Repository
 @FeignClient("gestion-usuarios")
 public interface UsuariosFeign {

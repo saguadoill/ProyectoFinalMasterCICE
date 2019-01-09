@@ -6,57 +6,59 @@
 </head>
 <body>
 <!--Contenido-->
-    <div id="titulo">
-        <h4>Buscar usuario</h4>
+<div id="titulo">
+    <h4>Buscar usuario</h4>
+</div>
+<form action="/usuarios/buscar" method="post">
+    <div class="row">
+        <div class="col-lg-10">
+            <input id="entrada" name="username_id" class="form-control mr-sm-2" type="text" placeholder="username/id"
+                   aria-label="Search">
+        </div>
+        <div class="col-lg-2">
+            <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Buscar</button>
+        </div>
     </div>
-    <form action="/usuarios/buscar" method="post">
-        <div class="row">
-            <div class="col-lg-10">
-                <input id="entrada" name="username_id" class="form-control mr-sm-2" type="text" placeholder="username/id" aria-label="Search">
-            </div>
-            <div class="col-lg-2">
-                <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Buscar</button>
-            </div>
-        </div>
-    </form>
-        <div class="row">
-            <hr/>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <table id="resultados" class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Foto</th>
-                        <th>Usuario</th>
-                        <th>Permisos</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody id="tb">
-                    <tr th:if="${#lists.isEmpty(lista)}">
-                        <td colspan="8" class="text-center"> Ningun usuario encontrado</td>
-                    </tr>
-                    <tr th:each="usuario : ${lista}" data-toggle="modal" data-target="#myModal" onclick="cargarModalListaUsuarios(this,'buscar')">
-                        <td><span th:text="${usuario.idUsuario}"> </span></td>
-                        <td ><img class="rounded-circle img-fluid w-25 h-auto float-left"
-                                  th:src="'data:image/png;base64,'+${usuario.foto}"/></td>
-                        <td ><span th:text="${usuario.username}">  </span></td>
-                        <td><span th:text="${usuario.perfil.nombrePerfil}">  </span></td>
-                        <td><span th:text="${usuario.nombre}">  </span></td>
-                        <td><span th:text="${usuario.apellidos}">  </span></td>
-                        <td><span th:if="!${usuario.cambioPasswd}"><i class="fas fa-question-circle" style="color: red" title="El usuaro debe cambiar la contraseña"></i></span></td>
-                    </tr>
-                    </tbody>
+</form>
+<div class="row">
+    <hr/>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="resultados" class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Foto</th>
+                <th>Usuario</th>
+                <th>Permisos</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tb">
+            <tr th:if="${#lists.isEmpty(lista)}">
+                <td colspan="8" class="text-center"> Ningun usuario encontrado</td>
+            </tr>
+            <tr th:each="usuario : ${lista}" data-toggle="modal" data-target="#myModal"
+                onclick="cargarModalListaUsuarios(this,'buscar')">
+                <td><span th:text="${usuario.idUsuario}"> </span></td>
+                <td><img class="rounded-circle img-fluid w-25 h-auto float-left"
+                         th:src="'data:image/png;base64,'+${usuario.foto}"/></td>
+                <td><span th:text="${usuario.username}">  </span></td>
+                <td><span th:text="${usuario.perfil.nombrePerfil}">  </span></td>
+                <td><span th:text="${usuario.nombre}">  </span></td>
+                <td><span th:text="${usuario.apellidos}">  </span></td>
+                <td><span th:if="!${usuario.cambioPasswd}"><i class="fas fa-question-circle" style="color: red"
+                                                              title="El usuaro debe cambiar la contraseña"></i></span>
+                </td>
+            </tr>
+            </tbody>
 
-                </table>
-            </div>
-        </div>
-
-<!--</div>-->
+        </table>
+    </div>
+</div>
 <!--Modal para modificacion usuario-->
 <div th:include="/pages/usuarios/modificar.html :: panel_modificar"></div>
 </body>

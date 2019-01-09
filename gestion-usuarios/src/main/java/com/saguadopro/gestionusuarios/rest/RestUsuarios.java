@@ -16,7 +16,7 @@ import java.util.List;
 public class RestUsuarios {
 
     @Autowired
-    UsuariosImp usuarios;
+    private UsuariosImp usuarios;
 
     @RequestMapping(value = "/usuarios",method = RequestMethod.POST)
     public HttpStatus crearUsuario(@RequestBody UsuarioDTO usuarioDTO){   // para probar con el postman @RequestBody

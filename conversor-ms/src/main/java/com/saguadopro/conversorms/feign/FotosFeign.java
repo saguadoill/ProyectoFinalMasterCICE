@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Cliente Feign que se comunica con el Microservicio fotos-ms.
- * @see "FotosService.java in FotosMsApplication"
+ * @see "FotosMicroservice"
  */
 @Repository
 @FeignClient("fotos-ms")

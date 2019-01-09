@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bienvenid@</title>
 </head>
 <body>
-Pagina de bienvenida
+<div class="container">
+    <div class="row text-center">
+        <div class="col-3"></div>
+        <div class="col-6">
+           <h3>Bienvenid@!</h3>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <img class="mx-auto d-block w-100" th:src="@{/img/imagen_bienvenida.png}"/>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row" style="margin-top: 10%">
+        <div class="col-6 border">
+            <h6>Noticia 1</h6>
+            <p> Esto puede ser una seccion de noticias</p>
+        </div>
+        <div class="col-6 border">
+            <h6>Noticia 2</h6>
+            <p> Esto puede ser una seccion de noticias</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>

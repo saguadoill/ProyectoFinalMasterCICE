@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
+/**
+ * Cliente Feign que se comunica con el microservicio apartamentos-ms
+ * @see "ApartamentosMicroservice"
+ */
 @Repository
 @FeignClient("gestion-apartamentos")
 public interface ApartamentosFeign {
 
     @RequestMapping(value = "/apartamentos", method = RequestMethod.POST)
-    HttpStatus crearUsuarioFeign(ApartamentoDTO usuarioDTO);
+    HttpStatus crearApartamento(ApartamentoDTO usuarioDTO);
 
     @RequestMapping(value = "/apartamentos/{idApartamento}",method = RequestMethod.DELETE)
     Boolean eliminarApartamentos(@PathVariable(value = "idApartamento") String idApartamento);

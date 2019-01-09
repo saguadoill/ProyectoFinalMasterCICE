@@ -29,10 +29,10 @@ public class ReservasService  implements ReservasImpl {
     private final static Logger logger = Logger.getLogger(ReservasService.class);
 
     @Autowired
-    ReservasRepo reservasRepo;
+    private ReservasRepo reservasRepo;
 
     @Autowired
-    ConversorFeign conversorFeign;
+    private ConversorFeign conversorFeign;
 
     /**
      * Metodo que devuelve una lista completa de todoas las reservas de la BBDD

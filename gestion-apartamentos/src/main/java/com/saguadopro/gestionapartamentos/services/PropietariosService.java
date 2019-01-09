@@ -21,10 +21,10 @@ public class PropietariosService implements PropietariosImp {
     private final static Logger logger = Logger.getLogger(ApartamentosService.class);
 
     @Autowired
-    PropietariosRepo propietariosRepo;
+    private PropietariosRepo propietariosRepo;
 
     @Autowired
-    ConversorFeign conversorFeign;
+    private ConversorFeign conversorFeign;
 
 
     /**
