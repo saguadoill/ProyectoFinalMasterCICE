@@ -48,13 +48,14 @@
                 <ul class="list-unstyled components">
                     <!--<p>Dummy Heading</p>-->
                     <li class="active">
-                        <a href="#">Inicio</a>
+                        <a href="/home">Inicio</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')">
                         <a id="menuUsuarios" href="#usuariosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
                         <ul class="collapse list-unstyled" id="usuariosSubmenu">
                             <li>
                                 <a href="/usuarios/buscar" >Buscar</a>
+                                <!--Para hacerlo con javascript-->
                                 <!--<a th:href="'javascript:cargarCodigo(\'/usuariosBuscar\');'">Buscar</a>-->
                             </li>
                             <li>
@@ -80,6 +81,23 @@
                             </li>
                             <li>
                                 <a href="/apartamentos/nodisponibles">No disponibles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
+                        <a href="#reservasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reservas</a>
+                        <ul class="collapse list-unstyled" id="reservasSubmenu">
+                            <li>
+                                <a href="/reservas/pendientes">Pendientes</a>
+                            </li>
+                            <li>
+                                <a href="/reservas/activas">Activas</a>
+                            </li>
+                            <li>
+                                <a href="/reservas/finalizadas">Finalizadas</a>
+                            </li>
+                            <li>
+                                <a href="/reservas/buscar">Buscar</a>
                             </li>
                         </ul>
                     </li>
@@ -126,23 +144,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <a href="#reservasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reservas</a>
-                        <ul class="collapse list-unstyled" id="reservasSubmenu">
-                            <li>
-                                <a href="/reservas/pendientes">Pendientes</a>
-                            </li>
-                            <li>
-                                <a href="/reservas/activas">Activas</a>
-                            </li>
-                            <li>
-                                <a href="/reservas/finalizadas">Finalizadas</a>
-                            </li>
-                            <li>
-                                <a href="/reservas/buscar">Buscar</a>
-                            </li>
-                        </ul>
-                    </li>
+
                 </ul>
             </nav>
         </div>
@@ -178,9 +180,7 @@
                     </div>
                 </nav>
             </div>
-            <!--<div id="contenido" class="container">-->
 
-            <!--</div>-->
             <div th:include="${pagina}" class="container">
 
             </div>
